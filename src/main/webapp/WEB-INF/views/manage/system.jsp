@@ -16,7 +16,8 @@
 						</h3>
 					</div>
 				</div>
-				<div class="portlet box blue">
+				
+				 <div class="portlet box blue">
 
 							<div class="portlet-title">
 
@@ -65,8 +66,9 @@
 
 									</thead>
 
-								</table><div class="row-fluid"><div class="span6"><div class="dataTables_info" id="sample_1_info">Showing 1 to 5 of 25 entries</div></div><div class="span6"><div class="dataTables_paginate paging_bootstrap pagination"><ul><li class="prev disabled"><a href="#">← <span class="hidden-480">Prev</span></a></li><li class="active"><a href="#">1</a></li><li><a href="#">2</a></li><li><a href="#">3</a></li><li><a href="#">4</a></li><li><a href="#">5</a></li><li class="next"><a href="#"><span class="hidden-480">Next</span> → </a></li></ul></div></div></div></div>
-
+								</table>
+								<div class="row-fluid"><div class="span6"><div class="dataTables_info" id="sample_1_info">Showing 1 to 5 of 25 entries</div></div><div class="span6"><div class="dataTables_paginate paging_bootstrap pagination"><ul><li class="prev disabled"><a href="#">← <span class="hidden-480">Prev</span></a></li><li class="active"><a href="#">1</a></li><li><a href="#">2</a></li><li><a href="#">3</a></li><li><a href="#">4</a></li><li><a href="#">5</a></li><li class="next"><a href="#"><span class="hidden-480">Next</span> → </a></li></ul></div></div></div></div>
+							
 							</div>
 
 						</div>
