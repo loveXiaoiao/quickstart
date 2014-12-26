@@ -20,17 +20,20 @@ import org.springframework.data.domain.Sort.Direction;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
+import org.springside.examples.quickstart.entity.Task;
 import org.springside.examples.quickstart.entity.User;
 import org.springside.examples.quickstart.repository.TaskDao;
 import org.springside.examples.quickstart.repository.UserDao;
 import org.springside.examples.quickstart.service.ServiceException;
 import org.springside.examples.quickstart.service.account.ShiroDbRealm.ShiroUser;
+import org.springside.examples.quickstart.util.DataPage;
 import org.springside.modules.persistence.DynamicSpecifications;
 import org.springside.modules.persistence.SearchFilter;
 import org.springside.modules.persistence.SearchFilter.Operator;
 import org.springside.modules.security.utils.Digests;
 import org.springside.modules.utils.Clock;
 import org.springside.modules.utils.Encodes;
+
 
 
 /**
@@ -59,13 +62,33 @@ public class AccountService {
 		return (List<User>) userDao.findAll();
 	}
 	
-	public Page<User> getUser(Long userId, Map<String, Object> searchParams, int pageNumber, int pageSize,
-			String sortType) {
-		PageRequest pageRequest = buildPageRequest(pageNumber, pageSize, sortType);
-		Specification<User> spec = buildSpecification(userId, searchParams);
-		return userDao.findAll(spec, pageRequest);
+	/**
+	 * getPageModel:分页查询.
+	 *
+	 * @param entity 实体
+	 * @param rowBounds 分页
+	 * @return 分页查询结果
+	 * @since JDK 1.6
+	 */
+	public DataPage<User> getPageModel(User entity, Map<String, Object> searchParams,Integer iDisplayStart,Integer iDisplayLength, String sortType){
+		DataPage<User> page = new DataPage<User>();
+		PageRequest pageRequest = buildPageRequest(iDisplayStart, iDisplayLength, sortType);
+		Specification<User> spec = buildSpecification(searchParams);
+		long total = userDao.count(spec);
+		Page<User> rows = userDao.findAll(spec,pageRequest);
+		List<User> users = rows.getContent();
+		page = new DataPage<User>(total,total, users);
+		return page;
 	}
-	
+	/**
+	 * 创建动态查询条件组合.
+	 */
+	private Specification<User> buildSpecification(Map<String, Object> searchParams) {
+		Map<String, SearchFilter> filters = SearchFilter.parse(searchParams);
+//		filters.put("user.id", new SearchFilter("user.id", Operator.EQ, userId));
+		Specification<User> spec = DynamicSpecifications.bySearchFilter(filters.values(), User.class);
+		return spec;
+	}
 	/**
 	 * 创建分页请求.
 	 */
@@ -76,18 +99,7 @@ public class AccountService {
 		} else if ("title".equals(sortType)) {
 			sort = new Sort(Direction.ASC, "title");
 		}
-
-		return new PageRequest(pageNumber - 1, pagzSize, sort);
-	}
-	
-	/**
-	 * 创建动态查询条件组合.
-	 */
-	private Specification<User> buildSpecification(Long userId, Map<String, Object> searchParams) {
-		Map<String, SearchFilter> filters = SearchFilter.parse(searchParams);
-		filters.put("user.id", new SearchFilter("user.id", Operator.EQ, userId));
-		Specification<User> spec = DynamicSpecifications.bySearchFilter(filters.values(), User.class);
-		return spec;
+		return new PageRequest(pageNumber, pagzSize, sort);
 	}
 
 	public User getUser(Long id) {

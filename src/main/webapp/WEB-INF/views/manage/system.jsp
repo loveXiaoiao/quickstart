@@ -7,7 +7,6 @@
 <html lang="en">
 <head>
 </head><body><div class="container-fluid">
-
 				<!-- BEGIN PAGE HEADER-->
 				<div class="row-fluid">
 					<div class="span12">
@@ -16,20 +15,24 @@
 						</h3>
 					</div>
 				</div>
-				
 				 <div class="portlet box blue">
-
 							<div class="portlet-title">
 
 								<div class="caption"><i class="icon-globe"></i>用户列表</div>
 							</div>
-
 							<div class="portlet-body">
+								<div class="controls">
+								<label class="help-inline">用户名：</label>
+									<input class="m-wrap small" size="8" type="text"
+										placeholder="用户名">
+								<label class="help-inline">姓名:</label>
+									<input class="m-wrap small" size="8" type="text"
+										placeholder="姓名">
+									<button class="btn red">查询</button>
+									<button class="btn green">重置</button>
+								</div>
 
-								<div class="clearfix">
-
-
-									<div class="btn-group pull-right">
+								<div class="btn-group pull-right">
 
 										<button class="btn dropdown-toggle" data-toggle="dropdown">选择 <i class="icon-angle-down"></i>
 
@@ -45,18 +48,19 @@
 										</ul>
 
 									</div>
-
-								</div>
-
-								<div id="sample_1_wrapper" class="dataTables_wrapper form-inline" role="grid"><div class="row-fluid"><div class="span6"><div id="sample_1_length" class="dataTables_length"><label><select size="1" name="sample_1_length" aria-controls="sample_1" class="m-wrap small"><option value="5" selected="selected">5</option><option value="15">15</option><option value="20">20</option><option value="-1">All</option></select> 条每页</label></div></div><div class="span6"><div class="dataTables_filter" id="sample_1_filter"><label>查询: <input type="text" aria-controls="sample_1" class="m-wrap medium"></label></div></div></div>
-								<table class="table table-striped table-bordered table-hover dataTable" id="sample_1" aria-describedby="sample_1_info">
-
+								<table class="table table-striped table-bordered table-hover dataTable" id="usertable" aria-describedby="sample_1_info">
 									<thead>
-
 										<tr role="row">
-										<th style="width: 24px;" class="sorting_disabled" role="columnheader" rowspan="1" colspan="1" aria-label=""><div class="checker">
-										<span><input type="checkbox" class="group-checkable" data-set="#sample_1 .checkboxes"></span></div>
-										</th>
+<!-- 										<th style="width: 24px;" class="sorting_disabled" role="columnheader" rowspan="1" colspan="1" aria-label=""> -->
+<!-- 										<div class="checker"> -->
+<!-- 										<span><input type="checkbox" class="group-checkable" data-set="#sample_1 .checkboxes"></span></div> -->
+<!-- 										</th> -->
+<!-- 										<th style="width: 24px;" class="sorting_disabled" role="columnheader" rowspan="1" colspan="1" aria-label=""> -->
+<!-- 										<div class="checker"><span class=""> -->
+<!-- 										<input type="checkbox" class="group-checkable" data-set="#usertable .checkboxes"> -->
+<!-- 										</span></div></th> -->
+										<th style="width:8px;"><input type="checkbox" class="group-checkable" data-set="#usertable .checkboxes"/></th>
+
 										<th class="sorting" role="columnheader" tabindex="0" aria-controls="sample_1" rowspan="1" colspan="1" aria-label="Username: activate to sort column ascending" style="width: 172px;">用户名</th>
 										<th class="hidden-480 sorting_disabled" role="columnheader" rowspan="1" colspan="1" aria-label="Email" style="width: 317px;">姓名</th>
 										<th class="hidden-480 sorting" role="columnheader" tabindex="0" aria-controls="sample_1" rowspan="1" colspan="1" aria-label="Points: activate to sort column ascending" style="width: 135px;">角色</th>
@@ -67,13 +71,26 @@
 									</thead>
 
 								</table>
-								<div class="row-fluid"><div class="span6"><div class="dataTables_info" id="sample_1_info">Showing 1 to 5 of 25 entries</div></div><div class="span6"><div class="dataTables_paginate paging_bootstrap pagination"><ul><li class="prev disabled"><a href="#">← <span class="hidden-480">Prev</span></a></li><li class="active"><a href="#">1</a></li><li><a href="#">2</a></li><li><a href="#">3</a></li><li><a href="#">4</a></li><li><a href="#">5</a></li><li class="next"><a href="#"><span class="hidden-480">Next</span> → </a></li></ul></div></div></div></div>
+								</div>
 							
 							</div>
 
 						</div>
 
-			</div>
+			<script type="text/javascript" src="media/js/select2.min.js"></script>
+
+			<script type="text/javascript" src="media/js/jquery.dataTables.min.js"></script>
+			<script type="text/javascript" src="media/js/jquery.dataTables.js"></script>
+		
+			<script type="text/javascript" src="media/js/DT_bootstrap.js"></script>
 			
-			<script src="js/manage/user.js" type="text/javascript"></script>    
+			<script src="js/manage/user.js" type="text/javascript"></script>    			<script>
+
+				jQuery(document).ready(function() {    
+				   App.init(); // initlayout and core plugins
+				   User.init();
+				   $("a[href='jump/manage_user']").parent().addClass("active");
+				   $("a[href='jump/manage_user']").parent().parent().parent().addClass("active");
+				});
+		</script>
 </body></html>

@@ -2,9 +2,8 @@
     pageEncoding="UTF-8"%>
 <!-- BEGIN CORE PLUGINS -->
 
-	<!-- <script src="media/js/jquery-1.10.1.min.js" type="text/javascript"></script> -->
-	<script src="media/js/jquery.js" type="text/javascript"></script>
-	
+	<script src="media/js/jquery-1.10.1.min.js" type="text/javascript"></script>
+<!-- 	<script src="media/js/jquery.js" type="text/javascript"></script> -->
 
 	<script src="media/js/jquery-migrate-1.2.1.min.js" type="text/javascript"></script>
 

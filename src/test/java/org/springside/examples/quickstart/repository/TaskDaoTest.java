@@ -7,6 +7,8 @@ package org.springside.examples.quickstart.repository;
 
 import static org.assertj.core.api.Assertions.*;
 
+import java.util.Date;
+
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -14,6 +16,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort.Direction;
 import org.springframework.test.context.ContextConfiguration;
 import org.springside.examples.quickstart.entity.Task;
+import org.springside.examples.quickstart.entity.User;
 import org.springside.modules.test.spring.SpringTransactionalTestCase;
 
 @ContextConfiguration(locations = { "/applicationContext.xml" })
@@ -21,6 +24,9 @@ public class TaskDaoTest extends SpringTransactionalTestCase {
 
 	@Autowired
 	private TaskDao taskDao;
+	
+	@Autowired
+	private UserDao userDao;
 
 	@Test
 	public void findTasksByUserId() throws Exception {
@@ -31,5 +37,19 @@ public class TaskDaoTest extends SpringTransactionalTestCase {
 		tasks = taskDao.findByUserId(99999L, new PageRequest(0, 100, Direction.ASC, "id"));
 		assertThat(tasks.getContent()).isEmpty();
 		assertThat(tasks.getContent()).isEmpty();
+	}
+	@Test
+	public void saveUserTest() throws Exception {
+		for(int i=0;i<20;i++){
+		User user = new User();
+		user.setLoginName("liyi");
+		user.setName("liyi");
+		user.setPassword("liyi");
+		user.setRoles("user");
+		user.setSalt("liyi");
+		user.setRegisterDate(new Date());
+		userDao.save(user);
+		}
+		
 	}
 }

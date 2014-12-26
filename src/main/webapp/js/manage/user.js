@@ -5,10 +5,8 @@ var User = function () {
 	var inittable = function(){
 		var oTable = $('#usertable').dataTable( {
 	        "bServerSide": true,
-	        "sAjaxSource": "listuser",
+	        "sAjaxSource": "system/listuser",
 	        "bProcessing": false,
-	        //simple_numbers  full_numbers
-	        //"sPaginationType": "two_button",
 	        "bFilter": false,//过滤功能
 	        "bSort": false,//排序功能
 	        "oLanguage": {
@@ -17,12 +15,14 @@ var User = function () {
 	        "aoColumns": [
 	                      	{ "mDataProp": function(lineData){
 	                      		var id = lineData.id;
-	                      		return '<input type="checkbox" name="user_check" class="checkboxes" value="'+id+'" />';
+//	                      		return '<div class="checker"> <span><input type="checkbox" class="checkboxes" name="user_check" value="'+id+'" /> </span></div>';
+	                      		return '<input type="checkbox" class="group-checkable checkboxes" name="user_check" value="'+id+'" />';
 	                      	}},
-							{ "mDataProp": "id" },
-							{ "mDataProp": "userCode" },
-							{ "mDataProp": "userPass" },
-							{ "mDataProp": "userName" },
+//							{ "mDataProp": "id" },
+							{ "mDataProp": "loginName" },
+							{ "mDataProp": "name" },
+							{ "mDataProp": "roles" },
+							{ "mDataProp": "registerDate" },
 							{ "mDataProp": function(lineData){
 								var id = lineData.id;
 								var del = '<button id="sample_editable_1_new" class="btn red" onclick="del(\''+id+'\')">删除<i class="icon-minus"></i></button>';
@@ -37,6 +37,23 @@ var User = function () {
 	        var bVis = oTable.fnSettings().aoColumns[iCol].bVisible;
 	        oTable.fnSetColumnVis(iCol, (bVis ? false : true));
 	    });
+		
+		jQuery('#usertable .group-checkable').change(function () {
+            var set = jQuery(this).attr("data-set");
+            var checked = jQuery(this).is(":checked");
+            jQuery(set).each(function () {
+                if (checked) {
+                    $(this).attr("checked", true);
+                } else {
+                    $(this).attr("checked", false);
+                }
+            });
+            jQuery.uniform.update(set);
+        });
+		
+		jQuery('#usertable_wrapper .dataTables_filter input').addClass("m-wrap medium"); // modify table search input
+        jQuery('#usertable_wrapper .dataTables_length select').addClass("m-wrap small");
+
 	};
 	
     return {
