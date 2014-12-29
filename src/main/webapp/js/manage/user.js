@@ -16,7 +16,7 @@ var User = function () {
 	                      	{ "mDataProp": function(lineData){
 	                      		var id = lineData.id;
 //	                      		return '<div class="checker"> <span><input type="checkbox" class="checkboxes" name="user_check" value="'+id+'" /> </span></div>';
-	                      		return '<input type="checkbox" class="group-checkable checkboxes" name="user_check" value="'+id+'" />';
+	                      		return '<input type="checkbox" class="group-checkable checkboxes"data-set="#usertable .checkboxes" name="user_check" value="'+id+'" />';
 	                      	}},
 //							{ "mDataProp": "id" },
 							{ "mDataProp": "loginName" },
@@ -51,8 +51,6 @@ var User = function () {
             jQuery.uniform.update(set);
         });
 		
-		jQuery('#usertable_wrapper .dataTables_filter input').addClass("m-wrap medium"); // modify table search input
-        jQuery('#usertable_wrapper .dataTables_length select').addClass("m-wrap small");
 
 	};
 	

@@ -36,3 +36,5 @@
 	<script type="text/javascript" src="media/js/select2.min.js"></script>
 	<script type="text/javascript" src="media/js/jquery.dataTables.min.js"></script>
 	<script type="text/javascript" src="media/js/DT_bootstrap.js"></script>
+	<script type="text/javascript" src="media/js/jquery.dataTables.js"></script>
+		

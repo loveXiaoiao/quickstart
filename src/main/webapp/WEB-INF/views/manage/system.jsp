@@ -7,17 +7,35 @@
 <html lang="en">
 <head>
 </head><body><div class="container-fluid">
-				<!-- BEGIN PAGE HEADER-->
-				<div class="row-fluid">
-					<div class="span12">
-						<h3 class="page-title">
-							用户管理<small>用户列表</small>
-						</h3>
-					</div>
-				</div>
+<!-- 				BEGIN PAGE HEADER -->
+<!-- 				<div class="row-fluid"> -->
+<!-- 					<div class="span12"> -->
+<!-- 						<h3 class="page-title"> -->
+<!-- 							用户管理<small>用户列表</small> -->
+<!-- 						</h3> -->
+<!-- 					</div> -->
+<!-- 				</div> -->
+						<ul class="breadcrumb">
+
+							<li>
+								<i class="icon-home"></i>
+
+								<a href="index.html">Home</a> 
+
+								<i class="icon-angle-right"></i>
+
+							</li>
+							<li>
+								<a href="#">用户管理</a>
+
+								<i class="icon-angle-right"></i>
+							</li>
+
+							<li><a href="#">用户列表</a></li>
+
+						</ul>
 				 <div class="portlet box blue">
 							<div class="portlet-title">
-
 								<div class="caption"><i class="icon-globe"></i>用户列表</div>
 							</div>
 							<div class="portlet-body">
@@ -31,9 +49,13 @@
 									<button class="btn red">查询</button>
 									<button class="btn green">重置</button>
 								</div>
+								
+								<div class="controls">
+								<div class= "">
+								<a href="#" class="btn"><i class="icon-plus"></i> 新增</a>
+								</div>
 
-								<div class="btn-group pull-right">
-
+								<div class="btn-group">
 										<button class="btn dropdown-toggle" data-toggle="dropdown">选择 <i class="icon-angle-down"></i>
 
 										</button>
@@ -47,6 +69,8 @@
 
 										</ul>
 
+									</div>
+									
 									</div>
 								<table class="table table-striped table-bordered table-hover dataTable" id="usertable" aria-describedby="sample_1_info">
 									<thead>
@@ -77,12 +101,7 @@
 
 						</div>
 
-			<script type="text/javascript" src="media/js/select2.min.js"></script>
-
-			<script type="text/javascript" src="media/js/jquery.dataTables.min.js"></script>
-			<script type="text/javascript" src="media/js/jquery.dataTables.js"></script>
-		
-			<script type="text/javascript" src="media/js/DT_bootstrap.js"></script>
+			
 			
 			<script src="js/manage/user.js" type="text/javascript"></script>    			<script>
 
