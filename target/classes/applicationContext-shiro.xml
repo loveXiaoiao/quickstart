@@ -31,6 +31,7 @@
 				/api/** = anon
 				/register/** = anon
 				/system/** = anon
+				/jump/** = anon
 				/admin/** = roles[admin]
 				/** = user
 			</value>
