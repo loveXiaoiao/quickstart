@@ -54,7 +54,6 @@ var User = function () {
 }();
 
 function addUser(){
-	alert("添加用户!");
 	window.location.href="jump/manage_userAdd";
 }
 
