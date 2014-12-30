@@ -31,13 +31,6 @@ var User = function () {
 	                  ]
 		} );
 		
-		$('#ckcolum input[type="checkbox"]').change(function(){
-	        /* Get the DataTables object again - this is not a recreation, just a get of the object */
-	        var iCol = parseInt($(this).attr("data-column"));
-	        var bVis = oTable.fnSettings().aoColumns[iCol].bVisible;
-	        oTable.fnSetColumnVis(iCol, (bVis ? false : true));
-	    });
-		
 		jQuery('#usertable .group-checkable').change(function () {
             var set = jQuery(this).attr("data-set");
             var checked = jQuery(this).is(":checked");
@@ -50,8 +43,6 @@ var User = function () {
             });
             jQuery.uniform.update(set);
         });
-		
-
 	};
 	
     return {
@@ -64,6 +55,7 @@ var User = function () {
 
 function addUser(){
 	alert("添加用户!");
+	window.location.href="jump/manage_userAdd";
 }
 
 function deleteUsers(){

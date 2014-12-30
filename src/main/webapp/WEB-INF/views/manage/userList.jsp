@@ -76,7 +76,7 @@
 
 			
 			
-			<script src="js/manage/user.js" type="text/javascript"></script>    			<script>
+			<script src="js/manage/userList.js" type="text/javascript"></script>    			<script>
 
 				jQuery(document).ready(function() {    
 				   App.init(); // initlayout and core plugins
