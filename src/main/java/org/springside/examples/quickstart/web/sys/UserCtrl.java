@@ -19,14 +19,14 @@ import com.google.common.collect.Maps;
 
 @Controller
 @RequestMapping(value = "/system")
-public class System {
+public class UserCtrl {
 	@Autowired
 	private AccountService accountService;
 	
 	
 	@RequestMapping(value = "success")
 	public String success(){
-		return "manage/system";
+		return "manage/userList";
 	}
 	
 	@RequestMapping("listuser")
