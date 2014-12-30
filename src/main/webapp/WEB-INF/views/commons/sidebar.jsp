@@ -26,6 +26,16 @@
 					<span class="selected"></span>
 
 					</a>
+					<ul class="sub-menu">
+						<li>
+							<a href="jump/manage_userList">
+							用户列表</a>
+						</li>
+						<li >
+							<a href="jump/manage_userAdd">
+							系统参数</a>
+						</li>
+					</ul>
 
 				</li>
 

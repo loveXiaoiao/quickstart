@@ -29,6 +29,11 @@ public class UserCtrl {
 		return "manage/userList";
 	}
 	
+	@RequestMapping(value = "saveUser")
+	public String saveUser(){
+		return "manage/userList";
+	}
+	
 	@RequestMapping("listuser")
 	@ResponseBody
 	public DataPage<User> getPageModel(HttpServletRequest request,User entity,Integer iDisplayStart,Integer iDisplayLength, String sortType){

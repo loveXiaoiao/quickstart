@@ -52,9 +52,9 @@ var User = function () {
     };
 
 }();
-
-function addUser(){
-	window.location.href="jump/manage_userAdd";
+function tankun(){
+	$("#myModal").modal('show');//展示
+//	$("#myModal").modal('hid');关闭
 }
 
 function deleteUsers(){
