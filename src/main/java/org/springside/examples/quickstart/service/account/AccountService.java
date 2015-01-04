@@ -66,7 +66,6 @@ public class AccountService {
 	 * getPageModel:分页查询.
 	 *
 	 * @param entity 实体
-	 * @param rowBounds 分页
 	 * @return 分页查询结果
 	 * @since JDK 1.6
 	 */
