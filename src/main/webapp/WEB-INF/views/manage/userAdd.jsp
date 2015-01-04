@@ -15,7 +15,7 @@
 		<ul class="breadcrumb">
 			<li><i class="icon-home"></i> <a href="index.html">Home</a> <i
 				class="icon-angle-right"></i></li>
-			<li><a href="jump/jump/manage_userList">用户管理</a> <i
+			<li><a href="jump/manage_userList">用户管理</a> <i
 				class="icon-angle-right"></i></li>
 
 			<li><a href="#">新增用户</a></li>
@@ -38,7 +38,7 @@
 
 				<!-- BEGIN FORM-->
 
-				<form action="" class="form-horizontal">
+				<form action="" id="userForm" class="form-horizontal">
 
 
 					<div class="control-group">
@@ -48,7 +48,7 @@
 						<div class="controls">
 
 							<input type="text" id="loginName" placeholder="用户名"
-								class="m-wrap medium">
+								class="m-wrap medium required:true">
 						</div>
 
 					</div>
@@ -59,7 +59,7 @@
 
 						<div class="controls">
 							<input type="text" id="name" placeholder="姓名"
-								class="m-wrap medium">
+								class="m-wrap medium required">
 						</div>
 
 					</div>
@@ -68,8 +68,8 @@
 						<label class="control-label">密码</label>
 
 						<div class="controls">
-							<input type="password" id="password" placeholder="密码"
-								class="m-wrap medium">
+							<input type="password" id="plainPassword" placeholder="密码"
+								class="m-wrap medium required">
 						</div>
 
 					</div>
@@ -82,9 +82,9 @@
 
 							<select class="small m-wrap" id="roles" tabindex="1">
 
-								<option value="Category 1">普通用户</option>
+								<option value="user">普通用户</option>
 
-								<option value="Category 2">管理员</option>
+								<option value="admin">管理员</option>
 
 							</select>
 
@@ -94,11 +94,11 @@
 
 					<div class="form-actions">
 
-						<button type="submit" class="btn blue">
+						<button type="button" class="btn blue" onclick="add();">
 							<i class="icon-ok"></i>保存
 						</button>
 
-						<button type="button" class="btn">取消</button>
+						<button type="button" class="btn" onclick="window.location.href='jump/manage_userList'">取消</button>
 
 					</div>
 
@@ -109,6 +109,7 @@
 
 		</div>
 	</div>
+	<script src="js/manage/userAdd.js" type="text/javascript"></script>
 
 	<script>
 		jQuery(document).ready(

@@ -13,6 +13,7 @@ import org.springside.examples.quickstart.entity.User;
 import org.springside.examples.quickstart.service.account.AccountService;
 import org.springside.examples.quickstart.service.account.ShiroDbRealm.ShiroUser;
 import org.springside.examples.quickstart.util.DataPage;
+import org.springside.examples.quickstart.util.ResultObject;
 import org.springside.modules.web.Servlets;
 
 import com.google.common.collect.Maps;
@@ -23,15 +24,27 @@ public class UserCtrl {
 	@Autowired
 	private AccountService accountService;
 	
+	private ResultObject resultObject = new ResultObject(true, "OK!");
+	
 	
 	@RequestMapping(value = "success")
 	public String success(){
 		return "manage/userList";
 	}
 	
-	@RequestMapping(value = "saveUser")
-	public String saveUser(){
-		return "manage/userList";
+	@RequestMapping("saveUser")
+	@ResponseBody
+	public ResultObject saveUser(User entity, HttpServletRequest request){
+		try{
+			accountService.registerUser(entity);
+			resultObject.setMsg("保存成功");
+			return resultObject;
+		}catch(Exception e){
+			e.printStackTrace();
+			resultObject.setMsg("保存失败");
+			resultObject.setSuccess(false);
+			return resultObject;
+		}
 	}
 	
 	@RequestMapping("listuser")
