@@ -4,6 +4,7 @@
 	String path = request.getContextPath();
 	String basePath = request.getScheme() + "://"+ request.getServerName() + ":" + request.getServerPort()+ path + "/";
 %>
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html lang="en">
 <head>
@@ -25,15 +26,16 @@
 				</div>
 			</div>
 			<div class="portlet-body">
-
+				<form id="search">
 				<div class="controls">
-					<label class="help-inline">用户名：</label> <input class="m-wrap small"
-						size="8" type="text" placeholder="用户名"> <label
-						class="help-inline">姓名:</label> <input class="m-wrap small"
-						size="8" type="text" placeholder="姓名">
-					<button class="btn red">查询</button>
-					<button class="btn green">重置</button>
+					<label class="help-inline">用户名：</label> 
+					<input class="m-wrap small" size="8" type="text" id="search_LIKE_loginName" name="search_LIKE_loginName" placeholder="用户名"> 
+					<label class="help-inline">姓名:</label> 
+					<input class="m-wrap small" name="search_LIKE_name" id="search_LIKE_name" size="8" type="text" placeholder="姓名">
+					<button class="btn red" onclick="reloadTable();">查询</button>
+					<button class="btn green" onclick="reset();">重置</button>
 				</div>
+				</form>
 
 				<div class="clearfix">
 					<!-- 按钮 -->
@@ -46,8 +48,7 @@
 							onclick="delUsers()">
 							删除<i class="icon-minus"></i>
 						</button>
-						<button id="sample_editable_1_tk" class="btn red"
-							onclick="tankun()">
+						<button id="sample_editable_1_tk" class="btn red"onclick="tankun()">
 							弹框<i class="icon-minus"></i>
 						</button>
 					</p>
@@ -85,48 +86,12 @@
 		</div>
 
 	</div>
-
-	<div id="portlet-config" class="modal hide">
-
-		<div class="modal-header">
-
-			<button data-dismiss="modal" class="close" type="button"></button>
-
-			<h3>Widget Settings</h3>
-
-		</div>
-
-		<div class="modal-body">Widget settings form goes here</div>
-		<div class="modal-footer">
-			<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-			<button type="button" class="btn btn-primary">提交更改</button>
-		</div>
-
-	</div>
-	<div class="modal fade" id="myModal" tabindex="-1" role="dialog"
-		aria-labelledby="myModalLabel" aria-hidden="true">
-		<div class="modal-dialog">
-			<div class="modal-content">
-				<div class="modal-header">
-					<button type="button" class="close" data-dismiss="modal"
-						aria-hidden="true">&times;</button>
-					<h4 class="modal-title" id="myModalLabel">模态框（Modal）标题</h4>
-				</div>
-				<div class="modal-body">在这里添加一些文本</div>
-				<div class="modal-footer">
-					<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-					<button type="button" class="btn btn-primary">提交更改</button>
-				</div>
-			</div>
-			<!-- /.modal-content -->
-		</div>
-	</div>
-
+	<%@include file = "../commons/messageBox.jsp" %>
 	<script src="js/manage/userList.js" type="text/javascript"></script>
 	<script>
 		jQuery(document).ready(
 				function() {
-					User.init();
+					User.init('');
 					$("a[href='jump/manage_userList']").parent().addClass(
 							"active");
 					$("a[href='jump/manage_userList']").parent().parent()

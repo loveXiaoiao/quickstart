@@ -36,7 +36,7 @@ public class RegisterController {
 
 	@RequestMapping(method = RequestMethod.POST)
 	public String register(@Valid User user, RedirectAttributes redirectAttributes) {
-		accountService.registerUser(user);
+//		accountService.registerUser(user);
 		redirectAttributes.addFlashAttribute("username", user.getLoginName());
 		return "redirect:/login";
 	}

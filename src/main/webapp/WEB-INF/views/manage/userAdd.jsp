@@ -110,6 +110,7 @@
 		</div>
 	</div>
 	<script src="js/manage/userAdd.js" type="text/javascript"></script>
+	<%@include file = "../commons/messageBox.jsp" %>
 
 	<script>
 		jQuery(document).ready(

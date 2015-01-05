@@ -9,6 +9,7 @@ var User = function () {
 	        "bProcessing": false,
 	        "bFilter": false,//过滤功能
 	        "bSort": false,//排序功能
+	        "stateSave": true,
 	        "oLanguage": {
 				"sUrl": "js/datatable-cn.txt"
 			},
@@ -28,7 +29,12 @@ var User = function () {
 								var del = '<button id="sample_editable_1_new" class="btn red" onclick="del(\''+id+'\')">删除<i class="icon-minus"></i></button>';
 								return del;
 							} }
-	                  ]
+	                  ],
+	         "fnServerParams": queryParams
+//	        	 function ( aoData ) { 
+//	        	  aoData.push( { "name": "search_LIKE_loginName", "value": $("#search_LIKE_loginName").val() } );
+//	        	  aoData.push( { "name": "search_LIKE_name", "value": $("#search_LIKE_name").val() } ); 
+//	        	  } 
 		} );
 		
 		jQuery('#usertable .group-checkable').change(function () {
@@ -52,7 +58,28 @@ var User = function () {
     };
 
 }();
+
+/**
+ * 对datatable重新加载
+ */
+function reloadTable(){
+//	var queryParams = {};
+//	var fields =$('#usertable').serializeArray(); //自动序列化表单元素为JSON对象 
+//	$.each( fields, function(i, field){  
+//		queryParams[field.name] = field.value; //设置查询参数  
+//	});
+	var table = $('#usertable').DataTable();
+	table.ajax.reload();
+}
+
+function reset(){
+	$("#search_LIKE_loginName").val('');
+	$("#search_LIKE_name").val('');
+	reloadTable();
+}
+
 function tankun(){
+	$("#modal_content").html("请选择内容！");
 	$("#myModal").modal('show');//展示
 //	$("#myModal").modal('hid');关闭
 }

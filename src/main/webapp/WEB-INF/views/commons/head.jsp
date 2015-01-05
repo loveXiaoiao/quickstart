@@ -75,7 +75,7 @@
 
 							<li><a href="extra_lock.html"><i class="icon-lock"></i> Lock Screen</a></li>
 
-							<li><a href="loginout"><i class="icon-key"></i> Log Out</a></li>
+							<li><a href="logout"><i class="icon-key"></i> Log Out</a></li>
 
 						</ul>
 

@@ -5,6 +5,8 @@
  *******************************************************************************/
 package org.springside.examples.quickstart.web.account;
 
+import org.apache.shiro.SecurityUtils;
+import org.apache.shiro.subject.Subject;
 import org.apache.shiro.web.filter.authc.FormAuthenticationFilter;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -33,5 +35,6 @@ public class LoginController {
 		model.addAttribute(FormAuthenticationFilter.DEFAULT_USERNAME_PARAM, userName);
 		return "login";
 	}
+	
 	
 }

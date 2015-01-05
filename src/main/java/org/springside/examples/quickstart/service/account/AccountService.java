@@ -20,7 +20,6 @@ import org.springframework.data.domain.Sort.Direction;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
-import org.springside.examples.quickstart.entity.Task;
 import org.springside.examples.quickstart.entity.User;
 import org.springside.examples.quickstart.repository.TaskDao;
 import org.springside.examples.quickstart.repository.UserDao;
@@ -29,7 +28,6 @@ import org.springside.examples.quickstart.service.account.ShiroDbRealm.ShiroUser
 import org.springside.examples.quickstart.util.DataPage;
 import org.springside.modules.persistence.DynamicSpecifications;
 import org.springside.modules.persistence.SearchFilter;
-import org.springside.modules.persistence.SearchFilter.Operator;
 import org.springside.modules.security.utils.Digests;
 import org.springside.modules.utils.Clock;
 import org.springside.modules.utils.Encodes;
@@ -69,9 +67,10 @@ public class AccountService {
 	 * @return 分页查询结果
 	 * @since JDK 1.6
 	 */
-	public DataPage<User> getPageModel(User entity, Map<String, Object> searchParams,Integer iDisplayStart,Integer iDisplayLength, String sortType){
+	public DataPage<User> getPageModel(User entity, Map<String, Object> searchParams,Integer iDisplayStart,Integer iDisplayLength, String sortType) throws ServiceException{
+		
 		DataPage<User> page = new DataPage<User>();
-		PageRequest pageRequest = buildPageRequest(iDisplayStart, iDisplayLength, sortType);
+		PageRequest pageRequest = buildPageRequest(iDisplayStart/iDisplayLength, iDisplayLength, sortType);
 		Specification<User> spec = buildSpecification(searchParams);
 		long total = userDao.count(spec);
 		Page<User> rows = userDao.findAll(spec,pageRequest);
@@ -109,11 +108,13 @@ public class AccountService {
 		return userDao.findByLoginName(loginName);
 	}
 
-	public void registerUser(User user) {
+	public void registerUser(User user) throws ServiceException{
+		if(findUserByLoginName(user.getLoginName()) != null){
+			throw new ServiceException("用户名已存在!");
+		}
 		entryptPassword(user);
 		user.setRoles("user");
 		user.setRegisterDate(clock.getCurrentDate());
-
 		userDao.save(user);
 	}
 
