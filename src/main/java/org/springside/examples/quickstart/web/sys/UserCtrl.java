@@ -10,6 +10,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springside.examples.quickstart.entity.User;
+import org.springside.examples.quickstart.service.ServiceException;
 import org.springside.examples.quickstart.service.account.AccountService;
 import org.springside.examples.quickstart.service.account.ShiroDbRealm.ShiroUser;
 import org.springside.examples.quickstart.util.DataPage;
@@ -38,10 +39,11 @@ public class UserCtrl {
 		try{
 			accountService.registerUser(entity);
 			resultObject.setMsg("保存成功");
+			resultObject.setResult(true);
 			return resultObject;
-		}catch(Exception e){
+		}catch(ServiceException e){
 			e.printStackTrace();
-			resultObject.setMsg("保存失败");
+			resultObject.setMsg(e.getMessage());
 			resultObject.setSuccess(false);
 			return resultObject;
 		}

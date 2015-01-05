@@ -52,7 +52,25 @@ var User = function () {
     };
 
 }();
+
+
+//$(document).ready(function() {
+//    var lastIdx = null;
+//    var table = $('#usertable').DataTable();
+//    $('#usertable tbody')
+//        .on( 'mouseover', 'td', function () {
+//            var colIdx = table.cell(this).index().column;
+//            if ( colIdx !== lastIdx ) {
+//                $( table.cells().nodes() ).removeClass( 'highlight' );
+//                $( table.column( colIdx ).nodes() ).addClass( 'highlight' );
+//            }
+//        } )
+//        .on( 'mouseleave', function () {
+//            $( table.cells().nodes() ).removeClass( 'highlight' );
+//        } );
+//} );
 function tankun(){
+	$("#modal_content").html("请选择内容！");
 	$("#myModal").modal('show');//展示
 //	$("#myModal").modal('hid');关闭
 }
