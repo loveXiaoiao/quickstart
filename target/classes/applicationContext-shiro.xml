@@ -10,6 +10,7 @@
 		<property name="realm" ref="shiroDbRealm" />
 		<property name="cacheManager" ref="shiroEhcacheManager" />
 	</bean>
+	
 
 	<!-- 項目自定义的Realm, 所有accountService依赖的dao都需要用depends-on声明 -->
 	<bean id="shiroDbRealm" class="org.springside.examples.quickstart.service.account.ShiroDbRealm">
@@ -30,8 +31,8 @@
 				/manage/**= anon
 				/api/** = anon
 				/register/** = anon
-				/system/** = anon
-				/jump/** = anon
+				/system/** = authc
+				/jump/** = authc
 				/admin/** = roles[admin]
 				/** = user
 			</value>

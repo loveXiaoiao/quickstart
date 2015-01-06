@@ -30,11 +30,10 @@ var User = function () {
 								return del;
 							} }
 	                  ],
-	         "fnServerParams": queryParams
-//	        	 function ( aoData ) { 
-//	        	  aoData.push( { "name": "search_LIKE_loginName", "value": $("#search_LIKE_loginName").val() } );
-//	        	  aoData.push( { "name": "search_LIKE_name", "value": $("#search_LIKE_name").val() } ); 
-//	        	  } 
+	         "fnServerParams": function ( aoData ) { 
+	        	  aoData.push( { "name": "search_LIKE_loginName", "value": $("#search_LIKE_loginName").val() } );
+	        	  aoData.push( { "name": "search_LIKE_name", "value": $("#search_LIKE_name").val() } ); 
+	        	  } 
 		} );
 		
 		jQuery('#usertable .group-checkable').change(function () {
