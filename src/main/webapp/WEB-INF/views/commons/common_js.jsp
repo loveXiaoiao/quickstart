@@ -38,4 +38,10 @@
 	<script type="text/javascript" src="media/js/jquery.dataTables.min.js"></script>
 	<script type="text/javascript" src="media/js/DT_bootstrap.js"></script>
 	<script type="text/javascript" src="media/js/jquery.dataTables.js"></script>
+	
+	<!-- highCharts图表插件 -->
+	<script type="text/javascript" src="thirdpart/Highcharts-4.0.3/js/highcharts.js"></script>
+	<script type="text/javascript" src="thirdpart/Highcharts-4.0.3/js/highcharts-more.js"></script>
+	<script type="text/javascript" src="thirdpart/Highcharts-4.0.3/js/modules/exporting.js"></script>
+	<script type="text/javascript" src="thirdpart/Highcharts-4.0.3/js/highcharts-3d.js"></script>
 		

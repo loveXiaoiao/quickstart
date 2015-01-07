@@ -26,7 +26,6 @@
 				</div>
 			</div>
 			<div class="portlet-body">
-				<form id="search">
 				<div class="controls">
 					<label class="help-inline">用户名：</label> 
 					<input class="m-wrap small" size="8" type="text" id="search_LIKE_loginName" name="search_LIKE_loginName" placeholder="用户名"> 
@@ -35,7 +34,6 @@
 					<button class="btn red" onclick="reloadTable();">查询</button>
 					<button class="btn green" onclick="reset();">重置</button>
 				</div>
-				</form>
 
 				<div class="clearfix">
 					<!-- 按钮 -->
@@ -44,7 +42,7 @@
 							onclick="window.location.href='jump/manage_userAdd'">
 							增加 <i class="icon-plus"></i>
 						</button>
-						<button id="sample_editable_1_new" class="btn red"
+						<button id="sample_editable_1_del" class="btn red"
 							onclick="delUsers()">
 							删除<i class="icon-minus"></i>
 						</button>
@@ -54,28 +52,25 @@
 					</p>
 				</div>
 
-				<table
-					class="table table-striped table-bordered table-hover dataTable"
-					id="usertable" aria-describedby="sample_1_info">
+				<table class="table table-striped table-bordered table-hover" id="usertable">
 					<thead>
-						<tr role="row">
-							<th style="width: 8px;"><input type="checkbox"
-								class="group-checkable" data-set="#usertable .checkboxes" /></th>
-							<th class="sorting" role="columnheader" tabindex="0"
-								aria-controls="sample_1" rowspan="1" colspan="1"
-								aria-label="Username: activate to sort column ascending"
-								style="width: 172px;">用户名</th>
-							<th class="hidden-480 sorting_disabled" role="columnheader"
-								rowspan="1" colspan="1" aria-label="Email" style="width: 317px;">姓名</th>
-							<th class="hidden-480 sorting" role="columnheader" tabindex="0"
-								aria-controls="sample_1" rowspan="1" colspan="1"
-								aria-label="Points: activate to sort column ascending"
-								style="width: 135px;">角色</th>
-							<th class="hidden-480 sorting_disabled" role="columnheader"
-								rowspan="1" colspan="1" aria-label="Joined"
-								style="width: 204px;">注册时间</th>
-							<th class="sorting_disabled" role="columnheader" rowspan="1"
-								colspan="1" aria-label="" style="width: 181px;">操作</th>
+
+						<tr>
+
+							<th style="width: 8px;"><input type="checkbox" class="group-checkable" data-set="#usertable .checkboxes" /></th>
+
+							<th>用户名</th>
+
+							<th class="hidden-480">姓名</th>
+
+							<th class="hidden-480">角色</th>
+
+							<th class="hidden-480">注册时间</th>
+							
+							<th class="hidden-480">操作</th>
+
+							<th></th>
+
 						</tr>
 
 					</thead>
@@ -91,7 +86,7 @@
 	<script>
 		jQuery(document).ready(
 				function() {
-					User.init('');
+					User.init();
 					$("a[href='jump/manage_userList']").parent().addClass(
 							"active");
 					$("a[href='jump/manage_userList']").parent().parent()

@@ -6,29 +6,29 @@ var User = function () {
 		var oTable = $('#usertable').dataTable( {
 	        "bServerSide": true,
 	        "sAjaxSource": "system/listuser",
-	        "bProcessing": false,
+	        "bProcessing": true,
 	        "bFilter": false,//过滤功能
-	        "bSort": false,//排序功能
+	        "bSort": true,//排序功能
 	        "stateSave": true,
 	        "oLanguage": {
 				"sUrl": "js/datatable-cn.txt"
 			},
+			"aaSorting": [[1, 'asc']],//实现默认排序
 	        "aoColumns": [
 	                      	{ "mDataProp": function(lineData){
 	                      		var id = lineData.id;
 //	                      		return '<div class="checker"> <span><input type="checkbox" class="checkboxes" name="user_check" value="'+id+'" /> </span></div>';
 	                      		return '<input type="checkbox" class="group-checkable checkboxes"data-set="#usertable .checkboxes" name="user_check" value="'+id+'" />';
 	                      	}},
-//							{ "mDataProp": "id" },
 							{ "mDataProp": "loginName" },
 							{ "mDataProp": "name" },
-							{ "mDataProp": "roles" },
+							{ "mDataProp": "roles" , "bSortable": false},//屏蔽此列排序功能
 							{ "mDataProp": "registerDate" },
 							{ "mDataProp": function(lineData){
 								var id = lineData.id;
 								var del = '<button id="sample_editable_1_new" class="btn red" onclick="del(\''+id+'\')">删除<i class="icon-minus"></i></button>';
 								return del;
-							} }
+							} , "bSortable": false}
 	                  ],
 	         "fnServerParams": function ( aoData ) { 
 	        	  aoData.push( { "name": "search_LIKE_loginName", "value": $("#search_LIKE_loginName").val() } );
@@ -62,11 +62,6 @@ var User = function () {
  * 对datatable重新加载
  */
 function reloadTable(){
-//	var queryParams = {};
-//	var fields =$('#usertable').serializeArray(); //自动序列化表单元素为JSON对象 
-//	$.each( fields, function(i, field){  
-//		queryParams[field.name] = field.value; //设置查询参数  
-//	});
 	var table = $('#usertable').DataTable();
 	table.ajax.reload();
 }
