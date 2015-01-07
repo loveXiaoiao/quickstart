@@ -35,6 +35,10 @@
 							<a href="jump/manage_userAdd">
 							系统参数</a>
 						</li>
+						<li >
+							<a href="jump/manage_userChart">
+							图表展示</a>
+						</li>
 					</ul>
 
 				</li>

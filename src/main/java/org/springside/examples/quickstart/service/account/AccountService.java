@@ -5,6 +5,7 @@
  *******************************************************************************/
 package org.springside.examples.quickstart.service.account;
 
+import java.util.Enumeration;
 import java.util.List;
 import java.util.Map;
 
@@ -67,10 +68,10 @@ public class AccountService {
 	 * @return 分页查询结果
 	 * @since JDK 1.6
 	 */
-	public DataPage<User> getPageModel(User entity, Map<String, Object> searchParams,Integer iDisplayStart,Integer iDisplayLength, String sortType) throws ServiceException{
+	public DataPage<User> getPageModel(User entity, Map<String, Object> searchParams,Integer iDisplayStart,Integer iDisplayLength, Sort sort) throws ServiceException{
 		
 		DataPage<User> page = new DataPage<User>();
-		PageRequest pageRequest = buildPageRequest(iDisplayStart/iDisplayLength, iDisplayLength, sortType);
+		PageRequest pageRequest = new PageRequest(iDisplayStart/iDisplayLength, iDisplayLength, sort);
 		Specification<User> spec = buildSpecification(searchParams);
 		long total = userDao.count(spec);
 		Page<User> rows = userDao.findAll(spec,pageRequest);
@@ -87,17 +88,42 @@ public class AccountService {
 		Specification<User> spec = DynamicSpecifications.bySearchFilter(filters.values(), User.class);
 		return spec;
 	}
-	/**
-	 * 创建分页请求.
-	 */
-	private PageRequest buildPageRequest(int pageNumber, int pagzSize, String sortType) {
-		Sort sort = null;
-		if ("auto".equals(sortType)) {
-			sort = new Sort(Direction.DESC, "id");
-		} else if ("title".equals(sortType)) {
-			sort = new Sort(Direction.ASC, "title");
+	//此方法已弃用，用来生成排序对象
+	private Sort buildSort(Map<String, String> paramsMap){
+		Integer iSortingCols = 0;
+		Integer iSortCol_0 = 0;
+		String sortName = null;
+		Direction direction = null;
+		String sortDir = null;
+		for(String paramName : paramsMap.keySet()){
+			if(!"".equals(paramName) && paramName.equals("iSortingCols")){
+				iSortingCols = Integer.parseInt(paramsMap.get(paramName));
+				if(iSortingCols == 0) return null;
+				continue;
+			}
+			if(!"".equals(paramName) && paramName.equals("iSortCol_0")){
+				iSortCol_0 = Integer.parseInt(paramsMap.get(paramName));
+				continue;
+			}
+			if(!"".equals(paramName) && paramName.startsWith("mDataProp_")){
+				Integer sortColNum = Integer.parseInt(paramName.substring("mDataProp_".length()));
+				if(sortColNum == iSortCol_0){
+					sortName = paramsMap.get(paramName);
+					continue;
+				}
+			}
+			if(!"".equals(paramName) && paramName.equals("sSortDir_0")){
+				sortDir = paramsMap.get(paramName);
+				if("asc".equals(sortDir)){
+					direction = Direction.ASC;
+				}
+				if("desc".endsWith(sortDir)){
+					direction = Direction.DESC;
+				}
+				continue;
+			}
 		}
-		return new PageRequest(pageNumber, pagzSize, sort);
+		return new Sort(direction,sortName);
 	}
 
 	public User getUser(Long id) {

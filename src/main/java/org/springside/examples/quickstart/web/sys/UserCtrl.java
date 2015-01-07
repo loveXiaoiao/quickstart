@@ -1,11 +1,15 @@
 package org.springside.examples.quickstart.web.sys;
 
+import java.util.Enumeration;
+import java.util.HashMap;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
 import org.apache.shiro.SecurityUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.domain.Sort.Direction;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -51,17 +55,20 @@ public class UserCtrl {
 	
 	@RequestMapping("listuser")
 	@ResponseBody
-	public DataPage<User> getPageModel(HttpServletRequest request,User entity,Integer iDisplayStart,Integer iDisplayLength, String sortType){
+	public DataPage<User> getPageModel(HttpServletRequest request,User entity,Integer iDisplayStart,Integer iDisplayLength){
+		//convertToMap定义于父类，将参数数组中的所有元素加入一个HashMap 
 		Map<String, Object> searchParams = Servlets.getParametersStartingWith(request, "search_");
 //		Long userId = getCurrentUserId();
 		DataPage<User> pages = null;
 		try {
-			pages = accountService.getPageModel(entity,searchParams,iDisplayStart,iDisplayLength,sortType);
+			pages = accountService.getPageModel(entity,searchParams,iDisplayStart,iDisplayLength,MyServlet.sortMsg(request));
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		return pages;
 	}
+	
+	
 	
 	/**
 	 * 取出Shiro中的当前用户Id.
@@ -70,5 +77,7 @@ public class UserCtrl {
 		ShiroUser user = (ShiroUser) SecurityUtils.getSubject().getPrincipal();
 		return user.id;
 	}
+	
+	
 
 }
