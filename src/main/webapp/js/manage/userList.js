@@ -19,7 +19,7 @@ var User = function () {
 	                      		var id = lineData.id;
 //	                      		return '<div class="checker"> <span><input type="checkbox" class="checkboxes" name="user_check" value="'+id+'" /> </span></div>';
 	                      		return '<input type="checkbox" class="group-checkable checkboxes"data-set="#usertable .checkboxes" name="user_check" value="'+id+'" />';
-	                      	}},
+	                      	}, "bSortable": false},
 							{ "mDataProp": "loginName" },
 							{ "mDataProp": "name" },
 							{ "mDataProp": "roles" , "bSortable": false},//屏蔽此列排序功能

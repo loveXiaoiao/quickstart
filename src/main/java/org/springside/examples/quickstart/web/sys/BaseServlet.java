@@ -10,8 +10,8 @@ import org.springframework.data.domain.Sort;
 import org.springframework.data.domain.Sort.Direction;
 import org.springside.modules.web.Servlets;
 
-public class MyServlet extends Servlets {
-	//功能是把request中的值放到map中，在Service中处理，功能和sortMsg类似
+public class BaseServlet extends Servlets {
+	//功能是把request中的值放到map中，在Service中处理，功能和sortMsg类似，已弃用
 	public static Map<String,String> getSortMsg(HttpServletRequest request){
 		Map<String, String> paramsMap = new HashMap<String, String>();
 		Enumeration paramNames = request.getParameterNames();
@@ -21,8 +21,6 @@ public class MyServlet extends Servlets {
 		}
 		return paramsMap;
 	}
-	
-	
 	//从request中拿到参数，拼接排序对象
 	public static Sort sortMsg(HttpServletRequest request){
 		Integer iSortingCols = 0;//排序的列数（一般是1或0）

@@ -61,7 +61,7 @@ public class UserCtrl {
 //		Long userId = getCurrentUserId();
 		DataPage<User> pages = null;
 		try {
-			pages = accountService.getPageModel(entity,searchParams,iDisplayStart,iDisplayLength,MyServlet.sortMsg(request));
+			pages = accountService.getPageModel(entity,searchParams,iDisplayStart,iDisplayLength,BaseServlet.sortMsg(request));
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
