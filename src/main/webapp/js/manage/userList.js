@@ -9,7 +9,7 @@ var User = function () {
 	        "bProcessing": true,
 	        "bFilter": false,//过滤功能
 	        "bSort": true,//排序功能
-//	        "stateSave": true,
+	        "stateSave": true,
 	        "oLanguage": {
 				"sUrl": "js/datatable-cn.txt"
 			},
