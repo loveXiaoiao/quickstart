@@ -21,7 +21,7 @@
 
 					<i class="icon-home"></i> 
 
-					<span class="title">用户管理</span>
+					<span class="title">系统管理</span>
 
 					<span class="selected"></span>
 

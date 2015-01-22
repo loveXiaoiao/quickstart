@@ -12,9 +12,9 @@
 	</bean>
 	
 
-	<!-- 項目自定义的Realm, 所有accountService依赖的dao都需要用depends-on声明 -->
-	<bean id="shiroDbRealm" class="org.springside.examples.quickstart.service.account.ShiroDbRealm">
-		<property name="accountService" ref="accountService"/>
+	<!-- 項目自定义的Realm, 所有userService依赖的dao都需要用depends-on声明 -->
+	<bean id="shiroDbRealm" class="org.weichart.quickstart.service.user.ShiroDbRealm">
+		<property name="userService" ref="userService"/>
 	</bean>
 	
 	<!-- Shiro Filter -->
