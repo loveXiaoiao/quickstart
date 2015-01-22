@@ -110,6 +110,7 @@
 	<script>
 		jQuery(document).ready(
 				function() {
+					App.init(); 
 					$("a[href='jump/manage_userAdd']").parent().addClass(
 							"active");
 					$("a[href='jump/manage_userAdd']").parent().parent()

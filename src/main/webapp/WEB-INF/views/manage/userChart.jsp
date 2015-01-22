@@ -34,6 +34,7 @@
 	<script>
 		jQuery(document).ready(
 				function() {
+					App.init(); 
 					$("a[href='jump/manage_userChart']").parent().addClass(
 							"active");
 					$("a[href='jump/manage_userChart']").parent().parent()

@@ -82,6 +82,7 @@
 	<script>
 		jQuery(document).ready(
 				function() {
+					App.init(); 
 					User.init();
 					$("a[href='jump/manage_userList']").parent().addClass(
 							"active");

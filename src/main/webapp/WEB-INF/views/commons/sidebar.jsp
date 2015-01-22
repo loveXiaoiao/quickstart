@@ -16,15 +16,10 @@
 
 				</li>
 				<li >
-
-					<a href="system/success">
-
+					<a href="javascript:;">
 					<i class="icon-home"></i> 
-
 					<span class="title">系统管理</span>
-
 					<span class="selected"></span>
-
 					</a>
 					<ul class="sub-menu">
 						<li>
@@ -42,41 +37,65 @@
 					</ul>
 
 				</li>
+				
+				
+				<li>
 
-<!-- 				<li> -->
+					<a href="javascript:;">
 
-<!-- 					<a href="javascript:;"> -->
+					<i class="icon-cogs"></i> 
 
-<!-- 					<i class="icon-cogs"></i>  -->
+					<span class="title">微信管理</span>
 
-<!-- 					<span class="title">系统管理</span> -->
+					<span class="selected "></span>
 
-<!-- 					<span class="arrow "></span> -->
+					</a>
 
-<!-- 					</a> -->
+					<ul class="sub-menu">
 
-<!-- 					<ul class="sub-menu"> -->
+						<li >
 
-<!-- 						<li > -->
+							<a href="jump/business_accountList">
 
-<!-- 							<a href="jump/manage_user"> -->
+							账号管理</a>
 
-<!-- 							用户管理</a> -->
+						</li>
 
-<!-- 						</li> -->
+						<li >
 
-<!-- 						<li > -->
+							<a href="jump/manage_system">
 
-<!-- 							<a href="jump/manage_system"> -->
+							圈子管理</a>
 
-<!-- 							系统参数</a> -->
+						</li>
+						
+						<li >
 
-<!-- 						</li> -->
+							<a href="jump/manage_system">
+
+							角色管理</a>
+
+						</li>
+						
+						<li >
+
+							<a href="jump/manage_system">
+
+							说说管理</a>
+
+						</li>
+						<li >
+
+							<a href="jump/manage_system">
+
+							评论管理</a>
+
+						</li>
 
 
-<!-- 					</ul> -->
+					</ul>
 
-<!-- 				</li> -->
+				</li>
 
 			</ul>
 
