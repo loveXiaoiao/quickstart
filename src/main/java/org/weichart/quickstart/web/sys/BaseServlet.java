@@ -9,7 +9,11 @@ import javax.servlet.http.HttpServletRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.domain.Sort.Direction;
 import org.springside.modules.web.Servlets;
-
+/**
+ * servlet辅助类
+ * @author liyi
+ *
+ */
 public class BaseServlet extends Servlets {
 	//功能是把request中的值放到map中，在Service中处理，功能和sortMsg类似，已弃用
 	public static Map<String,String> getSortMsg(HttpServletRequest request){

@@ -1,15 +1,11 @@
 package org.weichart.quickstart.web.sys;
 
-import java.util.Enumeration;
-import java.util.HashMap;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
 import org.apache.shiro.SecurityUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Sort;
-import org.springframework.data.domain.Sort.Direction;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -20,8 +16,11 @@ import org.weichart.quickstart.service.user.UserService;
 import org.weichart.quickstart.service.user.ShiroDbRealm.ShiroUser;
 import org.weichart.quickstart.util.DataPage;
 import org.weichart.quickstart.util.ResultObject;
-
-import com.google.common.collect.Maps;
+/**
+ * 
+ * @author liyi
+ *
+ */
 
 @Controller
 @RequestMapping(value = "/system")

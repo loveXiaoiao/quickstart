@@ -27,7 +27,7 @@ public class Circle extends IdEntity {
 	public void setName(String name) {
 		this.name = name;
 	}
-	
+	// JPA 基于account_id列的多对一关系定义
 	@ManyToOne
 	@JoinColumn(name = "account_id")
 	public Account getCreateAccount() {

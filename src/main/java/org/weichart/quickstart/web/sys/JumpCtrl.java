@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 /** 
  * @ClassName: JumpCtrl
  * @Description: TODO(页面跳转控制器)
- * @author wangguohong
+ * @author liyi
  * @date 2014-11-5 下午4:32:47
  * 
  */ 
