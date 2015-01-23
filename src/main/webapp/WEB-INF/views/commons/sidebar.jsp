@@ -45,7 +45,7 @@
 
 					<i class="icon-cogs"></i> 
 
-					<span class="title">微信管理</span>
+					<span class="title">业务管理</span>
 
 					<span class="selected "></span>
 
@@ -63,7 +63,7 @@
 
 						<li >
 
-							<a href="jump/manage_system">
+							<a href="jump/business_circleList">
 
 							圈子管理</a>
 
@@ -71,7 +71,7 @@
 						
 						<li >
 
-							<a href="jump/manage_system">
+							<a href="jump/business_circleRoleList">
 
 							角色管理</a>
 
@@ -79,14 +79,14 @@
 						
 						<li >
 
-							<a href="jump/manage_system">
+							<a href="jump/business_topicList">
 
 							说说管理</a>
 
 						</li>
 						<li >
 
-							<a href="jump/manage_system">
+							<a href="jump/business_commentList">
 
 							评论管理</a>
 

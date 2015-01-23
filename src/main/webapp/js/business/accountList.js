@@ -1,0 +1,119 @@
+/**
+ * 帐号列表
+ */
+var Account = function () {
+	var inittable = function(){
+		var oTable = $('#accounttable').dataTable( {
+	        "bServerSide": true,
+	        "sAjaxSource": "account/listAccount",
+	        "bProcessing": true,
+	        "bFilter": false,//过滤功能
+	        "bSort": true,//排序功能
+	        "stateSave": true,
+	        "oLanguage": {
+				"sUrl": "js/datatable-cn.txt"
+			},
+			"aaSorting": [[1, 'asc']],//实现默认排序
+	        "aoColumns": [
+	                      	{ "mDataProp": function(lineData){
+	                      		var id = lineData.id;
+//	                      		return '<div class="checker"> <span><input type="checkbox" class="checkboxes" name="user_check" value="'+id+'" /> </span></div>';
+	                      		return '<input type="checkbox" class="group-checkable checkboxes"data-set="#accounttable .checkboxes" name="account_check" value="'+id+'" />';
+	                      	}, "bSortable": false},
+							{ "mDataProp": "accountName" },
+							{ "mDataProp": "nickName" },
+							{ "mDataProp": "password" , "bSortable": false},
+							{ "mDataProp": "avatar" , "bSortable": false},
+							{ "mDataProp": "createTime" },
+							{ "mDataProp": function(lineData){
+								var gender = lineData.gender;
+								if(gender == 0){
+									return "男";
+								}if(gender == 1){
+									return "女";
+								}else {
+									return "--";
+								}
+							}, "bSortable": false},
+							{ "mDataProp": "area" },
+							{ "mDataProp": "personSignature" , "bSortable": false},
+							{ "mDataProp": function(lineData){
+								var id = lineData.id;
+								var del = '<button id="sample_editable_1_new" class="btn red" onclick="del(\''+id+'\')">删除<i class="icon-minus"></i></button>';
+								return del;
+							} , "bSortable": false}
+	                  ],
+	         "fnServerParams": function ( aoData ) { 
+	        	  aoData.push( { "name": "search_LIKE_accountName", "value": $("#search_LIKE_accountName").val() } );
+	        	  } 
+		} );
+		
+		jQuery('#accounttable .group-checkable').change(function () {
+            var set = jQuery(this).attr("data-set");
+            var checked = jQuery(this).is(":checked");
+            jQuery(set).each(function () {
+                if (checked) {
+                    $(this).attr("checked", true);
+                } else {
+                    $(this).attr("checked", false);
+                }
+            });
+            jQuery.uniform.update(set);
+        });
+	};
+	
+    return {
+        init: function () {
+        	inittable();
+        }
+    };
+
+}();
+
+/**
+ * 对datatable重新加载
+ */
+function reloadTable(){
+	var table = $('#accounttable').DataTable();
+	table.ajax.reload();
+}
+
+function reset(){
+	$("#search_LIKE_accountName").val('');
+	reloadTable();
+}
+
+function tankun(){
+	$("#accountAdd").modal('show');//展示
+//	$("#myModal").modal('hid');关闭
+}
+
+
+function add(){
+	var params = {}; //获取表单参数
+	params["accountName"] = $('#accountName').val();
+	params["nickName"] = $('#nickName').val();
+	params["password"] = $('#password').val();
+	params["gender"] = $('#gender').val();
+	params["area"] = $('#area').val();
+	params["personSignature"] = $('#personSignature').val();
+	$.ajax({
+		  type: "POST",
+		  url: "account/saveAccount",
+		  data: params,
+		  datatype:"json",
+		  success: function(data){
+				  $("#modal_content").html(data.msg);
+				  $("#modal_submit").attr("onclick","window.location.href='jump/business_accountList'");
+				  $("#myModal").modal('show');//展示
+		   }
+		});
+}
+
+function del(id){
+	alert(id);
+}
+
+function selectAll(){
+	alert("我要选中所有……");
+}

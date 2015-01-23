@@ -7,6 +7,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 /**
  * 说说实体
  * @author liyi
@@ -26,6 +28,8 @@ public class Topic extends IdEntity {
 	public void setContent(String content) {
 		this.content = content;
 	}
+	// 设定JSON序列化时的日期格式
+	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+08:00")
 	public Date getCreateTime() {
 		return createTime;
 	}

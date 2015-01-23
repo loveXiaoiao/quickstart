@@ -4,7 +4,7 @@
 
 		<div class="footer-inner">
 
-			2014 &copy; surfilter.
+			2014 &copy; liyi.
 
 		</div>
 

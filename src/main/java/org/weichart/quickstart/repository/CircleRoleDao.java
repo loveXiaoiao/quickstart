@@ -6,5 +6,6 @@ import org.weichart.quickstart.entity.CircleRole;
 
 public interface CircleRoleDao extends JpaSpecificationExecutor<CircleRole>,
 		PagingAndSortingRepository<CircleRole, Long> {
+	CircleRole findByRoleName(String roleName);
 
 }

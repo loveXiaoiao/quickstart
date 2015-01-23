@@ -32,7 +32,7 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
 <head>
 	<base href="<%=basePath%>">
 
-	<title>surfilter-flow<sitemesh:title/></title>
+	<title>wei-chart<sitemesh:title/></title>
 
 	<!-- BEGIN GLOBAL MANDATORY STYLES -->
 
@@ -89,23 +89,6 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
 
 			<!-- BEGIN SAMPLE PORTLET CONFIGURATION MODAL FORM-->
 
-			<div id="portlet-config" class="modal hide">
-
-				<div class="modal-header">
-
-					<button data-dismiss="modal" class="close" type="button"></button>
-
-					<h3>Widget Settings</h3>
-
-				</div>
-
-				<div class="modal-body">
-
-					Widget settings form goes here
-
-				</div>
-
-			</div>
 
 			<!-- END SAMPLE PORTLET CONFIGURATION MODAL FORM-->
 			<sitemesh:body/>

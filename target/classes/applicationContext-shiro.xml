@@ -28,10 +28,10 @@
 				/logout = logout
 				/js/** = anon
 				/media/** = anon
-				/manage/**= anon
 				/api/** = anon
 				/register/** = anon
 				/system/** = authc
+				/account/** = authc
 				/jump/** = authc
 				/admin/** = roles[admin]
 				/** = user

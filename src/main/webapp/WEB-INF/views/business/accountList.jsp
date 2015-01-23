@@ -10,23 +10,21 @@
 		<ul class="breadcrumb">
 			<li><i class="icon-home"></i> <a href="index.html">Home</a> <i
 				class="icon-angle-right"></i></li>
-			<li><a href="#">用户管理</a> <i class="icon-angle-right"></i></li>
-
-			<li><a href="#">用户列表</a></li>
+			<li><a href="#">业务管理</a> <i class="icon-angle-right"></i></li>
+			<li><a href="#">帐号列表</a></li>
 
 		</ul>
 		<div class="portlet box blue">
 			<div class="portlet-title">
 				<div class="caption">
-					<i class="icon-globe"></i>用户列表
+					<i class="icon-globe"></i>帐号列表
 				</div>
 			</div>
 			<div class="portlet-body">
 				<div class="controls">
-					<label class="help-inline">用户名：</label> 
-					<input class="m-wrap small" size="8" type="text" id="search_LIKE_loginName" name="search_LIKE_loginName" placeholder="用户名"> 
-					<label class="help-inline">姓名:</label> 
-					<input class="m-wrap small" name="search_LIKE_name" id="search_LIKE_name" size="8" type="text" placeholder="姓名">
+					<label class="help-inline">微信号：</label> <input class="m-wrap small"
+						size="8" type="text" id="search_LIKE_accountName"
+						name="search_LIKE_accountName" placeholder="微信号">
 					<button class="btn red" onclick="reloadTable();">查询</button>
 					<button class="btn green" onclick="reset();">重置</button>
 				</div>
@@ -35,34 +33,39 @@
 					<!-- 按钮 -->
 					<p>
 						<button id="sample_editable_1_new" class="btn green"
-							onclick="window.location.href='jump/manage_userAdd'">
+							onclick="tankun()">
 							增加 <i class="icon-plus"></i>
 						</button>
 						<button id="sample_editable_1_del" class="btn red"
 							onclick="delUsers()">
 							删除<i class="icon-minus"></i>
 						</button>
-						<button id="sample_editable_1_tk" class="btn red"onclick="tankun()">
-							弹框<i class="icon-minus"></i>
-						</button>
 					</p>
 				</div>
 
-				<table class="table table-striped table-bordered table-hover" id="usertable">
+				<table class="table table-striped table-bordered table-hover"
+					id="accounttable">
 					<thead>
-
 						<tr>
+							<th style="width: 8px;"><input type="checkbox"
+								class="group-checkable" data-set="#accounttable .checkboxes" /></th>
 
-							<th style="width: 8px;"><input type="checkbox" class="group-checkable" data-set="#usertable .checkboxes" /></th>
+							<th>微信号</th>
 
-							<th>用户名</th>
+							<th class="hidden-480">密码</th>
 
-							<th class="hidden-480">姓名</th>
+							<th class="hidden-480">昵称</th>
 
-							<th class="hidden-480">角色</th>
+							<th class="hidden-480">头像</th>
 
-							<th class="hidden-480">注册时间</th>
-							
+							<th class="hidden-480">创建时间</th>
+
+							<th class="hidden-480">性别</th>
+
+							<th class="hidden-480">地区</th>
+
+							<th class="hidden-480">个性签名</th>
+
 							<th class="hidden-480">操作</th>
 
 							<th></th>
@@ -73,17 +76,16 @@
 
 				</table>
 			</div>
-
 		</div>
-
 	</div>
-	<%@include file = "../commons/messageBox.jsp" %>
-	<script src="js/manage/userList.js" type="text/javascript"></script>
+	<%@include file="../commons/messageBox.jsp"%>
+	<%@include file="accountAdd.jsp" %>
+	<script src="js/business/accountList.js" type="text/javascript"></script>
 	<script>
 		jQuery(document).ready(
 				function() {
-				App.init(); 
-					User.init();
+					App.init();
+					Account.init();
 					$("a[href='jump/business_accountList']").parent().addClass(
 							"active");
 					$("a[href='jump/business_accountList']").parent().parent()

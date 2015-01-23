@@ -10,7 +10,7 @@
 
 				<!-- BEGIN LOGO -->
 
-				<a class="brand" href="index.html">
+				<a class="brand" href="system/success">
 
 				<img src="media/image/logo.png" alt="logo"/>
 

@@ -6,6 +6,7 @@
 	
 	<decorator name="default" page="commons/common.jsp">
 		<pattern>/system/*</pattern>
+		<pattern>/account/*</pattern>
 		<pattern>/jump/*</pattern>
 	</decorator>
 </decorators>

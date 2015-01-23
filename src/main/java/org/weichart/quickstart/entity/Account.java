@@ -1,7 +1,12 @@
 package org.weichart.quickstart.entity;
 
+import java.util.Date;
+
 import javax.persistence.Entity;
 import javax.persistence.Table;
+
+import org.hibernate.validator.constraints.NotBlank;
+import com.fasterxml.jackson.annotation.JsonFormat;
 
 /**
  * 帐号实体
@@ -20,7 +25,9 @@ public class Account extends IdEntity {
 	private String maxCard;//二维码
 	private Integer gender;//性别
 	private String area;//地区
+	private Date createTime;//创建时间
 	private String personSignature;//个性签名
+	@NotBlank
 	public String getAccountName() {
 		return accountName;
 	}
@@ -32,6 +39,14 @@ public class Account extends IdEntity {
 	}
 	public void setPassword(String password) {
 		this.password = password;
+	}
+	// 设定JSON序列化时的日期格式
+	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+08:00")
+	public Date getCreateTime() {
+		return createTime;
+	}
+	public void setCreateTime(Date createTime) {
+		this.createTime = createTime;
 	}
 	public String getAvatar() {
 		return avatar;
