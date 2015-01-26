@@ -1,6 +1,7 @@
 package org.weichart.quickstart.entity;
 
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
@@ -23,6 +24,7 @@ public class Topic extends IdEntity {
 	private Account account;//发表账号
 	private Circle circle;//所属圈子
 	private CircleRole circleRole;//发表角色
+	private List<CircleRole> praiseRoles;//点赞角色
 	public String getContent() {
 		return content;
 	}
@@ -62,6 +64,12 @@ public class Topic extends IdEntity {
 	}
 	public void setAccount(Account account) {
 		this.account = account;
+	}
+	public List<CircleRole> getPraiseRoles() {
+		return praiseRoles;
+	}
+	public void setPraiseRoles(List<CircleRole> praiseRoles) {
+		this.praiseRoles = praiseRoles;
 	}
 	
 	

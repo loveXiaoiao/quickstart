@@ -20,7 +20,9 @@ public class CircleRole extends IdEntity {
 	private String roleName;//角色名
 	private Circle circle;//所属圈(多对一)
 	private Date createTime;//创建时间
-	private Integer status;//状态(0启用，1停用)
+	private Integer status;//状态(0启用，1停用)是否在关联
+	private String avatar;//头像
+	private Integer activeDegree;//活跃度（1，正常，2，活跃，3，不活跃）
 	private String remark;//备注
 	private Account account;//使用人(多对一)
 	public String getRoleName() {
@@ -64,6 +66,18 @@ public class CircleRole extends IdEntity {
 	}
 	public void setAccount(Account account) {
 		this.account = account;
+	}
+	public String getAvatar() {
+		return avatar;
+	}
+	public void setAvatar(String avatar) {
+		this.avatar = avatar;
+	}
+	public Integer getActiveDegree() {
+		return activeDegree;
+	}
+	public void setActiveDegree(Integer activeDegree) {
+		this.activeDegree = activeDegree;
 	}
 	
 

@@ -1,6 +1,7 @@
 package org.weichart.quickstart.entity;
 
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
@@ -22,6 +23,8 @@ public class Circle extends IdEntity {
 	private Date createTime;//创建时间
 	private Integer status;//状态(0启用，1停用)
 	private String theme;//圈子主题
+	private String avatar;//头像
+	private List<Account> attentionAccounts;
 	
 	public String getName() {
 		return name;
@@ -58,6 +61,18 @@ public class Circle extends IdEntity {
 	}
 	public void setTheme(String theme) {
 		this.theme = theme;
+	}
+	public List<Account> getAttentionAccounts() {
+		return attentionAccounts;
+	}
+	public void setAttentionAccounts(List<Account> attentionAccounts) {
+		this.attentionAccounts = attentionAccounts;
+	}
+	public String getAvatar() {
+		return avatar;
+	}
+	public void setAvatar(String avatar) {
+		this.avatar = avatar;
 	}
 	
 	
