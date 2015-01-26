@@ -22,6 +22,7 @@ public class Comment extends IdEntity {
 	private Date createTime;//发表时间
 	private Topic topic;//所在说说
 	private Account account;//评论人
+	private CircleRole circleRole;//角色
 	public String getContent() {
 		return content;
 	}
@@ -51,6 +52,15 @@ public class Comment extends IdEntity {
 	}
 	public void setAccount(Account account) {
 		this.account = account;
+	}
+	
+	@ManyToOne
+	@JoinColumn(name = "circle_role_id")
+	public CircleRole getCircleRole() {
+		return circleRole;
+	}
+	public void setCircleRole(CircleRole circleRole) {
+		this.circleRole = circleRole;
 	}
 	
 }

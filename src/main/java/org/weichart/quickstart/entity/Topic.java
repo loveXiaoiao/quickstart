@@ -20,8 +20,9 @@ public class Topic extends IdEntity {
 	
 	private String content;//发表内容
 	private Date createTime;//发表时间
-	private Account account;//发表人
+	private Account account;//发表账号
 	private Circle circle;//所属圈子
+	private CircleRole circleRole;//发表角色
 	public String getContent() {
 		return content;
 	}
@@ -37,20 +38,30 @@ public class Topic extends IdEntity {
 		this.createTime = createTime;
 	}
 	@ManyToOne
-	@JoinColumn(name = "account_id")
-	public Account getAccount() {
-		return account;
-	}
-	public void setAccount(Account account) {
-		this.account = account;
-	}
-	@ManyToOne
 	@JoinColumn(name = "circle_id")
 	public Circle getCircle() {
 		return circle;
 	}
 	public void setCircle(Circle circle) {
 		this.circle = circle;
+	}
+	
+	@ManyToOne
+	@JoinColumn(name = "circle_role_id")
+	public CircleRole getCircleRole() {
+		return circleRole;
+	}
+	public void setCircleRole(CircleRole circleRole) {
+		this.circleRole = circleRole;
+	}
+	
+	@ManyToOne
+	@JoinColumn(name = "account_id")
+	public Account getAccount() {
+		return account;
+	}
+	public void setAccount(Account account) {
+		this.account = account;
 	}
 	
 	
