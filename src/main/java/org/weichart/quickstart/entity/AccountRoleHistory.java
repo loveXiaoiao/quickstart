@@ -3,6 +3,8 @@ package org.weichart.quickstart.entity;
 import java.util.Date;
 
 import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 /**
  * 用户角色管理历史实体
@@ -18,12 +20,17 @@ public class AccountRoleHistory extends IdEntity {
 	private CircleRole circleRole;
 	private Date OperateTime;
 	private Date OperateType;
+	
+	@ManyToOne
+	@JoinColumn(name = "account_id")
 	public Account getAccount() {
 		return account;
 	}
 	public void setAccount(Account account) {
 		this.account = account;
 	}
+	@ManyToOne
+	@JoinColumn(name = "circle_role_id")
 	public CircleRole getCircleRole() {
 		return circleRole;
 	}

@@ -5,7 +5,10 @@ import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.OrderBy;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
@@ -24,7 +27,7 @@ public class Circle extends IdEntity {
 	private Integer status;//状态(0启用，1停用)
 	private String theme;//圈子主题
 	private String avatar;//头像
-	private List<Account> attentionAccounts;
+	private List<Account> attentionAccounts;//关注此圈子用户
 	
 	public String getName() {
 		return name;
@@ -62,6 +65,9 @@ public class Circle extends IdEntity {
 	public void setTheme(String theme) {
 		this.theme = theme;
 	}
+	@ManyToMany
+	@JoinTable(name = "ss_attention_accounts", joinColumns = { @JoinColumn(name = "circle_id") }, inverseJoinColumns = { @JoinColumn(name = "account_id") })
+	@OrderBy("id")
 	public List<Account> getAttentionAccounts() {
 		return attentionAccounts;
 	}

@@ -5,7 +5,10 @@ import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.OrderBy;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
@@ -65,6 +68,10 @@ public class Topic extends IdEntity {
 	public void setAccount(Account account) {
 		this.account = account;
 	}
+	
+	@ManyToMany
+	@JoinTable(name = "ss_praise_roles", joinColumns = { @JoinColumn(name = "topic_id") }, inverseJoinColumns = { @JoinColumn(name = "circle_role_id") })
+	@OrderBy("id")
 	public List<CircleRole> getPraiseRoles() {
 		return praiseRoles;
 	}
