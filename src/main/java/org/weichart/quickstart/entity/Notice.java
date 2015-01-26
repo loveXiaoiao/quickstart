@@ -18,7 +18,24 @@ public class Notice extends IdEntity {
 	private Integer noticeType;//消息类型
 	private Integer status;//消息状态
 	private Account account;//所属账户
-	private Topic topic;
+	private Topic topic;//说说消息
+	private Circle circle;//圈子关注消息
+	private String content;//消息内容
+	
+	@ManyToOne
+	@JoinColumn(name = "circle_id")
+	public Circle getCircle() {
+		return circle;
+	}
+	public void setCircle(Circle circle) {
+		this.circle = circle;
+	}
+	public String getContent() {
+		return content;
+	}
+	public void setContent(String content) {
+		this.content = content;
+	}
 	public Integer getNoticeType() {
 		return noticeType;
 	}
