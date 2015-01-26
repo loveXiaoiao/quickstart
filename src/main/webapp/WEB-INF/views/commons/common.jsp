@@ -32,7 +32,7 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
 <head>
 	<base href="<%=basePath%>">
 
-	<title>wei-chart<sitemesh:title/></title>
+	<title>tarcle<sitemesh:title/></title>
 
 	<!-- BEGIN GLOBAL MANDATORY STYLES -->
 

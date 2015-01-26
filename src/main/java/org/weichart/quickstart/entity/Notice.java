@@ -16,7 +16,7 @@ import javax.persistence.Table;
 public class Notice extends IdEntity {
 	
 	private Integer noticeType;//消息类型
-	private Integer status;//消息状态
+	private Boolean isRead = false;//消息状态(是否已读)
 	private Account account;//所属账户
 	private Topic topic;//说说消息
 	private Circle circle;//圈子关注消息
@@ -42,12 +42,6 @@ public class Notice extends IdEntity {
 	public void setNoticeType(Integer noticeType) {
 		this.noticeType = noticeType;
 	}
-	public Integer getStatus() {
-		return status;
-	}
-	public void setStatus(Integer status) {
-		this.status = status;
-	}
 	@ManyToOne
 	@JoinColumn(name = "account_id")
 	public Account getAccount() {
@@ -63,6 +57,12 @@ public class Notice extends IdEntity {
 	}
 	public void setTopic(Topic topic) {
 		this.topic = topic;
+	}
+	public Boolean getIsRead() {
+		return isRead;
+	}
+	public void setIsRead(Boolean isRead) {
+		this.isRead = isRead;
 	}
 
 }

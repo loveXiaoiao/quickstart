@@ -21,7 +21,7 @@ var CircleRole = function () {
 	                      		return '<input type="checkbox" class="group-checkable checkboxes"data-set="#circleRoletable .checkboxes" value="'+id+'" />';
 	                      	}, "bSortable": false},
 							{ "mDataProp": "roleName" },
-							{ "mDataProp": "circle" },
+							{ "mDataProp": "circle.name" },
 							{ "mDataProp": "createTime" },
 							{ "mDataProp": function(lineData){
 								var status = lineData.status;

@@ -36,7 +36,7 @@ var Circle = function () {
 							{ "mDataProp": function(lineData){
 								var id = lineData.id;
 								var del = '<button id="sample_editable_1_new" class="btn red" onclick="del(\''+id+'\')">删除<i class="icon-minus"></i></button>';
-								var addRole = '<button id="sample_editable_1_new" class="btn green" onclick="del(\''+id+'\')">新增角色</button>';
+								var addRole = '<button id="sample_editable_1_new" class="btn green" onclick="circleRoleAddTK(\''+id+'\')">新增角色</button>';
 								
 								return del + addRole;
 							} , "bSortable": false}
@@ -81,8 +81,13 @@ function reset(){
 	reloadTable();
 }
 
-function tankun(){
+function addTK(){
 	$("#circleAdd").modal('show');//展示
+//	$("#myModal").modal('hid');关闭
+}
+function circleRoleAddTK(id){
+	$("#circleId").val(id);
+	$("#circleRoleAdd").modal('show');//展示
 //	$("#myModal").modal('hid');关闭
 }
 
@@ -90,6 +95,7 @@ function tankun(){
 function add(){
 	var params = {}; //获取表单参数
 	params["name"] = $('#name').val();
+	params["avatar"] = $('#avatar').val();
 	params["theme"] = $('#theme').val();
 	$.ajax({
 		  type: "POST",
@@ -105,7 +111,39 @@ function add(){
 }
 
 function del(id){
-	alert(id);
+	var params = {}; //获取表单参数
+	params["id"] = id;
+	$.ajax({
+		  type: "POST",
+		  url: "circle/deleteCircle",
+		  data: params,
+		  datatype:"json",
+		  success: function(data){
+				  $("#modal_content").html(data.msg);
+				  $("#modal_submit").attr("onclick","window.location.href='jump/business_circleList'");
+				  $("#myModal").modal('show');//展示
+		   }
+		});
+}
+
+function addRole(id){
+	var params = {}; //获取表单参数
+	params["circle_id"] = $('#circleId').val();
+	params["avatar"] = $('#roleAvatar').val();
+	params["roleName"] = $('#roleName').val();
+	params["remark"] = $('#remark').val();
+	
+	$.ajax({
+		  type: "POST",
+		  url: "circleRole/saveCircleRole",
+		  data: params,
+		  datatype:"json",
+		  success: function(data){
+				  $("#modal_content").html(data.msg);
+				  $("#modal_submit").attr("onclick","window.location.href='jump/business_circleList'");
+				  $("#myModal").modal('show');//展示
+		   }
+		});
 }
 
 function selectAll(){

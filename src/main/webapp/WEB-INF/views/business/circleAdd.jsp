@@ -16,7 +16,16 @@
 							<div class="controls">
 
 								<input type="text" id="name" placeholder="名称"
-									class="m-wrap medium required:true">
+									class="m-wrap medium">
+							</div>
+						</div>
+						
+						<div class="control-group">
+							<label class="control-label">头像</label>
+							<div class="controls">
+
+								<input type="text" id="avatar" placeholder="头像"
+									class="m-wrap medium">
 							</div>
 						</div>
 

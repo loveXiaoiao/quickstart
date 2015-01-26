@@ -77,6 +77,14 @@ public class CircleService {
 		entity.setStatus(0);
 		circleDao.save(entity);
 	}
+	
+	public void deleteEntity(Long id){
+		circleDao.delete(id);
+	}
+	
+	public Circle findById(Long id){
+		return circleDao.findOne(id);
+	}
 
 	
 	

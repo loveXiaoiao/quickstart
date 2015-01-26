@@ -19,9 +19,11 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 public class Comment extends IdEntity {
 	
 	private String content;//评论内容
+	private String images;//评论图片
 	private Date createTime;//发表时间
 	private Topic topic;//所在说说
 	private Account account;//评论人
+	private Comment parentComment;//父评论
 	private CircleRole circleRole;//角色
 	public String getContent() {
 		return content;
@@ -61,6 +63,21 @@ public class Comment extends IdEntity {
 	}
 	public void setCircleRole(CircleRole circleRole) {
 		this.circleRole = circleRole;
+	}
+	public String getImages() {
+		return images;
+	}
+	public void setImages(String images) {
+		this.images = images;
+	}
+	
+	@ManyToOne
+	@JoinColumn(name = "comment_id")
+	public Comment getParentComment() {
+		return parentComment;
+	}
+	public void setParentComment(Comment parentComment) {
+		this.parentComment = parentComment;
 	}
 	
 }

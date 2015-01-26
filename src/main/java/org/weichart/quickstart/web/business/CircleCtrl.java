@@ -60,5 +60,21 @@ public class CircleCtrl {
 			return resultObject;
 		}
 	}
+		
+		@RequestMapping("deleteCircle")
+		@ResponseBody
+		public ResultObject deleteCircle(Circle entity, HttpServletRequest request){
+			try{
+				circleService.deleteEntity(entity.getId());
+				resultObject.setMsg("删除成功");
+				resultObject.setSuccess(true);
+				return resultObject;
+			}catch(ServiceException e){
+				e.printStackTrace();
+				resultObject.setMsg(e.getMessage());
+				resultObject.setSuccess(false);
+				return resultObject;
+			}
+	}
 
 }

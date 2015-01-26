@@ -9,9 +9,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springside.modules.web.Servlets;
+import org.weichart.quickstart.entity.Circle;
 import org.weichart.quickstart.entity.CircleRole;
 import org.weichart.quickstart.service.ServiceException;
 import org.weichart.quickstart.service.business.CircleRoleService;
+import org.weichart.quickstart.service.business.CircleService;
 import org.weichart.quickstart.util.DataPage;
 import org.weichart.quickstart.util.ResultObject;
 import org.weichart.quickstart.web.sys.BaseServlet;
@@ -27,8 +29,10 @@ import org.weichart.quickstart.web.sys.BaseServlet;
 public class CircleRoleCtrl {
 	@Autowired
 	private CircleRoleService circleRoleService;
-private ResultObject resultObject = new ResultObject(true, "OK!");
-	
+
+	@Autowired
+	private CircleService circleService;
+	private ResultObject resultObject = new ResultObject(true, "OK!");
 	
 	@RequestMapping("listCircleRole")
 	@ResponseBody
@@ -48,7 +52,16 @@ private ResultObject resultObject = new ResultObject(true, "OK!");
 	@RequestMapping("saveCircleRole")
 	@ResponseBody
 	public ResultObject saveUser(CircleRole entity, HttpServletRequest request){
+		Long circleId = Long.parseLong(request.getParameter("circle_id"));
+		Circle circle = circleService.findById(circleId);
+		if(circle == null){
+			resultObject.setMsg("保存失败");
+			resultObject.setSuccess(false);
+			return resultObject;
+		}
 		try{
+			entity.setCircle(circle);
+			entity.setStatus(1);
 			circleRoleService.addEntity(entity);
 			resultObject.setMsg("保存成功");
 			resultObject.setSuccess(true);

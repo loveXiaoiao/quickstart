@@ -19,7 +19,7 @@ public class AccountRoleHistory extends IdEntity {
 	private Account account;
 	private CircleRole circleRole;
 	private Date OperateTime;
-	private Date OperateType;
+	private Integer OperateType;
 	
 	@ManyToOne
 	@JoinColumn(name = "account_id")
@@ -43,10 +43,10 @@ public class AccountRoleHistory extends IdEntity {
 	public void setOperateTime(Date operateTime) {
 		OperateTime = operateTime;
 	}
-	public Date getOperateType() {
+	public Integer getOperateType() {
 		return OperateType;
 	}
-	public void setOperateType(Date operateType) {
+	public void setOperateType(Integer operateType) {
 		OperateType = operateType;
 	}
 	
