@@ -1,5 +1,6 @@
 package org.weichart.quickstart.service.business;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -65,6 +66,13 @@ public class CircleService {
 		return spec;
 	}
 	
+	public List<Circle> getEntityList(Map<String, Object> searchParams){
+		List<Circle> circles = new ArrayList<Circle>();
+		Specification<Circle> spec = buildSpecification(searchParams);
+		circles = circleDao.findAll(spec);
+		return circles;
+	}
+	
 	public Circle findCircleByName(String name) {
 		return circleDao.findByname(name);
 	}
@@ -78,7 +86,7 @@ public class CircleService {
 		circleDao.save(entity);
 	}
 	
-	public void deleteEntity(Long id){
+	public void deleteEntity(Long id) throws ServiceException{
 		circleDao.delete(id);
 	}
 	

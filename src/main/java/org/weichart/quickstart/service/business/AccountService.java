@@ -79,5 +79,9 @@ public class AccountService {
 		accountDao.save(entity);
 	}
 	
+	public void deleteEntity(Long id){
+		accountDao.delete(id);
+	}
+	
 
 }

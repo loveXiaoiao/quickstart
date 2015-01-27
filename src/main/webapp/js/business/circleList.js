@@ -20,7 +20,20 @@ var Circle = function () {
 	                      		return '<input type="checkbox" class="group-checkable checkboxes"data-set="#circletable .checkboxes" name="account_check" value="'+id+'" />';
 	                      	}, "bSortable": false},
 							{ "mDataProp": "name"},
-							{ "mDataProp": "createAccount", "bSortable": false },
+							{ "mDataProp": function(lineData){
+								var createAccount = lineData.createAccount;
+								if(createAccount == null){
+									return "后台管理员";
+								}else {
+									return createAccount.accountName;
+								}}, "bSortable": false },
+							{ "mDataProp": function(lineData){
+								var avatar = lineData.avatar;
+								if(avatar == null){
+									return "--";
+								}else {
+									return '<img height="25px" width="60px;" src="'+avatar+'" />';
+								}}, "bSortable": false },
 							{ "mDataProp": "createTime"},
 							{ "mDataProp": function(lineData){
 								var status = lineData.status;
@@ -83,12 +96,10 @@ function reset(){
 
 function addTK(){
 	$("#circleAdd").modal('show');//展示
-//	$("#myModal").modal('hid');关闭
 }
 function circleRoleAddTK(id){
 	$("#circleId").val(id);
 	$("#circleRoleAdd").modal('show');//展示
-//	$("#myModal").modal('hid');关闭
 }
 
 
@@ -103,27 +114,31 @@ function add(){
 		  data: params,
 		  datatype:"json",
 		  success: function(data){
-				  $("#modal_content").html(data.msg);
-				  $("#modal_submit").attr("onclick","window.location.href='jump/business_circleList'");
-				  $("#myModal").modal('show');//展示
+			  	  $("#successAlert").html(data.msg);
+			  	  $("#myAlertSuccess").show();
+				  reloadTable();
 		   }
 		});
 }
 
 function del(id){
-	var params = {}; //获取表单参数
-	params["id"] = id;
-	$.ajax({
-		  type: "POST",
-		  url: "circle/deleteCircle",
-		  data: params,
-		  datatype:"json",
-		  success: function(data){
-				  $("#modal_content").html(data.msg);
-				  $("#modal_submit").attr("onclick","window.location.href='jump/business_circleList'");
-				  $("#myModal").modal('show');//展示
-		   }
-		});
+	$("#modal_content").html("确定删除吗？删除后将不能恢复！");
+	$("#myModal").modal('show');
+    $("#modal_submit").click(function(){
+    	var params = {}; //获取表单参数
+    	params["id"] = id;
+    	$.ajax({
+    		type: "POST",
+    		url: "circle/deleteCircle",
+    		data: params,
+    		datatype:"json",
+    		success: function(data){
+    			$("#successAlert").html(data.msg);
+    			$("#myAlertSuccess").show();
+    			reloadTable();
+    		}
+    	});
+    });
 }
 
 function addRole(id){
@@ -132,16 +147,15 @@ function addRole(id){
 	params["avatar"] = $('#roleAvatar').val();
 	params["roleName"] = $('#roleName').val();
 	params["remark"] = $('#remark').val();
-	
 	$.ajax({
 		  type: "POST",
 		  url: "circleRole/saveCircleRole",
 		  data: params,
 		  datatype:"json",
 		  success: function(data){
-				  $("#modal_content").html(data.msg);
-				  $("#modal_submit").attr("onclick","window.location.href='jump/business_circleList'");
-				  $("#myModal").modal('show');//展示
+			  $("#successAlert").html(data.msg);
+			  $("#myAlertSuccess").show();
+  			reloadTable();
 		   }
 		});
 }

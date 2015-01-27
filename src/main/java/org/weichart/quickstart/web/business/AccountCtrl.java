@@ -61,5 +61,21 @@ public class AccountCtrl {
 			return resultObject;
 		}
 	}
+	
+	@RequestMapping("deleteAccount")
+	@ResponseBody
+	public ResultObject deleteAccount(Account entity, HttpServletRequest request){
+		try{
+			accountService.deleteEntity(entity.getId());
+			resultObject.setMsg("删除成功");
+			resultObject.setSuccess(true);
+			return resultObject;
+		}catch(ServiceException e){
+			e.printStackTrace();
+			resultObject.setMsg("删除失败");
+			resultObject.setSuccess(false);
+			return resultObject;
+		}
+}
 
 }

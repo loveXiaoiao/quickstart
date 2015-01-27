@@ -1,5 +1,6 @@
 package org.weichart.quickstart.service.business;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -66,6 +67,14 @@ public class CircleRoleService {
 		return spec;
 	}
 	
+	
+	public List<CircleRole> getEntityList(Map<String, Object> searchParams){
+		List<CircleRole> circles = new ArrayList<CircleRole>();
+		Specification<CircleRole> spec = buildSpecification(searchParams);
+		circles = circleRoleDao.findAll(spec);
+		return circles;
+	}
+	
 	public CircleRole findByRoleName(String roleName) {
 		return circleRoleDao.findByRoleName(roleName);
 	}
@@ -76,6 +85,10 @@ public class CircleRoleService {
 		}
 		entity.setCreateTime(clock.getCurrentDate());
 		circleRoleDao.save(entity);
+	}
+	
+	public void deleteEntity(Long id){
+		circleRoleDao.delete(id);
 	}
 	
 

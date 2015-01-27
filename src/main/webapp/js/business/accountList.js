@@ -23,7 +23,13 @@ var Account = function () {
 							{ "mDataProp": "accountName" },
 							{ "mDataProp": "nickName" },
 							{ "mDataProp": "password" , "bSortable": false},
-							{ "mDataProp": "avatar" , "bSortable": false},
+							{ "mDataProp": function(lineData){
+								var avatar = lineData.avatar;
+								if(avatar == null){
+									return "--";
+								}else {
+									return '<img height="25px" width="60px;" src="'+avatar+'" />';
+								}} , "bSortable": false},
 							{ "mDataProp": "createTime" },
 							{ "mDataProp": function(lineData){
 								var gender = lineData.gender;
@@ -85,7 +91,6 @@ function reset(){
 
 function tankun(){
 	$("#accountAdd").modal('show');//展示
-//	$("#myModal").modal('hid');关闭
 }
 
 
@@ -95,6 +100,7 @@ function add(){
 	params["nickName"] = $('#nickName').val();
 	params["password"] = $('#password').val();
 	params["gender"] = $('#gender').val();
+	params["avatar"] = $('#avatar').val();
 	params["area"] = $('#area').val();
 	params["personSignature"] = $('#personSignature').val();
 	$.ajax({
@@ -103,15 +109,31 @@ function add(){
 		  data: params,
 		  datatype:"json",
 		  success: function(data){
-				  $("#modal_content").html(data.msg);
-				  $("#modal_submit").attr("onclick","window.location.href='jump/business_accountList'");
-				  $("#myModal").modal('show');//展示
+			  $("#successAlert").html(data.msg);
+		  	  $("#myAlertSuccess").show();
+			  reloadTable();
 		   }
 		});
 }
 
 function del(id){
-	alert(id);
+	$("#modal_content").html("确定删除吗？删除后将不能恢复！");
+	$("#myModal").modal('show');
+    $("#modal_submit").click(function(){
+    	var params = {}; //获取表单参数
+    	params["id"] = id;
+    	$.ajax({
+    		type: "POST",
+    		url: "account/deleteAccount",
+    		data: params,
+    		datatype:"json",
+    		success: function(data){
+    			$("#successAlert").html(data.msg);
+    			$("#myAlertSuccess").show();
+    			reloadTable();
+    		}
+    	});
+    });
 }
 
 function selectAll(){

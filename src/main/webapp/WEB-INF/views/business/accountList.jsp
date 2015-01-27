@@ -22,7 +22,7 @@
 			</div>
 			<div class="portlet-body">
 				<div class="controls">
-					<label class="help-inline">微信号：</label> <input class="m-wrap small"
+					<label class="help-inline">帐号：</label> <input class="m-wrap small"
 						size="8" type="text" id="search_LIKE_accountName"
 						name="search_LIKE_accountName" placeholder="微信号">
 					<button class="btn red" onclick="reloadTable();">查询</button>
@@ -50,7 +50,7 @@
 							<th style="width: 8px;"><input type="checkbox"
 								class="group-checkable" data-set="#accounttable .checkboxes" /></th>
 
-							<th>微信号</th>
+							<th>帐号</th>
 
 							<th class="hidden-480">密码</th>
 

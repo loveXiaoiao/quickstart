@@ -11,7 +11,7 @@ import java.io.Serializable;
 public class ResultObject implements Serializable {
 	
 	
-private boolean success = false;
+	private boolean success = false;
 	
 	private String msg = "That's a result object!";
 	

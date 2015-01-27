@@ -22,6 +22,13 @@ var CircleRole = function () {
 	                      	}, "bSortable": false},
 							{ "mDataProp": "roleName" },
 							{ "mDataProp": "circle.name" },
+							{ "mDataProp": function(lineData){
+								var avatar = lineData.avatar;
+								if(avatar == null){
+									return "--";
+								}else {
+									return '<img height="25px" width="60px;" src="'+avatar+'" />';
+								}}, "bSortable": false },
 							{ "mDataProp": "createTime" },
 							{ "mDataProp": function(lineData){
 								var status = lineData.status;
@@ -34,12 +41,18 @@ var CircleRole = function () {
 								}
 							}, "bSortable": false},
 							{ "mDataProp": "remark" , "bSortable": false},
-							{ "mDataProp": "account" },
+							{ "mDataProp": function(lineData){
+								var account = lineData.account;
+								if(account == null){
+									return "未关联";
+								}else {
+									return account.accountName;
+								}
+							} },
 							{ "mDataProp": function(lineData){
 								var id = lineData.id;
 								var del = '<button id="sample_editable_1_new" class="btn red" onclick="del(\''+id+'\')">删除<i class="icon-minus"></i></button>';
-								var addAccount = '<button id="sample_editable_1_new" class="btn green" onclick="del(\''+id+'\')">添加账户</button>';
-								return del + addAccount;
+								return del;
 							} , "bSortable": false}
 	                  ],
 	         "fnServerParams": function ( aoData ) { 
@@ -82,31 +95,24 @@ function reset(){
 	reloadTable();
 }
 
-function tankun(){
-	$("#circleRoleAdd").modal('show');//展示
-//	$("#myModal").modal('hid');关闭
-}
-
-
-function add(){
+function del(id){
+	$("#modal_content").html("确定删除吗？删除后将不能恢复！");
+	$("#myModal").modal('show');
+    $("#modal_submit").click(function(){
 	var params = {}; //获取表单参数
-	params["roleName"] = $('#roleName').val();
-	params["remark"] = $('#remark').val();
+	params["id"] = id;
 	$.ajax({
 		  type: "POST",
-		  url: "circleRole/saveCircleRole",
+		  url: "circleRole/deleteCircleRole",
 		  data: params,
 		  datatype:"json",
 		  success: function(data){
-				  $("#modal_content").html(data.msg);
-				  $("#modal_submit").attr("onclick","window.location.href='jump/business_circleRoleList'");
-				  $("#myModal").modal('show');//展示
+			  $("#successAlert").html(data.msg);
+		  	  $("#myAlertSuccess").show();
+			  reloadTable();
 		   }
 		});
-}
-
-function del(id){
-	alert(id);
+    });
 }
 
 function selectAll(){

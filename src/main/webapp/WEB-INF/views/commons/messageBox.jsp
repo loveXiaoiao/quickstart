@@ -11,10 +11,11 @@
 				</div>
 				<div class="modal-body" id="modal_content">在这里添加一些文本</div>
 				<div class="modal-footer">
-					<button type="button" class="btn btn-default" data-dismiss="modal" id="modal_submit" onclick="">确认</button>
-<!-- 					<button type="button" class="btn btn-primary"></button> -->
+					<button type="button" class="btn btn-default" data-dismiss="modal" id="modal_submit" onclick=";">确认</button>
+					<button type="button" class="btn btn-primary" data-dismiss="modal" id="modal_cancel" onclick=";">取消</button>
 				</div>
 			</div>
 			<!-- /.modal-content -->
 		</div>
 	</div>
+	

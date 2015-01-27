@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<div class="modal fade" id="circleRoleAdd" tabindex="-1" role="dialog"
+<div class="modal fade hide" id="circleRoleAdd" tabindex="-1" role="dialog"
 		aria-labelledby="myModalLabel" aria-hidden="true">
 		<div class="modal-dialog">
 			<div class="modal-content">
@@ -9,8 +9,8 @@
 						aria-hidden="true">&times;</button>
 					<h4 class="modal-title" id="myModalLabel">新增角色</h4>
 				</div>
-				<div class="modal-body" id="modal_content">
-				<form action="" id="userForm" class="form-horizontal">
+				<div class="modal-body">
+				<form action="" id="circleRoleForm" class="form-horizontal">
 						<div class="control-group">
 							<label class="control-label">角色名</label>
 							<div class="controls">
@@ -45,8 +45,8 @@
 
 </div>
 				<div class="modal-footer">
-					<button type="button" class="btn green" data-dismiss="modal" id="modal_submit" onclick="addRole()">保存</button>
-					<button type="button" class="btn btn-primary" data-dismiss="modal" id="modal_submit" onclick=";">取消</button>
+					<button type="button" class="btn green" data-dismiss="modal" onclick="addRole();">保存</button>
+					<button type="button" class="btn btn-primary" data-dismiss="modal" onclick=";">取消</button>
 				</div>
 			</div>
 			<!-- /.modal-content -->

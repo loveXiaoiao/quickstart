@@ -49,6 +49,8 @@
 							<th>角色名</th>
 
 							<th class="hidden-480">圈子</th>
+							
+							<th class="hidden-480">头像</th>
 
 							<th class="hidden-480">创建时间</th>
 

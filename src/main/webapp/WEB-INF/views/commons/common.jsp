@@ -86,13 +86,22 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
 		<!-- BEGIN PAGE -->
 
 		<div class="page-content">
+			<div id="myAlertSuccess" class="alert alert-success hide">
+				<button class="close" data-dismiss="alert"></button>
+				<span id="successAlert">成功！</span>
+			</div>
+
+			<div id="myAlertWarning" class="alert alert-warning hide">
+				<button class="close" data-dismiss="alert"></button>
+				<span id="warningAlert">失败！</span>
+			</div>
 
 			<!-- BEGIN SAMPLE PORTLET CONFIGURATION MODAL FORM-->
 
 
 			<!-- END SAMPLE PORTLET CONFIGURATION MODAL FORM-->
-			<sitemesh:body/>
-			</div>
+			<sitemesh:body />
+		</div>
 
 		<!-- END PAGE -->
 

@@ -33,12 +33,8 @@
 					<!-- 按钮 -->
 					<p>
 						<button id="sample_editable_1_new" class="btn green"
-							onclick="addTK()">
+							onclick="addTK();">
 							增加 <i class="icon-plus"></i>
-						</button>
-						<button id="sample_editable_1_del" class="btn red"
-							onclick="delUsers()">
-							删除<i class="icon-minus"></i>
 						</button>
 					</p>
 				</div>
@@ -53,6 +49,8 @@
 							<th>名称</th>
 
 							<th class="hidden-480">创建人</th>
+							
+							<th class="hidden-480">头像</th>
 
 							<th class="hidden-480">创建时间</th>
 
