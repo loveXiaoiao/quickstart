@@ -38,6 +38,15 @@
 							<textarea class="medium m-wrap" id="theme" name="theme" rows="3"></textarea>
 						</div>
 					</div>
+					
+					<div class="control-group">
+
+						<label class="control-label">关注账号</label>
+
+						<div class="controls">
+							<select class="medium m-wrap" id="attentions" name="attentions"  rows="3"></select>
+						</div>
+					</div>
 					<input type="hidden" id="id" name="id" class="m-wrap medium required:true" >
 
 					</form>
