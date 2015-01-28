@@ -1,5 +1,6 @@
 package org.weichart.quickstart.service.business;
 
+import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -77,13 +78,18 @@ public class CircleService {
 		return circleDao.findByname(name);
 	}
 	
-	public void addEntity(Circle entity) throws ServiceException{
-		if(findCircleByName(entity.getName()) != null){
-			throw new ServiceException("该圈子已存在!");
+	public void saveEntity(Circle entity) throws ServiceException{
+		if(entity.getId() == null){//新增
+			entity.setCreateTime(clock.getCurrentDate());
+			entity.setStatus(0);
+			circleDao.save(entity);
+		}else{//修改
+			Circle circle = circleDao.findOne(entity.getId());
+			circle.setName(entity.getName());
+			circle.setAvatar(entity.getAvatar());
+			circle.setTheme(entity.getTheme());
+			circleDao.save(circle);
 		}
-		entity.setCreateTime(clock.getCurrentDate());
-		entity.setStatus(0);
-		circleDao.save(entity);
 	}
 	
 	public void deleteEntity(Long id) throws ServiceException{
@@ -93,10 +99,6 @@ public class CircleService {
 	public Circle findById(Long id){
 		return circleDao.findOne(id);
 	}
-
-	
-	
-	
 	
 
 }

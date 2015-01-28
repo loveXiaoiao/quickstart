@@ -49,9 +49,10 @@ var Circle = function () {
 							{ "mDataProp": function(lineData){
 								var id = lineData.id;
 								var del = '<button id="sample_editable_1_new" class="btn red" onclick="del(\''+id+'\')">删除<i class="icon-minus"></i></button>';
+								var edit = '<button id="sample_editable_1_new" class="btn blue" onclick="editTK(\''+id+'\')">编辑</button>';
 								var addRole = '<button id="sample_editable_1_new" class="btn green" onclick="circleRoleAddTK(\''+id+'\')">新增角色</button>';
 								
-								return del + addRole;
+								return del +edit+ addRole;
 							} , "bSortable": false}
 	                  ],
 	         "fnServerParams": function ( aoData ) { 
@@ -95,16 +96,36 @@ function reset(){
 }
 
 function addTK(){
-	$("#circleAdd").modal('show');//展示
+	$("#circleAddEditModal").modal('show');//展示
+}
+
+function editTK(id){
+	$("#id").val(id);
+	$("#circleAddEditModal").modal('show');//展示
+	var circleId = $.trim($("#id").val());
+	//加载资产信息
+	if (circleId != "null" && circleId != "" && typeof(circleId)!="undefined") {
+		$.ajax({
+    		type: "POST",
+    		url: "circle/getEntity",
+    		data: {'id':circleId},
+    		datatype:"json",
+    		success: function(data){
+    			$('#name').val(data.result.name);
+    			$('#avatar').val(data.result.avatar);
+    			$('#theme').val(data.result.theme);
+    		}
+    	});
+	}
 }
 function circleRoleAddTK(id){
 	$("#circleId").val(id);
 	$("#circleRoleAdd").modal('show');//展示
 }
 
-
-function add(){
+function save(){
 	var params = {}; //获取表单参数
+	params["id"]= $('#id').val();
 	params["name"] = $('#name').val();
 	params["avatar"] = $('#avatar').val();
 	params["theme"] = $('#theme').val();
@@ -120,6 +141,9 @@ function add(){
 		   }
 		});
 }
+
+
+
 
 function del(id){
 	$("#modal_content").html("确定删除吗？删除后将不能恢复！");

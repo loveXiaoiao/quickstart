@@ -49,10 +49,27 @@ public class CircleCtrl {
 
 	@RequestMapping("saveCircle")
 	@ResponseBody
-	public ResultObject saveUser(Circle entity, HttpServletRequest request) {
+	public ResultObject saveCircle(Circle entity, HttpServletRequest request) {
 		try {
-			circleService.addEntity(entity);
+			circleService.saveEntity(entity);
 			resultObject.setMsg("保存成功");
+			resultObject.setSuccess(true);
+			return resultObject;
+		} catch (ServiceException e) {
+			e.printStackTrace();
+			resultObject.setMsg(e.getMessage());
+			resultObject.setSuccess(false);
+			return resultObject;
+		}
+	}
+	
+	@RequestMapping("getEntity")
+	@ResponseBody
+	public ResultObject getEntity(Circle entity, HttpServletRequest request) {
+		try {
+			Circle circle = circleService.findById(entity.getId());
+			resultObject.setMsg("成功");
+			resultObject.setResult(circle);
 			resultObject.setSuccess(true);
 			return resultObject;
 		} catch (ServiceException e) {

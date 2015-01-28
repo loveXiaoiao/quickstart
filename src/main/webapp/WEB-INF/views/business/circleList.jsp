@@ -74,6 +74,7 @@
 	<%@include file="circleAdd.jsp" %>
 	<%@include file="circleRoleAdd.jsp" %>
 	<script src="js/business/circleList.js" type="text/javascript"></script>
+	
 	<script>
 		jQuery(document).ready(
 				function() {
