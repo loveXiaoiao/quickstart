@@ -11,8 +11,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springside.modules.web.Servlets;
+import org.weichart.quickstart.entity.Account;
 import org.weichart.quickstart.entity.Circle;
 import org.weichart.quickstart.service.ServiceException;
+import org.weichart.quickstart.service.business.AccountService;
 import org.weichart.quickstart.service.business.CircleService;
 import org.weichart.quickstart.util.DataPage;
 import org.weichart.quickstart.util.ResultObject;
@@ -29,6 +31,8 @@ import org.weichart.quickstart.web.sys.BaseServlet;
 public class CircleCtrl {
 	@Autowired
 	private CircleService circleService;
+	@Autowired
+	private AccountService accountService;
 
 	private ResultObject resultObject = new ResultObject(true, "OK!");
 
@@ -96,23 +100,7 @@ public class CircleCtrl {
 		}
 	}
 	
-	@RequestMapping("listApi")
-	@ResponseBody
-	public ResultObject listApi(HttpServletRequest request) {
-		Map<String, Object> searchParams = Servlets.getParametersStartingWith(request, "search_");
-		try {
-			List<Circle> circles = new ArrayList<Circle>();
-			circles = circleService.getEntityList(searchParams);
-			resultObject.setResult(circles);
-			resultObject.setMsg("success");
-			resultObject.setSuccess(true);
-			return resultObject;
-		} catch (ServiceException e) {
-			e.printStackTrace();
-			resultObject.setMsg("false");
-			resultObject.setSuccess(false);
-			return resultObject;
-		}
-	}
+	
+	
 
 }

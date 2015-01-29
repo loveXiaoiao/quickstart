@@ -1,4 +1,4 @@
-package org.weichart.quickstart.web.business;
+package org.weichart.quickstart.web.api;
 
 import java.util.Map;
 
@@ -23,31 +23,13 @@ import org.weichart.quickstart.web.sys.BaseServlet;
  */
 
 @Controller
-@RequestMapping(value = "/account")
-public class AccountCtrl {
+@RequestMapping(value = "/api")
+public class AccountApi {
 
 	@Autowired
 	private AccountService accountService;
 	private ResultObject resultObject = new ResultObject(true, "OK!");
 
-	@RequestMapping("listAccount")
-	@ResponseBody
-	public DataPage<Account> getPageModel(HttpServletRequest request,
-			Account entity, Integer iDisplayStart, Integer iDisplayLength) {
-		// convertToMap定义于父类，将参数数组中的所有元素加入一个HashMap
-		Map<String, Object> searchParams = Servlets.getParametersStartingWith(
-				request, "search_");
-		// Long userId = getCurrentUserId();
-		DataPage<Account> pages = null;
-		try {
-			pages = accountService
-					.getPageModel(entity, searchParams, iDisplayStart,
-							iDisplayLength, BaseServlet.sortMsg(request));
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		return pages;
-	}
 
 	@RequestMapping("saveAccount")
 	@ResponseBody
@@ -80,6 +62,34 @@ public class AccountCtrl {
 			return resultObject;
 		}
 	}
-
+	/**
+	 * 
+	 * @param entity
+	 * @param request
+	 * accountName
+	 * password
+	 * @return
+	 */
+	@RequestMapping("verifyAccount")
+	@ResponseBody
+	public ResultObject verifyAccount(Account entity, HttpServletRequest request) {
+		try {
+			Account account = accountService.findByAccountNameAndPassword(entity.getAccountName(), entity.getPassword());
+			if(account == null){
+				resultObject.setMsg("用户名或密码错误");
+				resultObject.setSuccess(false);
+				return resultObject;
+			}
+			resultObject.setMsg("登录成功");
+			resultObject.setResult(account);
+			resultObject.setSuccess(true);
+			return resultObject;
+		} catch (ServiceException e) {
+			e.printStackTrace();
+			resultObject.setMsg("登录失败");
+			resultObject.setSuccess(false);
+			return resultObject;
+		}
+	}
 
 }

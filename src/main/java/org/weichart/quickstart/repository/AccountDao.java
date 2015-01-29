@@ -7,5 +7,7 @@ import org.weichart.quickstart.entity.Account;
 public interface AccountDao extends PagingAndSortingRepository<Account, Long>,JpaSpecificationExecutor<Account> {
 	
 	Account findByAccountName(String accountName);
+	
+	Account findByAccountNameAndPassword(String accountName, String password);
 
 }

@@ -14,6 +14,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springside.modules.persistence.DynamicSpecifications;
 import org.springside.modules.persistence.SearchFilter;
 import org.springside.modules.utils.Clock;
+import org.weichart.quickstart.entity.Account;
 import org.weichart.quickstart.entity.CircleRole;
 import org.weichart.quickstart.repository.CircleRoleDao;
 import org.weichart.quickstart.service.ServiceException;
@@ -89,6 +90,15 @@ public class CircleRoleService {
 	
 	public void deleteEntity(Long id){
 		circleRoleDao.delete(id);
+	}
+	
+	public CircleRole findById(Long id){
+		return circleRoleDao.findOne(id);
+	}
+	
+	public void addRelation(CircleRole circleRole, Account account){
+		circleRole.setAccount(account);
+		circleRoleDao.save(circleRole);
 	}
 	
 

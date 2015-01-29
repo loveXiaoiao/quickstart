@@ -83,5 +83,12 @@ public class AccountService {
 		accountDao.delete(id);
 	}
 	
+	public Account findByAccountNameAndPassword(String accountName,String password){
+		return accountDao.findByAccountNameAndPassword(accountName, password);
+	}
+	
+	public Account findById(Long id){
+		return accountDao.findOne(id);
+	}
 
 }

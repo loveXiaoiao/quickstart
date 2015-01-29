@@ -15,6 +15,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springside.modules.persistence.DynamicSpecifications;
 import org.springside.modules.persistence.SearchFilter;
 import org.springside.modules.utils.Clock;
+import org.weichart.quickstart.entity.Account;
 import org.weichart.quickstart.entity.Circle;
 import org.weichart.quickstart.repository.CircleDao;
 import org.weichart.quickstart.service.ServiceException;
@@ -98,6 +99,23 @@ public class CircleService {
 	
 	public Circle findById(Long id){
 		return circleDao.findOne(id);
+	}
+	
+	public void attentionCircle(Account account, Circle circle) throws ServiceException{
+		List<Account> accounts = circle.getAttentionAccounts();
+		accounts.add(account);//增加
+		circle.setAttentionAccounts(accounts);
+		circleDao.save(circle);
+	}
+	
+	public void removeAttentionCircle(Account account, Circle circle) throws ServiceException{
+		List<Account> accounts = circle.getAttentionAccounts();
+		if(!accounts.contains(account)){
+			throw new ServiceException("不在关注列表中!");
+		}
+		accounts.remove(account);
+		circle.setAttentionAccounts(accounts);
+		circleDao.save(circle);
 	}
 	
 
