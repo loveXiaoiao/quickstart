@@ -7,7 +7,7 @@
 				<div class="modal-header">
 					<button type="button" class="close" data-dismiss="modal"
 						aria-hidden="true">&times;</button>
-					<h4 class="modal-title" id="myModalLabel">新增圈子</h4>
+					<h4 class="modal-title" id="myModalLabel">圈子</h4>
 				</div>
 				<div class="modal-body">
 				<form action=""  class="form-horizontal">
@@ -38,17 +38,7 @@
 							<textarea class="medium m-wrap" id="theme" name="theme" rows="3"></textarea>
 						</div>
 					</div>
-					
-					<div class="control-group">
-
-						<label class="control-label">关注账号</label>
-
-						<div class="controls">
-							<select class="medium m-wrap" id="attentions" name="attentions"  rows="3"></select>
-						</div>
-					</div>
 					<input type="hidden" id="id" name="id" class="m-wrap medium required:true" >
-
 					</form>
 
 				</div>

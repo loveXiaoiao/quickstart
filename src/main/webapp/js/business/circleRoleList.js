@@ -52,7 +52,8 @@ var CircleRole = function () {
 							{ "mDataProp": function(lineData){
 								var id = lineData.id;
 								var del = '<button id="sample_editable_1_new" class="btn red" onclick="del(\''+id+'\')">删除<i class="icon-minus"></i></button>';
-								return del;
+								var addTopic = '<button id="sample_editable_1_new" class="btn green" onclick="topicAddTK(\''+id+'\')">新增说说</button>';
+								return del +addTopic;
 							} , "bSortable": false}
 	                  ],
 	         "fnServerParams": function ( aoData ) { 
@@ -93,6 +94,29 @@ function reloadTable(){
 function reset(){
 	$("#search_LIKE_roleName").val('');
 	reloadTable();
+}
+
+function topicAddTK(id){
+	$("#circleRoleId").val(id);
+	$("#topicAddEditModal").modal('show');//展示
+}
+
+function addTopic(id){
+	var params = {}; //获取表单参数
+	params["circleRole.id"] = $('#circleRoleId').val();
+	params["content"] = $('#content').val();
+	params["images"] = $('#images').val();
+	$.ajax({
+		  type: "POST",
+		  url: "topic/saveTopic",
+		  data: params,
+		  datatype:"json",
+		  success: function(data){
+			  $("#successAlert").html(data.msg);
+			  $("#myAlertSuccess").show();
+  			reloadTable();
+		   }
+		});
 }
 
 function del(id){

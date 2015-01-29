@@ -1,5 +1,7 @@
 package org.weichart.quickstart.web.api;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -8,9 +10,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.weichart.quickstart.entity.Account;
+import org.springside.modules.web.Servlets;
+import org.weichart.quickstart.entity.Comment;
 import org.weichart.quickstart.service.ServiceException;
 import org.weichart.quickstart.service.business.AccountService;
+import org.weichart.quickstart.service.business.CommentService;
 import org.weichart.quickstart.util.ResultObject;
 
 /**
@@ -21,18 +25,20 @@ import org.weichart.quickstart.util.ResultObject;
 
 @Controller
 @RequestMapping(value = "/api")
-public class AccountApi {
-
+public class CommentApi {
+	@Autowired
+	private CommentService commentService;
 	@Autowired
 	private AccountService accountService;
+
 	private ResultObject resultObject = new ResultObject(true, "OK!");
 
 
-	@RequestMapping("saveAccount")
+	@RequestMapping("saveComment")
 	@ResponseBody
-	public ResultObject saveUser(Account entity, HttpServletRequest request) {
+	public ResultObject saveComment(Comment entity, HttpServletRequest request) {
 		try {
-			accountService.addEntity(entity);
+			commentService.saveEntity(entity);
 			resultObject.setMsg("保存成功");
 			resultObject.setSuccess(true);
 			return resultObject;
@@ -43,12 +49,12 @@ public class AccountApi {
 			return resultObject;
 		}
 	}
-
-	@RequestMapping("deleteAccount")
+	
+	@RequestMapping("deleteComment")
 	@ResponseBody
-	public ResultObject deleteAccount(Account entity, HttpServletRequest request) {
+	public ResultObject deleteComment(Comment entity, HttpServletRequest request) {
 		try {
-			accountService.deleteEntity(entity.getId());
+			commentService.deleteEntity(entity.getId());
 			resultObject.setMsg("删除成功");
 			resultObject.setSuccess(true);
 			return resultObject;
@@ -59,34 +65,26 @@ public class AccountApi {
 			return resultObject;
 		}
 	}
-	/**
-	 * 
-	 * @param entity
-	 * @param request
-	 * accountName
-	 * password
-	 * @return
-	 */
-	@RequestMapping("verifyAccount")
+	
+	@RequestMapping("listComment")
 	@ResponseBody
-	public ResultObject verifyAccount(Account entity, HttpServletRequest request) {
+	public ResultObject listApi(HttpServletRequest request) {
+		Map<String, Object> searchParams = Servlets.getParametersStartingWith(request, "search_");
 		try {
-			Account account = accountService.findByAccountNameAndPassword(entity.getAccountName(), entity.getPassword());
-			if(account == null){
-				resultObject.setMsg("用户名或密码错误");
-				resultObject.setSuccess(false);
-				return resultObject;
-			}
-			resultObject.setMsg("登录成功");
-			resultObject.setResult(account);
+			List<Comment> comments = new ArrayList<Comment>();
+//			comments = commentService.getEntityList(searchParams);
+			resultObject.setResult(comments);
+			resultObject.setMsg("success");
 			resultObject.setSuccess(true);
 			return resultObject;
 		} catch (ServiceException e) {
 			e.printStackTrace();
-			resultObject.setMsg("登录失败");
+			resultObject.setMsg(e.getMessage());
 			resultObject.setSuccess(false);
 			return resultObject;
 		}
 	}
+	
+	
 
 }

@@ -23,6 +23,7 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 public class Topic extends IdEntity {
 	
 	private String content;//发表内容
+	private String images;//评论图片
 	private Date createTime;//发表时间
 	private Account account;//发表账号
 	private Circle circle;//所属圈子
@@ -77,6 +78,12 @@ public class Topic extends IdEntity {
 	}
 	public void setPraiseRoles(List<CircleRole> praiseRoles) {
 		this.praiseRoles = praiseRoles;
+	}
+	public String getImages() {
+		return images;
+	}
+	public void setImages(String images) {
+		this.images = images;
 	}
 	
 	

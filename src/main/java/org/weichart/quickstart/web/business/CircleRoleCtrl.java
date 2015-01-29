@@ -62,7 +62,7 @@ public class CircleRoleCtrl {
 
 	@RequestMapping("saveCircleRole")
 	@ResponseBody
-	public ResultObject saveUser(CircleRole entity, HttpServletRequest request) {
+	public ResultObject saveCircleRole(CircleRole entity, HttpServletRequest request) {
 		Long circleId = Long.parseLong(request.getParameter("circle_id"));
 		Circle circle = circleService.findById(circleId);
 		if (circle == null) {

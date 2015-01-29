@@ -74,6 +74,7 @@
 	</div>
 	<%@include file="../commons/messageBox.jsp"%>
 	<%@include file="circleRoleAdd.jsp" %>
+	<%@include file="topicAdd.jsp" %>
 	<script src="js/business/circleRoleList.js" type="text/javascript"></script>
 	<script>
 		jQuery(document).ready(

@@ -120,7 +120,7 @@ function editTK(id){
 }
 function circleRoleAddTK(id){
 	$("#circleId").val(id);
-	$("#circleRoleAdd").modal('show');//展示
+	$("#circleRoleAddEditModal").modal('show');//展示
 }
 
 function save(){
