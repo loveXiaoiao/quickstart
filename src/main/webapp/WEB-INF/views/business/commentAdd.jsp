@@ -28,7 +28,7 @@
 							</div>
 
 						</div>
-
+					<input type="hidden" id="id" name="id" class="m-wrap medium required:true" >
 					<input type="hidden" id="topicId" name="topicId" class="m-wrap medium required:true" >
 					<input type="hidden" id="parentCommentId" name="parentCommentId" class="m-wrap medium required:true" >
 

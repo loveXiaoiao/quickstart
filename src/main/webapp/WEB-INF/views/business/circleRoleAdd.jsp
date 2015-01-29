@@ -20,6 +20,7 @@
 							</div>
 
 						</div>
+						<input type="hidden" id="id" name="id" class="m-wrap medium required:true" >
 						<input type="hidden" id="circleId"  class="m-wrap medium required:true" >
 						<div class="control-group">
 							<label class="control-label">头像</label>
@@ -42,7 +43,7 @@
 					</form>
 					</div>
 				<div class="modal-footer">
-					<button type="button" class="btn green" data-dismiss="modal" onclick="addRole();">保存</button>
+					<button type="button" class="btn green" data-dismiss="modal" id="circleRoleAdd"  onclick=";">保存</button>
 					<button type="button" class="btn btn-primary" data-dismiss="modal" onclick=";">取消</button>
 				</div>
 			</div>

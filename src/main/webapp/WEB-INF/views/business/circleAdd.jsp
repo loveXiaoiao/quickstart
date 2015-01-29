@@ -24,7 +24,7 @@
 							<label class="control-label">头像</label>
 							<div class="controls">
 
-								<input type="text" id="avatar"  name="avatar" placeholder="头像"
+								<input type="text" id="circleAvatar"  name="circleAvatar" placeholder="头像"
 									class="m-wrap medium required:true">
 							</div>
 
@@ -39,11 +39,12 @@
 						</div>
 					</div>
 					<input type="hidden" id="id" name="id" class="m-wrap medium required:true" >
+					<input type="hidden" id="accountId"  class="m-wrap medium required:true" >
 					</form>
 
 				</div>
 				<div class="modal-footer">
-					<button type="button" class="btn green" data-dismiss="modal" onclick="save();">保存</button>
+					<button type="button" class="btn green" data-dismiss="modal" id="circleAdd" onclick=";">保存</button>
 					<button type="button" class="btn btn-primary" data-dismiss="modal" onclick=";">取消</button>
 				</div>
 			</div>

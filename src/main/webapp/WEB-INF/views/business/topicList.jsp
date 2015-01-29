@@ -23,8 +23,7 @@
 			<div class="portlet-body">
 				<div class="controls">
 					<label class="help-inline">内容：</label> <input class="m-wrap small"
-						size="8" type="text" id="search_LIKE_content"
-						name="search_LIKE_name" placeholder="内容">
+						size="8" type="text" id="search_LIKE_content" name="search_LIKE_content" placeholder="内容">
 					<button class="btn red" onclick="reloadTable();">查询</button>
 					<button class="btn green" onclick="reset();">重置</button>
 				</div>
@@ -82,6 +81,10 @@
 					Topic.init();
 					$("#commentAdd").click(function(){
 						addComment();
+					});
+					
+					$("#topicAdd").click(function(){
+						save();
 					});
 					$("a[href='jump/business_topicList']").parent().addClass(
 							"active");

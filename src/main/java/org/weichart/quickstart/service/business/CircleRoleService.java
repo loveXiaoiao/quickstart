@@ -15,7 +15,9 @@ import org.springside.modules.persistence.DynamicSpecifications;
 import org.springside.modules.persistence.SearchFilter;
 import org.springside.modules.utils.Clock;
 import org.weichart.quickstart.entity.Account;
+import org.weichart.quickstart.entity.Circle;
 import org.weichart.quickstart.entity.CircleRole;
+import org.weichart.quickstart.repository.CircleDao;
 import org.weichart.quickstart.repository.CircleRoleDao;
 import org.weichart.quickstart.service.ServiceException;
 import org.weichart.quickstart.util.DataPage;
@@ -32,6 +34,7 @@ import org.weichart.quickstart.util.DataPage;
 public class CircleRoleService {
 	
 	private CircleRoleDao circleRoleDao;
+	private CircleDao circleDao;
 	private Clock clock = Clock.DEFAULT;
 	
 	@Autowired
@@ -39,6 +42,11 @@ public class CircleRoleService {
 		this.circleRoleDao = circleRoleDao;
 	}
 	
+	@Autowired
+	public void setCircleDao(CircleDao circleDao) {
+		this.circleDao = circleDao;
+	}
+
 
 	/**
 	 * getPageModel:分页查询.
@@ -80,12 +88,24 @@ public class CircleRoleService {
 		return circleRoleDao.findByRoleName(roleName);
 	}
 	
-	public void addEntity(CircleRole entity) throws ServiceException{
-		if(findByRoleName(entity.getRoleName()) != null){
-			throw new ServiceException("该角色已存在!");
+	public void saveEntity(CircleRole entity) throws ServiceException{
+		if(entity.getId() == null){//新增
+			if(findByRoleName(entity.getRoleName()) != null){
+				throw new ServiceException("该角色已存在!");
+			}
+			Circle circle = circleDao.findOne(entity.getCircle().getId());
+			entity.setCircle(circle);
+			entity.setStatus(1);//未关联
+			entity.setActiveDegree(1);
+			entity.setCreateTime(clock.getCurrentDate());
+			circleRoleDao.save(entity);
+		}else{//修改
+			CircleRole circleRole = circleRoleDao.findOne(entity.getId());
+			circleRole.setAvatar(entity.getAvatar());
+			circleRole.setRoleName(entity.getRoleName());
+			circleRole.setRemark(entity.getRemark());
+			circleRoleDao.save(circleRole);
 		}
-		entity.setCreateTime(clock.getCurrentDate());
-		circleRoleDao.save(entity);
 	}
 	
 	public void deleteEntity(Long id){

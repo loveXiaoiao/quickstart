@@ -29,8 +29,12 @@ var Topic = function () {
 								}}, "bSortable": false },
 							{ "mDataProp": "createTime"},
 							{ "mDataProp": function(lineData){
-								var createAccount = lineData.createAccount;
-									return createAccount.accountName;
+								var account = lineData.account;
+									if(account != null){
+										return account.accountName;
+									}else{
+										return "--";
+									}
 								}, "bSortable": false },
 							{ "mDataProp": function(lineData){
 								var circle = lineData.circle;
@@ -115,7 +119,6 @@ function commentAddTK(id){
 function save(){
 	var params = {}; //获取表单参数
 	params["id"]= $('#id').val();
-	params["circleRole.id"] = $('#circleRoleId').val();
 	params["content"] = $('#content').val();
 	params["images"] = $('#images').val();
 	$.ajax({

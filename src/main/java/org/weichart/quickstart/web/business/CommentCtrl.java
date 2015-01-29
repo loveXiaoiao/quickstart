@@ -35,46 +35,53 @@ import org.weichart.quickstart.web.sys.BaseServlet;
 public class CommentCtrl {
 	@Autowired
 	private CommentService commentService;
-	
+
 	@Autowired
 	private TopicService topicService;
-	
+
 	@Autowired
 	private CircleRoleService circleRoleService;
-	
+
 	@Autowired
 	private CircleService circleService;
-	
+
 	@Autowired
 	private AccountService accountService;
-	
+
 	private ResultObject resultObject = new ResultObject(true, "OK!");
 
 	@RequestMapping("listComment")
 	@ResponseBody
-	public DataPage<Comment> getPageModel(HttpServletRequest request,Comment entity, Integer iDisplayStart, Integer iDisplayLength) {
+	public DataPage<Comment> getPageModel(HttpServletRequest request,
+			Comment entity, Integer iDisplayStart, Integer iDisplayLength) {
 		// convertToMap定义于父类，将参数数组中的所有元素加入一个HashMap
-		Map<String, Object> searchParams = Servlets.getParametersStartingWith(request, "search_");
+		Map<String, Object> searchParams = Servlets.getParametersStartingWith(
+				request, "search_");
 		// Long userId = getCurrentUserId();
 		DataPage<Comment> pages = null;
 		try {
-			pages = commentService.getPageModel(entity, searchParams, iDisplayStart,iDisplayLength, BaseServlet.sortMsg(request));
+			pages = commentService
+					.getPageModel(entity, searchParams, iDisplayStart,
+							iDisplayLength, BaseServlet.sortMsg(request));
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		return pages;
 	}
 
+	/**
+	 * 
+	 * @param entity
+	 * circleRole.id
+	 * topic.id
+	 * parentComment.id
+	 * @param request
+	 * @return
+	 */
 	@RequestMapping("saveComment")
 	@ResponseBody
 	public ResultObject saveComment(Comment entity, HttpServletRequest request) {
 		try {
-			Topic topic = topicService.findById(entity.getTopic().getId());
-			if(topic != null){
-				Circle circle = topic.getCircle();
-				CircleRole circleRole = topic.getCircleRole();
-				Account account = topic.getAccount();
-			}
 			commentService.saveEntity(entity);
 			resultObject.setMsg("保存成功");
 			resultObject.setSuccess(true);
@@ -86,7 +93,7 @@ public class CommentCtrl {
 			return resultObject;
 		}
 	}
-	
+
 	@RequestMapping("getEntity")
 	@ResponseBody
 	public ResultObject getEntity(Comment entity, HttpServletRequest request) {
@@ -119,6 +126,5 @@ public class CommentCtrl {
 			return resultObject;
 		}
 	}
-	
 
 }

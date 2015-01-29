@@ -14,8 +14,12 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springside.modules.persistence.DynamicSpecifications;
 import org.springside.modules.persistence.SearchFilter;
 import org.springside.modules.utils.Clock;
+import org.weichart.quickstart.entity.CircleRole;
 import org.weichart.quickstart.entity.Comment;
+import org.weichart.quickstart.entity.Topic;
+import org.weichart.quickstart.repository.CircleRoleDao;
 import org.weichart.quickstart.repository.CommentDao;
+import org.weichart.quickstart.repository.TopicDao;
 import org.weichart.quickstart.service.ServiceException;
 import org.weichart.quickstart.util.DataPage;
 
@@ -32,10 +36,19 @@ public class CommentService {
 	
 	private CommentDao commentDao;
 	private Clock clock = Clock.DEFAULT;
-
+	private TopicDao topicDao;
+	private CircleRoleDao circleRoleDao;
 	@Autowired
 	public void setCommentDao(CommentDao commentDao) {
 		this.commentDao = commentDao;
+	}
+	@Autowired
+	public void setTopicDao(TopicDao topicDao) {
+		this.topicDao = topicDao;
+	}
+	@Autowired
+	public void setCircleRoleDao(CircleRoleDao circleRoleDao) {
+		this.circleRoleDao = circleRoleDao;
 	}
 	/**
 	 * getPageModel:分页查询.
@@ -75,10 +88,17 @@ public class CommentService {
 	public void saveEntity(Comment entity) throws ServiceException{
 		if(entity.getId() == null){//新增
 			entity.setCreateTime(clock.getCurrentDate());
+			Topic topic = topicDao.findOne(entity.getTopic().getId());
+			entity.setTopic(topic);
+			CircleRole circleRole = circleRoleDao.findOne(entity.getCircleRole().getId());
+			entity.setCircleRole(circleRole);
+			entity.setAccount(circleRole.getAccount());
+			entity.setParentComment(commentDao.findOne(entity.getParentComment().getId()));
 			commentDao.save(entity);
 		}else{//修改
-			//TODO
 			Comment comment = commentDao.findOne(entity.getId());
+			comment.setContent(entity.getContent());
+			comment.setImages(entity.getImages());
 			commentDao.save(comment);
 		}
 	}

@@ -46,14 +46,10 @@ public class CircleRoleCtrl {
 	public DataPage<CircleRole> getPageModel(HttpServletRequest request,
 			CircleRole entity, Integer iDisplayStart, Integer iDisplayLength) {
 		// convertToMap定义于父类，将参数数组中的所有元素加入一个HashMap
-		Map<String, Object> searchParams = Servlets.getParametersStartingWith(
-				request, "search_");
-		// Long userId = getCurrentUserId();
+		Map<String, Object> searchParams = Servlets.getParametersStartingWith(request, "search_");
 		DataPage<CircleRole> pages = null;
 		try {
-			pages = circleRoleService
-					.getPageModel(entity, searchParams, iDisplayStart,
-							iDisplayLength, BaseServlet.sortMsg(request));
+			pages = circleRoleService.getPageModel(entity, searchParams, iDisplayStart,iDisplayLength, BaseServlet.sortMsg(request));
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -63,17 +59,8 @@ public class CircleRoleCtrl {
 	@RequestMapping("saveCircleRole")
 	@ResponseBody
 	public ResultObject saveCircleRole(CircleRole entity, HttpServletRequest request) {
-		Long circleId = Long.parseLong(request.getParameter("circle_id"));
-		Circle circle = circleService.findById(circleId);
-		if (circle == null) {
-			resultObject.setMsg("保存失败");
-			resultObject.setSuccess(false);
-			return resultObject;
-		}
 		try {
-			entity.setCircle(circle);
-			entity.setStatus(1);
-			circleRoleService.addEntity(entity);
+			circleRoleService.saveEntity(entity);
 			resultObject.setMsg("保存成功");
 			resultObject.setSuccess(true);
 			return resultObject;

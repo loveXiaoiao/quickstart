@@ -60,26 +60,22 @@ public class TopicCtrl {
 		}
 		return pages;
 	}
+	/**
+	 * 
+	 * @param entity
+	 * circleRole.id
+	 * @param request
+	 * @return
+	 */
 
 	@RequestMapping("saveTopic")
 	@ResponseBody
 	public ResultObject saveTopic(Topic entity, HttpServletRequest request) {
 		try {
-			CircleRole circleRole = circleRoleService.findById(entity.getCircleRole().getId());
-			if(circleRole != null){
-				Circle circle = circleRole.getCircle();
-				Account account = circleRole.getAccount();
-				entity.setCircleRole(circleRole);
-				entity.setCircle(circle);
-				entity.setAccount(account);
 				topicService.saveEntity(entity);
 				resultObject.setMsg("保存成功");
 				resultObject.setSuccess(true);
 				return resultObject;
-			}else{
-				resultObject.setSuccess(false);
-				return resultObject;
-			}
 		} catch (ServiceException e) {
 			e.printStackTrace();
 			resultObject.setMsg(e.getMessage());

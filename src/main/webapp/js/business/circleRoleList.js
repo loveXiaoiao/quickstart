@@ -52,8 +52,9 @@ var CircleRole = function () {
 							{ "mDataProp": function(lineData){
 								var id = lineData.id;
 								var del = '<button id="sample_editable_1_new" class="btn red" onclick="del(\''+id+'\')">删除<i class="icon-minus"></i></button>';
+								var edit = '<button id="sample_editable_1_new" class="btn blue" onclick="editTK(\''+id+'\')">编辑</button>';
 								var addTopic = '<button id="sample_editable_1_new" class="btn green" onclick="topicAddTK(\''+id+'\')">新增说说</button>';
-								return del +addTopic;
+								return del +edit+addTopic;
 							} , "bSortable": false}
 	                  ],
 	         "fnServerParams": function ( aoData ) { 
@@ -101,7 +102,46 @@ function topicAddTK(id){
 	$("#topicAddEditModal").modal('show');//展示
 }
 
-function addTopic(id){
+function editTK(id){
+	$("#id").val(id);
+	$("#circleRoleAddEditModal").modal('show');//展示
+	var circleRoleId = $.trim($("#id").val());
+	//加载资产信息
+	if (circleRoleId != "null" && circleRoleId != "" && typeof(circleRoleId)!="undefined") {
+		$.ajax({
+    		type: "POST",
+    		url: "circleRole/getEntity",
+    		data: {'id':circleRoleId},
+    		datatype:"json",
+    		success: function(data){
+    			$('#roleName').val(data.result.roleName);
+    			$('#avatar').val(data.result.avatar);
+    			$('#remark').val(data.result.remark);
+    		}
+    	});
+	}
+}
+//编辑
+function saveCircleRole(){
+	var params = {}; //获取表单参数
+	params["id"]= $('#id').val();
+	params["roleName"] = $('#roleName').val();
+	params["avatar"] = $('#avatar').val();
+	params["remark"] = $('#remark').val();
+	$.ajax({
+		  type: "POST",
+		  url: "circleRole/saveCircleRole",
+		  data: params,
+		  datatype:"json",
+		  success: function(data){
+			  	  $("#successAlert").html(data.msg);
+			  	  $("#myAlertSuccess").show();
+				  reloadTable();
+		   }
+		});
+}
+
+function addTopic(){
 	var params = {}; //获取表单参数
 	params["circleRole.id"] = $('#circleRoleId').val();
 	params["content"] = $('#content').val();

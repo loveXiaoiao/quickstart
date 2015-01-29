@@ -81,6 +81,12 @@
 				function() {
 					App.init();
 					CircleRole.init();
+					$("#circleRoleAdd").click(function(){
+						addRole();
+					});
+					$("#topicAdd").click(function(){
+						addTopic();
+					});
 					$("a[href='jump/business_circleRoleList']").parent().addClass(
 							"active");
 					$("a[href='jump/business_circleRoleList']").parent().parent()

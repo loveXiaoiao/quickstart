@@ -80,12 +80,16 @@
 	</div>
 	<%@include file="../commons/messageBox.jsp"%>
 	<%@include file="accountAdd.jsp" %>
+	<%@include file="circleAdd.jsp" %>
 	<script src="js/business/accountList.js" type="text/javascript"></script>
 	<script>
 		jQuery(document).ready(
 				function() {
 					App.init();
 					Account.init();
+					$("#circleAdd").click(function(){
+						addCircle();
+					});
 					$("a[href='jump/business_accountList']").parent().addClass(
 							"active");
 					$("a[href='jump/business_accountList']").parent().parent()

@@ -31,7 +31,7 @@
 
 				</div>
 				<div class="modal-footer">
-					<button type="button" class="btn green" data-dismiss="modal" onclick="addTopic();">保存</button>
+					<button type="button" class="btn green" data-dismiss="modal" id="topicAdd" onclick=";">保存</button>
 					<button type="button" class="btn btn-primary" data-dismiss="modal" onclick=";">取消</button>
 				</div>
 			</div>

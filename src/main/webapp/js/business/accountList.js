@@ -46,7 +46,8 @@ var Account = function () {
 							{ "mDataProp": function(lineData){
 								var id = lineData.id;
 								var del = '<button id="sample_editable_1_new" class="btn red" onclick="del(\''+id+'\')">删除<i class="icon-minus"></i></button>';
-								return del;
+								var addCircle = '<button id="sample_editable_1_new" class="btn green" onclick="circleAddTK(\''+id+'\')">新增圈子</button>';
+								return del+addCircle;
 							} , "bSortable": false}
 	                  ],
 	         "fnServerParams": function ( aoData ) { 
@@ -91,6 +92,31 @@ function reset(){
 
 function tankun(){
 	$("#accountAdd").modal('show');//展示
+}
+
+function circleAddTK(id){
+	$("#accountId").val(id);
+	$("#circleAddEditModal").modal('show');//展示
+}
+
+
+function addCircle(){
+	var params = {}; //获取表单参数
+	params["createAccount.id"]= $('#accountId').val();
+	params["name"] = $('#name').val();
+	params["avatar"] = $('#circleAvatar').val();
+	params["theme"] = $('#theme').val();
+	$.ajax({
+		  type: "POST",
+		  url: "circle/saveCircle",
+		  data: params,
+		  datatype:"json",
+		  success: function(data){
+			  	  $("#successAlert").html(data.msg);
+			  	  $("#myAlertSuccess").show();
+				  reloadTable();
+		   }
+		});
 }
 
 

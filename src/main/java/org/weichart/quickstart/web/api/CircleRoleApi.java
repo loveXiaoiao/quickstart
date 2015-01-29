@@ -42,18 +42,9 @@ public class CircleRoleApi {
 
 	@RequestMapping("saveCircleRole")
 	@ResponseBody
-	public ResultObject saveUser(CircleRole entity, HttpServletRequest request) {
-		Long circleId = Long.parseLong(request.getParameter("circle_id"));
-		Circle circle = circleService.findById(circleId);
-		if (circle == null) {
-			resultObject.setMsg("保存失败");
-			resultObject.setSuccess(false);
-			return resultObject;
-		}
+	public ResultObject saveCircleRole(CircleRole entity, HttpServletRequest request) {
 		try {
-			entity.setCircle(circle);
-			entity.setStatus(1);
-			circleRoleService.addEntity(entity);
+			circleRoleService.saveEntity(entity);
 			resultObject.setMsg("保存成功");
 			resultObject.setSuccess(true);
 			return resultObject;

@@ -17,6 +17,7 @@ import org.springside.modules.persistence.SearchFilter;
 import org.springside.modules.utils.Clock;
 import org.weichart.quickstart.entity.Account;
 import org.weichart.quickstart.entity.Circle;
+import org.weichart.quickstart.repository.AccountDao;
 import org.weichart.quickstart.repository.CircleDao;
 import org.weichart.quickstart.service.ServiceException;
 import org.weichart.quickstart.util.DataPage;
@@ -33,9 +34,13 @@ import org.weichart.quickstart.util.DataPage;
 public class CircleService {
 	
 	private CircleDao circleDao;
+	private AccountDao accountDao;
 	private Clock clock = Clock.DEFAULT;
 
-	
+	@Autowired
+	public void setAccountDao(AccountDao accountDao) {
+		this.accountDao = accountDao;
+	}
 	@Autowired
 	public void setCircleDao(CircleDao circleDao) {
 		this.circleDao = circleDao;
@@ -81,7 +86,11 @@ public class CircleService {
 	
 	public void saveEntity(Circle entity) throws ServiceException{
 		if(entity.getId() == null){//新增
+			if(findCircleByName(entity.getName()) != null){
+				throw new ServiceException("该圈子已存在!");
+			}
 			entity.setCreateTime(clock.getCurrentDate());
+			entity.setCreateAccount(accountDao.findOne(entity.getCreateAccount().getId()));
 			entity.setStatus(0);
 			circleDao.save(entity);
 		}else{//修改
