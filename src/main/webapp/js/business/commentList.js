@@ -5,7 +5,7 @@ var Comment = function () {
 	var inittable = function(){
 		var oTable = $('#commenttable').dataTable( {
 	        "bServerSide": true,
-	        "sAjaxSource": "topic/listTopic",
+	        "sAjaxSource": "comment/listComment",
 	        "bProcessing": true,
 	        "bFilter": false,//过滤功能
 	        "bSort": true,//排序功能
@@ -29,6 +29,12 @@ var Comment = function () {
 								}}, "bSortable": false },
 							{ "mDataProp": "createTime"},
 							{ "mDataProp": function(lineData){
+								var topic = lineData.topic;
+								if(topic != null){
+									return topic.content;
+								}
+								return "--";}, "bSortable": false},
+							{ "mDataProp": function(lineData){
 								var createAccount = lineData.createAccount;
 								if(createAccount == null){
 									return "后台管理员";
@@ -37,10 +43,16 @@ var Comment = function () {
 								}}, "bSortable": false },
 							{ "mDataProp": function(lineData){
 								var circle = lineData.circle;
-								return circle.name;}, "bSortable": false},
+								if(circle != null){
+									return circle.name;
+								}
+								return "--";}, "bSortable": false},
 							{ "mDataProp": function(lineData){
 								var circleRole = lineData.circleRole;
-								return circleRole.roleName;}, "bSortable": false},
+								if(circleRole != null){
+									return circleRole.roleName;
+								}
+								return "--";}, "bSortable": false},
 							{ "mDataProp": function(lineData){
 								var parentComment = lineData.parentComment;
 								if(parentComment == null){
@@ -48,6 +60,7 @@ var Comment = function () {
 								}
 								return parentComment.content;}, "bSortable": false},
 							{ "mDataProp": function(lineData){
+								console.info(lineData.topic);
 								var id = lineData.id;
 								var del = '<button id="sample_editable_1_new" class="btn red" onclick="del(\''+id+'\')">删除<i class="icon-minus"></i></button>';
 								var edit = '<button id="sample_editable_1_new" class="btn blue" onclick="editTK(\''+id+'\')">编辑</button>';
@@ -98,25 +111,25 @@ function reset(){
 
 function editTK(id){
 	$("#id").val(id);
-	$("#topicAddEditModal").modal('show');//展示
+	$("#commentAddEditModal").modal('show');//展示
 	var circleId = $.trim($("#id").val());
 	//加载资产信息
 	if (circleId != "null" && circleId != "" && typeof(circleId)!="undefined") {
 		$.ajax({
     		type: "POST",
-    		url: "topic/getEntity",
+    		url: "comment/getEntity",
     		data: {'id':circleId},
     		datatype:"json",
     		success: function(data){
-    			$('#content').val(data.result.content);
-    			$('#images').val(data.result.images);
+    			$('#commentContent').val(data.result.content);
+    			$('#commentImages').val(data.result.images);
     		}
     	});
 	}
 }
 function childCommentAddTK(id, topicId){
 	$("#parrentCommentId").val(id);
-	$("#topicIc").val(topicId);
+	$("#topicId").val(topicId);
 	$("#commentAddEditModal").modal('show');//展示
 }
 
@@ -147,8 +160,8 @@ function addChildComment(){
 	var params = {}; //获取表单参数
 	params["parentComment.id"] = $('#parentCommentId').val();
 	params["topic.id"] = $('#topicId').val();
-	params["content"] = $('#content').val();
-	params["images"] = $('#images').val();
+	params["content"] = $('#commentContent').val();
+	params["images"] = $('#commentImages').val();
 	$.ajax({
 		  type: "POST",
 		  url: "comment/saveComment",

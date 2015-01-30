@@ -20,7 +20,7 @@
 							</div>
 
 						</div>
-						<input type="hidden" id="id" name="id" class="m-wrap medium required:true" >
+						<input type="hidden" id="id" name="id" class="m-wrap medium required:true" ><!-- 需要修改 -->
 						<input type="hidden" id="circleId"  class="m-wrap medium required:true" >
 						<div class="control-group">
 							<label class="control-label">头像</label>

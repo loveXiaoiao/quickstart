@@ -88,12 +88,18 @@ public class CommentService {
 	public void saveEntity(Comment entity) throws ServiceException{
 		if(entity.getId() == null){//新增
 			entity.setCreateTime(clock.getCurrentDate());
-			Topic topic = topicDao.findOne(entity.getTopic().getId());
-			entity.setTopic(topic);
-			CircleRole circleRole = circleRoleDao.findOne(entity.getCircleRole().getId());
-			entity.setCircleRole(circleRole);
-			entity.setAccount(circleRole.getAccount());
-			entity.setParentComment(commentDao.findOne(entity.getParentComment().getId()));
+			if(entity.getTopic() != null){
+				Topic topic = topicDao.findOne(entity.getTopic().getId());
+				entity.setTopic(topic);
+			}
+			if(entity.getCircleRole() != null){
+				CircleRole circleRole = circleRoleDao.findOne(entity.getCircleRole().getId());
+				entity.setCircleRole(circleRole);
+				entity.setAccount(circleRole.getAccount());
+			}
+			if(entity.getParentComment() != null){
+				entity.setParentComment(commentDao.findOne(entity.getParentComment().getId()));
+			}
 			commentDao.save(entity);
 		}else{//修改
 			Comment comment = commentDao.findOne(entity.getId());

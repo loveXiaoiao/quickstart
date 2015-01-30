@@ -156,15 +156,15 @@ function del(id){
 }
 
 /**
- * 待编辑
+ * 
  * @param id
  */
 
 function addComment(){
 	var params = {}; //获取表单参数
 	params["topic.id"] = $('#topicId').val();
-	params["content"] = $('#content').val();
-	params["images"] = $('#images').val();
+	params["content"] = $('#commentContent').val();
+	params["images"] = $('#commentImages').val();
 	$.ajax({
 		  type: "POST",
 		  url: "comment/saveComment",

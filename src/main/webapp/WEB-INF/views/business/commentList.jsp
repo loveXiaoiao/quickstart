@@ -51,6 +51,8 @@
 							<th class="hidden-480">图片</th>
 							
 							<th class="hidden-480">发表时间</th>
+							
+							<th class="hidden-480">所在说说</th>
 
 							<th class="hidden-480">帐号</th>
 
