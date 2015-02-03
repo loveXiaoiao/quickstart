@@ -28,6 +28,7 @@ public class Topic extends IdEntity {
 	private Account account;//发表账号
 	private Circle circle;//所属圈子
 	private CircleRole circleRole;//发表角色
+	private Date updateTime;//更新时间
 	private List<CircleRole> praiseRoles;//点赞角色
 	public String getContent() {
 		return content;
@@ -84,6 +85,14 @@ public class Topic extends IdEntity {
 	}
 	public void setImages(String images) {
 		this.images = images;
+	}
+	// 设定JSON序列化时的日期格式
+	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+08:00")
+	public Date getUpdateTime() {
+		return updateTime;
+	}
+	public void setUpdateTime(Date updateTime) {
+		this.updateTime = updateTime;
 	}
 	
 	
