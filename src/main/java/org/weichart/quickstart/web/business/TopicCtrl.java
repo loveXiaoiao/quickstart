@@ -88,9 +88,9 @@ public class TopicCtrl {
 	@ResponseBody
 	public ResultObject getEntity(Topic entity, HttpServletRequest request) {
 		try {
-			Topic Topic = topicService.findById(entity.getId());
+			Topic topic = topicService.findById(entity.getId());
 			resultObject.setMsg("成功");
-			resultObject.setResult(Topic);
+			resultObject.setResult(topic);
 			resultObject.setSuccess(true);
 			return resultObject;
 		} catch (ServiceException e) {

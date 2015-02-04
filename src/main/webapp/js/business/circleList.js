@@ -50,8 +50,7 @@ var Circle = function () {
 								var id = lineData.id;
 								var del = '<button id="sample_editable_1_new" class="btn red" onclick="del(\''+id+'\')">删除<i class="icon-minus"></i></button>';
 								var edit = '<button id="sample_editable_1_new" class="btn blue" onclick="editTK(\''+id+'\')">编辑</button>';
-								var addRole = '<button id="sample_editable_1_new" class="btn green" onclick="circleRoleAddTK(\''+id+'\')">新增角色</button>';
-								return del +edit+ addRole;
+								return del +edit;
 							} , "bSortable": false}
 	                  ],
 	         "fnServerParams": function ( aoData ) { 
@@ -111,22 +110,19 @@ function editTK(id){
     		datatype:"json",
     		success: function(data){
     			$('#name').val(data.result.name);
-    			$('#circleAvatar').val(data.result.avatar);
+    			$('#avatar').val(data.result.avatar);
     			$('#theme').val(data.result.theme);
     		}
     	});
 	}
 }
-function circleRoleAddTK(id){
-	$("#circleId").val(id);
-	$("#circleRoleAddEditModal").modal('show');//展示
-}
+
 //编辑
 function saveCircle(){
 	var params = {}; //获取表单参数
 	params["id"]= $('#id').val();
 	params["name"] = $('#name').val();
-	params["avatar"] = $('#circleAvatar').val();
+	params["avatar"] = $('#avatar').val();
 	params["theme"] = $('#theme').val();
 	$.ajax({
 		  type: "POST",
@@ -162,25 +158,3 @@ function del(id){
     });
 }
 
-function addRole(id){
-	var params = {}; //获取表单参数
-	params["circle.id"] = $('#circleId').val();
-	params["avatar"] = $('#roleAvatar').val();
-	params["roleName"] = $('#roleName').val();
-	params["remark"] = $('#remark').val();
-	$.ajax({
-		  type: "POST",
-		  url: "circleRole/saveCircleRole",
-		  data: params,
-		  datatype:"json",
-		  success: function(data){
-			  $("#successAlert").html(data.msg);
-			  $("#myAlertSuccess").show();
-  			reloadTable();
-		   }
-		});
-}
-
-function selectAll(){
-	alert("我要选中所有……");
-}

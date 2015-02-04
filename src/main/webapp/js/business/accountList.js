@@ -46,8 +46,7 @@ var Account = function () {
 							{ "mDataProp": function(lineData){
 								var id = lineData.id;
 								var del = '<button id="sample_editable_1_new" class="btn red" onclick="del(\''+id+'\')">删除<i class="icon-minus"></i></button>';
-								var addCircle = '<button id="sample_editable_1_new" class="btn green" onclick="circleAddTK(\''+id+'\')">新增圈子</button>';
-								return del+addCircle;
+								return del;
 							} , "bSortable": false}
 	                  ],
 	         "fnServerParams": function ( aoData ) { 
@@ -90,15 +89,9 @@ function reset(){
 	reloadTable();
 }
 
-function tankun(){
+function addTK(){
 	$("#accountAdd").modal('show');//展示
 }
-
-function circleAddTK(id){
-	$("#accountId").val(id);
-	$("#circleAddEditModal").modal('show');//展示
-}
-
 
 function addCircle(){
 	var params = {}; //获取表单参数
@@ -118,8 +111,6 @@ function addCircle(){
 		   }
 		});
 }
-
-
 function add(){
 	var params = {}; //获取表单参数
 	params["accountName"] = $('#accountName').val();
@@ -162,6 +153,3 @@ function del(id){
     });
 }
 
-function selectAll(){
-	alert("我要选中所有……");
-}

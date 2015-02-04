@@ -32,8 +32,12 @@
 				<div class="clearfix">
 					<!-- 按钮 -->
 					<p>
+						<button id="sample_editable_1_new" class="btn green"
+							onclick="addTK()">
+							增加 <i class="icon-plus"></i>
+						</button>
 						<button id="sample_editable_1_del" class="btn red"
-							onclick="delUsers()">
+							onclick="batchDel()">
 							删除<i class="icon-minus"></i>
 						</button>
 					</p>
@@ -74,19 +78,12 @@
 	</div>
 	<%@include file="../commons/messageBox.jsp"%>
 	<%@include file="circleRoleAdd.jsp" %>
-	<%@include file="topicAdd.jsp" %>
 	<script src="js/business/circleRoleList.js" type="text/javascript"></script>
 	<script>
 		jQuery(document).ready(
 				function() {
 					App.init();
 					CircleRole.init();
-					$("#circleRoleAdd").click(function(){
-						addRole();
-					});
-					$("#topicAdd").click(function(){
-						addTopic();
-					});
 					$("a[href='jump/business_circleRoleList']").parent().addClass(
 							"active");
 					$("a[href='jump/business_circleRoleList']").parent().parent()

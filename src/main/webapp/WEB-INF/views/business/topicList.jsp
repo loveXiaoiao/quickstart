@@ -31,8 +31,12 @@
 				<div class="clearfix">
 					<!-- 按钮 -->
 					<p>
+						<button id="sample_editable_1_new" class="btn green"
+							onclick="addTK()">
+							增加 <i class="icon-plus"></i>
+						</button>
 						<button id="sample_editable_1_del" class="btn red"
-							onclick="delTopics();">
+							onclick="batchDel();">
 							删除<i class="icon-minus"></i>
 						</button>
 					</p>
@@ -71,7 +75,6 @@
 	</div>
 	<%@include file="../commons/messageBox.jsp"%>
 	<%@include file="topicAdd.jsp" %>
-	<%@include file="commentAdd.jsp" %>
 	<script src="js/business/topicList.js" type="text/javascript"></script>
 	
 	<script>
@@ -79,13 +82,6 @@
 				function() {
 					App.init();
 					Topic.init();
-					$("#commentAdd").click(function(){
-						addComment();
-					});
-					
-					$("#topicAdd").click(function(){
-						save();
-					});
 					$("a[href='jump/business_topicList']").parent().addClass(
 							"active");
 					$("a[href='jump/business_topicList']").parent().parent()

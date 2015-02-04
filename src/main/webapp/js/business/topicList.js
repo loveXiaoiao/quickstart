@@ -46,8 +46,7 @@ var Topic = function () {
 								var id = lineData.id;
 								var del = '<button id="sample_editable_1_new" class="btn red" onclick="del(\''+id+'\')">删除<i class="icon-minus"></i></button>';
 								var edit = '<button id="sample_editable_1_new" class="btn blue" onclick="editTK(\''+id+'\')">编辑</button>';
-								var addComment = '<button id="sample_editable_1_new" class="btn green" onclick="commentAddTK(\''+id+'\')">新增评论</button>';
-								return del +edit+ addComment;
+								return del +edit;
 							} , "bSortable": false}
 	                  ],
 	         "fnServerParams": function ( aoData ) { 
@@ -109,14 +108,10 @@ function editTK(id){
     	});
 	}
 }
-function commentAddTK(id){
-	$("#topicId").val(id);
-	$("#commentAddEditModal").modal('show');//展示
-}
 /**
  * 未用
  */
-function save(){
+function saveTopic(){
 	var params = {}; //获取表单参数
 	params["id"]= $('#id').val();
 	params["content"] = $('#content').val();
@@ -155,29 +150,4 @@ function del(id){
     });
 }
 
-/**
- * 
- * @param id
- */
 
-function addComment(){
-	var params = {}; //获取表单参数
-	params["topic.id"] = $('#topicId').val();
-	params["content"] = $('#commentContent').val();
-	params["images"] = $('#commentImages').val();
-	$.ajax({
-		  type: "POST",
-		  url: "comment/saveComment",
-		  data: params,
-		  datatype:"json",
-		  success: function(data){
-			  $("#successAlert").html(data.msg);
-			  $("#myAlertSuccess").show();
-  			reloadTable();
-		   }
-		});
-}
-
-function selectAll(){
-	alert("我要选中所有……");
-}

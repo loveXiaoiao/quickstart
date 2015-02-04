@@ -26,7 +26,7 @@
 							<label class="control-label">头像</label>
 							<div class="controls">
 
-								<input type="text" id="roleAvatar"  placeholder="头像"
+								<input type="text" id="avatar"  placeholder="头像"
 									class="m-wrap medium required:true">
 							</div>
 
@@ -43,7 +43,7 @@
 					</form>
 					</div>
 				<div class="modal-footer">
-					<button type="button" class="btn green" data-dismiss="modal" id="circleRoleAdd"  onclick=";">保存</button>
+					<button type="button" class="btn green" data-dismiss="modal" onclick="saveCircleRole();">保存</button>
 					<button type="button" class="btn btn-primary" data-dismiss="modal" onclick=";">取消</button>
 				</div>
 			</div>

@@ -15,7 +15,7 @@
 							<label class="control-label">内容</label>
 							<div class="controls">
 
-								<input type="text" id="commentContent" name="commentContent" placeholder="内容"
+								<input type="text" id="content" name="content" placeholder="内容"
 									class="m-wrap medium required:true">
 							</div>
 
@@ -23,7 +23,7 @@
 						<div class="control-group">
 							<label class="control-label">图片</label>
 							<div class="controls">
-								<input type="text" id="commentImages"  name="commentImages" placeholder="内容"
+								<input type="text" id="images"  name="images" placeholder="内容"
 									class="m-wrap medium required:true">
 							</div>
 
@@ -36,7 +36,7 @@
 
 				</div>
 				<div class="modal-footer">
-					<button type="button" class="btn green" data-dismiss="modal" id="commentAdd">保存</button>
+					<button type="button" class="btn green" data-dismiss="modal" onclick="saveComment();">保存</button>
 					<button type="button" class="btn btn-primary" data-dismiss="modal" onclick=";">取消</button>
 				</div>
 			</div>

@@ -26,12 +26,13 @@
 							</div>
 						</div>
 					<input type="hidden" id="circleRoleId" name="circleRoleId" class="m-wrap medium" >
+					<input type="hidden" id="id" name="id" class="m-wrap medium" >
 
 					</form>
 
 				</div>
 				<div class="modal-footer">
-					<button type="button" class="btn green" data-dismiss="modal" id="topicAdd" onclick=";">保存</button>
+					<button type="button" class="btn green" data-dismiss="modal" onclick="saveTopic();">保存</button>
 					<button type="button" class="btn btn-primary" data-dismiss="modal" onclick=";">取消</button>
 				</div>
 			</div>

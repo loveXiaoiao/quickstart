@@ -64,8 +64,7 @@ var Comment = function () {
 								var id = lineData.id;
 								var del = '<button id="sample_editable_1_new" class="btn red" onclick="del(\''+id+'\')">删除<i class="icon-minus"></i></button>';
 								var edit = '<button id="sample_editable_1_new" class="btn blue" onclick="editTK(\''+id+'\')">编辑</button>';
-								var addChildComment = '<button id="sample_editable_1_new" class="btn green" onclick="childCommentAddTK(\''+id+'\', \''+lineData.topic.id+'\')">添加评论</button>';
-								return del +edit+ addChildComment;
+								return del +edit;
 							} , "bSortable": false}
 	                  ],
 	         "fnServerParams": function ( aoData ) { 
@@ -121,16 +120,11 @@ function editTK(id){
     		data: {'id':circleId},
     		datatype:"json",
     		success: function(data){
-    			$('#commentContent').val(data.result.content);
-    			$('#commentImages').val(data.result.images);
+    			$('#content').val(data.result.content);
+    			$('#images').val(data.result.images);
     		}
     	});
 	}
-}
-function childCommentAddTK(id, topicId){
-	$("#parrentCommentId").val(id);
-	$("#topicId").val(topicId);
-	$("#commentAddEditModal").modal('show');//展示
 }
 
 
@@ -156,12 +150,13 @@ function del(id){
 
 
 
-function addChildComment(){
+function saveComment(){
 	var params = {}; //获取表单参数
+	params["id"]= $('#id').val();
 	params["parentComment.id"] = $('#parentCommentId').val();
 	params["topic.id"] = $('#topicId').val();
-	params["content"] = $('#commentContent').val();
-	params["images"] = $('#commentImages').val();
+	params["content"] = $('#content').val();
+	params["images"] = $('#images').val();
 	$.ajax({
 		  type: "POST",
 		  url: "comment/saveComment",
@@ -175,6 +170,3 @@ function addChildComment(){
 		});
 }
 
-function selectAll(){
-	alert("我要选中所有……");
-}

@@ -14,6 +14,7 @@ import org.springside.modules.web.Servlets;
 import org.weichart.quickstart.entity.Account;
 import org.weichart.quickstart.entity.Circle;
 import org.weichart.quickstart.entity.CircleRole;
+import org.weichart.quickstart.entity.Topic;
 import org.weichart.quickstart.service.ServiceException;
 import org.weichart.quickstart.service.business.AccountService;
 import org.weichart.quickstart.service.business.CircleRoleService;
@@ -84,6 +85,23 @@ public class CircleRoleCtrl {
 		} catch (ServiceException e) {
 			e.printStackTrace();
 			resultObject.setMsg("删除失败");
+			resultObject.setSuccess(false);
+			return resultObject;
+		}
+	}
+	
+	@RequestMapping("getEntity")
+	@ResponseBody
+	public ResultObject getEntity(CircleRole entity, HttpServletRequest request) {
+		try {
+			CircleRole circleRole = circleRoleService.findById(entity.getId());
+			resultObject.setMsg("成功");
+			resultObject.setResult(circleRole);
+			resultObject.setSuccess(true);
+			return resultObject;
+		} catch (ServiceException e) {
+			e.printStackTrace();
+			resultObject.setMsg(e.getMessage());
 			resultObject.setSuccess(false);
 			return resultObject;
 		}
