@@ -10,7 +10,7 @@
 					<h4 class="modal-title" id="myModalLabel">圈子</h4>
 				</div>
 				<div class="modal-body">
-				<form action=""  class="form-horizontal">
+				<form action="" id="circleAddForm" name="circleAddForm" class="form-horizontal" method="post">
 						<div class="control-group">
 							<label class="control-label">名称</label>
 							<div class="controls">
@@ -30,7 +30,22 @@
 
 						</div>
 
-						<div class="control-group">
+					<div class="control-group">
+
+						<label class="control-label">创建账户</label>
+
+						<div class="controls">
+
+							<select class="" data-placeholder="Choose a Category" id="createAccount">
+
+								<option value="">选择账户</option>
+
+							</select>
+						</div>
+					</div>
+
+
+					<div class="control-group">
 
 						<label class="control-label">主题</label>
 
@@ -39,14 +54,13 @@
 						</div>
 					</div>
 					<input type="hidden" id="id" name="id" class="m-wrap medium required:true" >
-					<input type="hidden" id="accountId"  class="m-wrap medium required:true" >
-					</form>
-
+					<input type="hidden" id="accountId" name="account.id" class="m-wrap medium required:true" >
+				</form>
 				</div>
-				<div class="modal-footer">
-					<button type="button" class="btn green" data-dismiss="modal" onclick="saveCircle();">保存</button>
-					<button type="button" class="btn btn-primary" data-dismiss="modal" onclick=";">取消</button>
-				</div>
+					<div class="modal-footer">
+						<button type="button" class="btn green" data-dismiss="modal" onclick="saveCircle();">保存</button>
+						<button type="button" class="btn btn-primary" data-dismiss="modal" onclick="circleAddForm.reset();">取消</button>
+					</div>
 			</div>
 			<!-- /.modal-content -->
 		</div>

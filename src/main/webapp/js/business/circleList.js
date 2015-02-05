@@ -50,7 +50,8 @@ var Circle = function () {
 								var id = lineData.id;
 								var del = '<button id="sample_editable_1_new" class="btn red" onclick="del(\''+id+'\')">删除<i class="icon-minus"></i></button>';
 								var edit = '<button id="sample_editable_1_new" class="btn blue" onclick="editTK(\''+id+'\')">编辑</button>';
-								return del +edit;
+								var editAttention = '<button id="sample_editable_1_new" class="btn blue" onclick="editAttentionTK(\''+id+'\')">配置关注</button>';
+								return del +edit+editAttention;
 							} , "bSortable": false}
 	                  ],
 	         "fnServerParams": function ( aoData ) { 
@@ -75,6 +76,7 @@ var Circle = function () {
     return {
         init: function () {
         	inittable();
+        	addAccountOption();
         }
     };
 
@@ -95,7 +97,12 @@ function reset(){
 
 function addTK(){
 	$("#circleAddEditModal").modal('show');//展示
+	
 }
+function editAttentionTK(){
+	$("#attentionModal").modal('show');
+}
+
 
 function editTK(id){
 	$("#id").val(id);
@@ -112,15 +119,18 @@ function editTK(id){
     			$('#name').val(data.result.name);
     			$('#avatar').val(data.result.avatar);
     			$('#theme').val(data.result.theme);
+    			$('#createAccount').val(data.result.createAccount.id);
     		}
     	});
 	}
 }
 
+
 //编辑
 function saveCircle(){
 	var params = {}; //获取表单参数
 	params["id"]= $('#id').val();
+	params["createAccount.id"]= $('#createAccount').val();
 	params["name"] = $('#name').val();
 	params["avatar"] = $('#avatar').val();
 	params["theme"] = $('#theme').val();
@@ -133,8 +143,10 @@ function saveCircle(){
 			  	  $("#successAlert").html(data.msg);
 			  	  $("#myAlertSuccess").show();
 				  reloadTable();
+				  $("#circleAddForm")[0].reset();
 		   }
 		});
+	
 }
 
 
@@ -157,4 +169,72 @@ function del(id){
     	});
     });
 }
+
+function addAccountOption(){
+	$.ajax({
+		type: "GET",
+		url: "account/findAllAccount",
+		datatype:"json",
+		success: function(data){
+			if(data.success){
+				for(var i=0;i<data.result.length;i++){
+					//给select添加option
+					$("#createAccount").append("<option value='"+data.result[i].id+"'>"+data.result[i].accountName+"</option>"); 
+				}
+			}
+		}
+	});
+}
+
+
+function editAttentionTK(id){
+	if(id != null){
+		$('#attentionEditForm-circleId').val(id);
+		// 先清空table下的所有节点，根据后台传输的数据动态渲染表格
+		$('#attentionEditTable').empty();
+		$('#attentionEditTable').append('<tr><th>帐号名称</th><td>是否关注</td></tr>');
+		$.ajax({
+			url: 'account/getAttentions',
+			data: {
+				'id': id
+			},
+			type: 'POST',
+			async:false,
+			success: function(data){
+				var data = data.result;
+				if(data != null && data.length > 0){
+					for(var i=0;i<data.length;i++){
+						var template = '<tr><th>'+data[i].accountName+'</th><td><input name="accountId" value="'+data[i].id+'" type="checkbox" '+(data[i].flag=='true'?'checked':'')+' /></td></tr>';
+						$('#attentionEditTable').append(template);
+					}
+				}
+			}
+		});
+		
+		$("#attentionModal").modal('show');
+	}
+}
+
+function saveAttention(){
+	$("#modal_content").html("确定删除吗？删除后将不能恢复！");
+	$("#myModal").modal('show');
+    $("#modal_submit").click(function(){
+    	var params = {}; //获取表单参数
+    	params["id"] = id;
+    	$.ajax({
+    		type: "POST",
+    		url: "circle/deleteCircle",
+    		data: params,
+    		datatype:"json",
+    		success: function(data){
+    			$("#successAlert").html(data.msg);
+    			$("#myAlertSuccess").show();
+    			reloadTable();
+    		}
+    	});
+    });
+}
+
+
+
 

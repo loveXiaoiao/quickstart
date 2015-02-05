@@ -27,6 +27,15 @@ public class Account extends IdEntity {
 	private String area;//地区
 	private Date createTime;//创建时间
 	private String personSignature;//个性签名
+	private String flag;//功能字段，用来判断关注
+	
+	
+	public String getFlag() {
+		return flag;
+	}
+	public void setFlag(String flag) {
+		this.flag = flag;
+	}
 	@NotBlank
 	public String getAccountName() {
 		return accountName;

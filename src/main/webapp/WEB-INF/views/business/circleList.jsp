@@ -47,8 +47,7 @@
 					id="circletable">
 					<thead>
 						<tr>
-							<th style="width: 8px;"><input type="checkbox"
-								class="group-checkable" data-set="circletable .checkboxes" /></th>
+							<th style="width: 8px;"><input type="checkbox" class="group-checkable" data-set="circletable .checkboxes" /></th>
 
 							<th>名称</th>
 
@@ -74,8 +73,10 @@
 			</div>
 		</div>
 	</div>
+	
 	<%@include file="../commons/messageBox.jsp"%>
 	<%@include file="circleAdd.jsp" %>
+	<%@include file="attentionEdit.jsp" %>
 	<script src="js/business/circleList.js" type="text/javascript"></script>
 	
 	<script>

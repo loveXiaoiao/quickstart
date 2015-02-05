@@ -98,6 +98,7 @@ public class CircleService {
 			circle.setName(entity.getName());
 			circle.setAvatar(entity.getAvatar());
 			circle.setTheme(entity.getTheme());
+			circle.setCreateAccount(accountDao.findOne(entity.getCreateAccount().getId()));
 			circleDao.save(circle);
 		}
 	}
@@ -126,6 +127,7 @@ public class CircleService {
 		circle.setAttentionAccounts(accounts);
 		circleDao.save(circle);
 	}
+	
 	
 
 }

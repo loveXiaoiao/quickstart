@@ -90,5 +90,10 @@ public class AccountService {
 	public Account findById(Long id){
 		return accountDao.findOne(id);
 	}
+	
+	public List<Account> findAll(Map<String, Object> searchParams)throws ServiceException{
+		Specification<Account> spec = buildSpecification(searchParams);
+		return accountDao.findAll(spec);
+	}
 
 }

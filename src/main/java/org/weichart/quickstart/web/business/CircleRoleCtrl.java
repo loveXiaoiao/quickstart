@@ -1,7 +1,5 @@
 package org.weichart.quickstart.web.business;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -11,10 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springside.modules.web.Servlets;
-import org.weichart.quickstart.entity.Account;
-import org.weichart.quickstart.entity.Circle;
 import org.weichart.quickstart.entity.CircleRole;
-import org.weichart.quickstart.entity.Topic;
 import org.weichart.quickstart.service.ServiceException;
 import org.weichart.quickstart.service.business.AccountService;
 import org.weichart.quickstart.service.business.CircleRoleService;

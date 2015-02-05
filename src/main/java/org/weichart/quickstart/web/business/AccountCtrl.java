@@ -1,5 +1,6 @@
 package org.weichart.quickstart.web.business;
 
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -10,8 +11,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springside.modules.web.Servlets;
 import org.weichart.quickstart.entity.Account;
+import org.weichart.quickstart.entity.Circle;
 import org.weichart.quickstart.service.ServiceException;
 import org.weichart.quickstart.service.business.AccountService;
+import org.weichart.quickstart.service.business.CircleService;
 import org.weichart.quickstart.util.DataPage;
 import org.weichart.quickstart.util.ResultObject;
 import org.weichart.quickstart.web.sys.BaseServlet;
@@ -28,6 +31,8 @@ public class AccountCtrl {
 
 	@Autowired
 	private AccountService accountService;
+	@Autowired
+	private CircleService circleService;
 	private ResultObject resultObject = new ResultObject(true, "OK!");
 
 	@RequestMapping("listAccount")
@@ -35,8 +40,7 @@ public class AccountCtrl {
 	public DataPage<Account> getPageModel(HttpServletRequest request,
 			Account entity, Integer iDisplayStart, Integer iDisplayLength) {
 		// convertToMap定义于父类，将参数数组中的所有元素加入一个HashMap
-		Map<String, Object> searchParams = Servlets.getParametersStartingWith(
-				request, "search_");
+		Map<String, Object> searchParams = Servlets.getParametersStartingWith(request, "search_");
 		// Long userId = getCurrentUserId();
 		DataPage<Account> pages = null;
 		try {
@@ -80,6 +84,49 @@ public class AccountCtrl {
 			return resultObject;
 		}
 	}
+	
+	@RequestMapping("findAllAccount")
+	@ResponseBody
+	public ResultObject listAllEntity(HttpServletRequest request){
+		Map<String, Object> searchParams = Servlets.getParametersStartingWith(request, "search_");
+		try {
+			List<Account> accounts = accountService.findAll(searchParams);
+			resultObject.setResult(accounts);
+			resultObject.setSuccess(true);
+			return resultObject;
+		} catch (ServiceException e) {
+			e.printStackTrace();
+			resultObject.setSuccess(false);
+			return resultObject;
+		}
+	}
+	
+	@RequestMapping("getAttentions")
+	@ResponseBody
+	public ResultObject getCheckAccount(Circle entity, HttpServletRequest request) {
+		try {
+			Map<String, Object> searchParams = Servlets.getParametersStartingWith(request, "search_");
+			List<Account> accounts = accountService.findAll(searchParams);
+			Circle circle = circleService.findById(entity.getId());
+			List<Account> attentionAccounts = circle.getAttentionAccounts();
+			for(Account account : accounts){
+				account.setFlag("false");
+				if(attentionAccounts.contains(account)){
+					account.setFlag("true");//如果在粉丝列表中，就把flag设为true
+				}
+			}
+			resultObject.setMsg("成功");
+			resultObject.setResult(accounts);
+			resultObject.setSuccess(true);
+			return resultObject;
+		} catch (ServiceException e) {
+			e.printStackTrace();
+			resultObject.setMsg(e.getMessage());
+			resultObject.setSuccess(false);
+			return resultObject;
+		}
+	}
+	
 
 
 }
