@@ -45,8 +45,9 @@ var Account = function () {
 							{ "mDataProp": "personSignature" , "bSortable": false},
 							{ "mDataProp": function(lineData){
 								var id = lineData.id;
+								var edit = '<button id="sample_editable_1_new" class="btn blue" onclick="editTK(\''+id+'\')">编辑</button>';
 								var del = '<button id="sample_editable_1_new" class="btn red" onclick="del(\''+id+'\')">删除<i class="icon-minus"></i></button>';
-								return del;
+								return edit+del;
 							} , "bSortable": false}
 	                  ],
 	         "fnServerParams": function ( aoData ) { 
@@ -93,26 +94,33 @@ function addTK(){
 	$("#accountAdd").modal('show');//展示
 }
 
-function addCircle(){
-	var params = {}; //获取表单参数
-	params["createAccount.id"]= $('#accountId').val();
-	params["name"] = $('#name').val();
-	params["avatar"] = $('#circleAvatar').val();
-	params["theme"] = $('#theme').val();
-	$.ajax({
-		  type: "POST",
-		  url: "circle/saveCircle",
-		  data: params,
-		  datatype:"json",
-		  success: function(data){
-			  	  $("#successAlert").html(data.msg);
-			  	  $("#myAlertSuccess").show();
-				  reloadTable();
-		   }
-		});
+function editTK(id){
+	$("#id").val(id);
+	$("#accountAdd").modal('show');//展示
+	var accountId = $.trim($("#id").val());
+	//加载资产信息
+	if (accountId != "null" && accountId != "" && typeof(accountId)!="undefined") {
+		$.ajax({
+    		type: "POST",
+    		url: "account/getEntity",
+    		data: {'id':accountId},
+    		datatype:"json",
+    		success: function(data){
+    			$('#accountName').val(data.result.accountName);
+    			$('#nickName').val(data.result.nickName);
+    			$('#password').val(data.result.password);
+    			$('#gender').val(data.result.gender);
+    			$('#avatar').val(data.result.avatar);
+    			$('#area').val(data.result.area);
+    			$('#personSignature').val(data.result.personSignature);
+    		}
+    	});
+	}
 }
+
 function add(){
 	var params = {}; //获取表单参数
+	params["id"] = $('#id').val();
 	params["accountName"] = $('#accountName').val();
 	params["nickName"] = $('#nickName').val();
 	params["password"] = $('#password').val();
@@ -129,6 +137,7 @@ function add(){
 			  $("#successAlert").html(data.msg);
 		  	  $("#myAlertSuccess").show();
 			  reloadTable();
+			  $("#accountForm")[0].reset();
 		   }
 		});
 }

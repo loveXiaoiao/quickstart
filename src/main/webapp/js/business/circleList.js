@@ -50,7 +50,7 @@ var Circle = function () {
 								var id = lineData.id;
 								var del = '<button id="sample_editable_1_new" class="btn red" onclick="del(\''+id+'\')">删除<i class="icon-minus"></i></button>';
 								var edit = '<button id="sample_editable_1_new" class="btn blue" onclick="editTK(\''+id+'\')">编辑</button>';
-								var editAttention = '<button id="sample_editable_1_new" class="btn blue" onclick="editAttentionTK(\''+id+'\')">配置关注</button>';
+								var editAttention = '<button id="sample_editable_1_new" class="btn green" onclick="editAttentionTK(\''+id+'\')">配置关注</button>';
 								return del +edit+editAttention;
 							} , "bSortable": false}
 	                  ],

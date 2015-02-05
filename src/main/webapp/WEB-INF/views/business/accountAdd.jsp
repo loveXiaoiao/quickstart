@@ -9,7 +9,7 @@
 					<h4 class="modal-title" id="myModalLabel">账户</h4>
 				</div>
 				<div class="modal-body">
-				<form action="" id="userForm" class="form-horizontal">
+				<form action="" name="accountForm" id="accountForm" class="form-horizontal">
 						<div class="control-group">
 							<label class="control-label">帐号</label>
 							<div class="controls">
@@ -90,14 +90,15 @@
 							</div>
 
 						</div>
+						<input type="hidden" id="id" name="id" class="m-wrap medium required:true" >
 
 					</form>
 
 
 </div>
 				<div class="modal-footer">
-					<button type="button" class="btn green" data-dismiss="modal" onclick="add()">保存</button>
-					<button type="button" class="btn btn-primary" data-dismiss="modal" onclick=";">取消</button>
+					<button type="button" class="btn green" data-dismiss="modal" onclick="add();">保存</button>
+					<button type="button" class="btn btn-primary" data-dismiss="modal" onclick="accountForm.reset();">取消</button>
 				</div>
 			</div>
 			<!-- /.modal-content -->

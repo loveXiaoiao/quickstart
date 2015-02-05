@@ -68,6 +68,25 @@ public class AccountCtrl {
 			return resultObject;
 		}
 	}
+	
+	@RequestMapping("getEntity")
+	@ResponseBody
+	public ResultObject getEntity(Account entity, HttpServletRequest request) {
+		try {
+			Account account = accountService.findById(entity.getId());
+			resultObject.setMsg("保存成功");
+			resultObject.setResult(account);
+			resultObject.setSuccess(true);
+			return resultObject;
+		} catch (ServiceException e) {
+			e.printStackTrace();
+			resultObject.setMsg(e.getMessage());
+			resultObject.setSuccess(false);
+			return resultObject;
+		}
+	}
+	
+	
 
 	@RequestMapping("deleteAccount")
 	@ResponseBody
