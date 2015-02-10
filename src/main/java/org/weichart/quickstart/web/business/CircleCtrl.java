@@ -98,6 +98,18 @@ public class CircleCtrl {
 		}
 	}
 	
+	@RequestMapping("updateAttentions")
+	@ResponseBody
+	public ResultObject  updateAttentions(Long ids[], HttpServletRequest request){
+		try{
+			System.out.println("is ids");
+			return resultObject;
+		}catch(ServiceException e){
+			e.printStackTrace();
+			return resultObject;
+		}
+	}
+	
 	
 	
 

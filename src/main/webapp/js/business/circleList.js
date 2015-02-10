@@ -216,15 +216,15 @@ function editAttentionTK(id){
 }
 
 function saveAttention(){
-	$("#modal_content").html("确定删除吗？删除后将不能恢复！");
-	$("#myModal").modal('show');
-    $("#modal_submit").click(function(){
-    	var params = {}; //获取表单参数
-    	params["id"] = id;
+		var params = {};
+    	var ids=[];
+    	ids.push(1);
     	$.ajax({
     		type: "POST",
-    		url: "circle/deleteCircle",
-    		data: params,
+    		url: "circle/updateAttentions",
+    		data:  {
+				'ids': ids
+			},
     		datatype:"json",
     		success: function(data){
     			$("#successAlert").html(data.msg);
@@ -232,7 +232,6 @@ function saveAttention(){
     			reloadTable();
     		}
     	});
-    });
 }
 
 
