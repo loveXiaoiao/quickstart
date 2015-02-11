@@ -216,14 +216,20 @@ function editAttentionTK(id){
 }
 
 function saveAttention(){
-		var params = {};
-    	var ids=[];
-    	ids.push(1);
+		var id = $("#attentionEditForm-circleId").val();
+		var ids = "";
+		var x=0;
+		 $('#attentionEditTable input[name="accountId"]:checked').each(function(){
+			 ids += $(this).val() + ","; 
+			 x=x+2;
+		 });
+		 ids = ids.slice(0,x-1);
     	$.ajax({
     		type: "POST",
     		url: "circle/updateAttentions",
     		data:  {
-				'ids': ids
+				'ids': ids,
+				'id': id
 			},
     		datatype:"json",
     		success: function(data){

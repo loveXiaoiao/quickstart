@@ -89,11 +89,11 @@ public class CircleRoleService {
 	}
 	
 	public void saveEntity(CircleRole entity) throws ServiceException{
+		Circle circle = circleDao.findOne(entity.getCircle().getId());
 		if(entity.getId() == null){//新增
 			if(findByRoleName(entity.getRoleName()) != null){
 				throw new ServiceException("该角色已存在!");
 			}
-			Circle circle = circleDao.findOne(entity.getCircle().getId());
 			entity.setCircle(circle);
 			entity.setStatus(1);//未关联
 			entity.setActiveDegree(1);
@@ -103,6 +103,7 @@ public class CircleRoleService {
 			CircleRole circleRole = circleRoleDao.findOne(entity.getId());
 			circleRole.setAvatar(entity.getAvatar());
 			circleRole.setRoleName(entity.getRoleName());
+			circleRole.setCircle(circle);
 			circleRole.setRemark(entity.getRemark());
 			circleRoleDao.save(circleRole);
 		}
@@ -114,6 +115,10 @@ public class CircleRoleService {
 	
 	public CircleRole findById(Long id){
 		return circleRoleDao.findOne(id);
+	}
+	
+	public List<CircleRole> findAll(){
+		return (List<CircleRole>)circleRoleDao.findAll();
 	}
 	
 	public void addRelation(CircleRole circleRole, Account account){

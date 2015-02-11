@@ -95,5 +95,9 @@ public class AccountService {
 		Specification<Account> spec = buildSpecification(searchParams);
 		return accountDao.findAll(spec);
 	}
+	
+	public List<Account> findByids(List<Long> ids){
+		return (List<Account>)accountDao.findAll(ids);
+	}
 
 }

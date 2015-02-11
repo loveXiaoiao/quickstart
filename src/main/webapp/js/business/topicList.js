@@ -71,6 +71,8 @@ var Topic = function () {
     return {
         init: function () {
         	inittable();
+        	addCircleRoleOption();
+        	addCircleOption();
         }
     };
 
@@ -89,6 +91,42 @@ function reset(){
 	reloadTable();
 }
 
+function addCircleOption(){
+	$.ajax({
+		type: "GET",
+		url: "circle/findAllCircle",
+		datatype:"json",
+		success: function(data){
+			if(data.success){
+				for(var i=0;i<data.result.length;i++){
+					//给select添加option
+					$("#belongCircle").append("<option value='"+data.result[i].id+"'>"+data.result[i].name+"</option>"); 
+				}
+			}
+		}
+	});
+}
+
+function addCircleRoleOption(){
+	$.ajax({
+		type: "GET",
+		url: "circleRole/findAllCircleRole",
+		datatype:"json",
+		success: function(data){
+			if(data.success){
+				for(var i=0;i<data.result.length;i++){
+					//给select添加option
+					$("#createRole").append("<option value='"+data.result[i].id+"'>"+data.result[i].roleName+"</option>"); 
+				}
+			}
+		}
+	});
+}
+
+function addTK(){
+	$("#topicAddEditModal").modal('show');//展示
+}
+
 
 function editTK(id){
 	$("#id").val(id);
@@ -104,6 +142,8 @@ function editTK(id){
     		success: function(data){
     			$('#content').val(data.result.content);
     			$('#images').val(data.result.images);
+    			$("#createRole").val(data.result.circleRole.id);
+    			$("#belongCircle").val(data.result.circle.id);
     		}
     	});
 	}
@@ -116,6 +156,8 @@ function saveTopic(){
 	params["id"]= $('#id').val();
 	params["content"] = $('#content').val();
 	params["images"] = $('#images').val();
+	params["circle.id"] = $('#belongCircle').val();
+	params["circleRole.id"] = $('#createRole').val();
 	$.ajax({
 		  type: "POST",
 		  url: "topic/saveTopic",

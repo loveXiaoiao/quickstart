@@ -10,7 +10,7 @@
 					<h4 class="modal-title" id="myModalLabel">角色</h4>
 				</div>
 				<div class="modal-body">
-				<form action="" id="circleRoleForm" class="form-horizontal">
+				<form action="" id="circleRoleForm" name="circleRoleForm" class="form-horizontal">
 						<div class="control-group">
 							<label class="control-label">角色名</label>
 							<div class="controls">
@@ -21,7 +21,6 @@
 
 						</div>
 						<input type="hidden" id="id" name="id" class="m-wrap medium required:true" ><!-- 需要修改 -->
-						<input type="hidden" id="circleId"  class="m-wrap medium required:true" >
 						<div class="control-group">
 							<label class="control-label">头像</label>
 							<div class="controls">
@@ -31,7 +30,22 @@
 							</div>
 
 						</div>
-						<div class="control-group">
+
+					<div class="control-group">
+
+						<label class="control-label">圈子</label>
+
+						<div class="controls">
+
+							<select class="" data-placeholder="" id="belongCircle">
+
+								<option value="">选择圈子</option>
+
+							</select>
+						</div>
+					</div>
+					
+					<div class="control-group">
 
 						<label class="control-label">备注</label>
 
@@ -44,7 +58,7 @@
 					</div>
 				<div class="modal-footer">
 					<button type="button" class="btn green" data-dismiss="modal" onclick="saveCircleRole();">保存</button>
-					<button type="button" class="btn btn-primary" data-dismiss="modal" onclick=";">取消</button>
+					<button type="button" class="btn btn-primary" data-dismiss="modal" onclick="circleRoleForm.reset();">取消</button>
 				</div>
 			</div>
 			<!-- /.modal-content -->

@@ -78,6 +78,7 @@ var CircleRole = function () {
     return {
         init: function () {
         	inittable();
+        	addAccountOption();
         }
     };
 
@@ -96,6 +97,26 @@ function reset(){
 	reloadTable();
 }
 
+function addAccountOption(){
+	$.ajax({
+		type: "GET",
+		url: "circle/findAllCircle",
+		datatype:"json",
+		success: function(data){
+			if(data.success){
+				for(var i=0;i<data.result.length;i++){
+					//给select添加option
+					$("#belongCircle").append("<option value='"+data.result[i].id+"'>"+data.result[i].name+"</option>"); 
+				}
+			}
+		}
+	});
+}
+
+function addTK(){
+	$("#topicAddEditModal").modal('show');//展示
+}
+
 
 function editTK(id){
 	$("#id").val(id);
@@ -112,6 +133,7 @@ function editTK(id){
     			$('#roleName').val(data.result.roleName);
     			$('#avatar').val(data.result.avatar);
     			$('#remark').val(data.result.remark);
+    			$('#belongCircle').val(data.result.circle.id);
     		}
     	});
 	}
@@ -122,6 +144,7 @@ function saveCircleRole(){
 	params["id"]= $('#id').val();
 	params["roleName"] = $('#roleName').val();
 	params["avatar"] = $('#avatar').val();
+	params["circle.id"] = $('#belongCircle').val();
 	params["remark"] = $('#remark').val();
 	$.ajax({
 		  type: "POST",

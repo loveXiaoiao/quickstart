@@ -1,5 +1,6 @@
 package org.weichart.quickstart.web.business;
 
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -97,6 +98,22 @@ public class CircleRoleCtrl {
 		} catch (ServiceException e) {
 			e.printStackTrace();
 			resultObject.setMsg(e.getMessage());
+			resultObject.setSuccess(false);
+			return resultObject;
+		}
+	}
+	
+	@RequestMapping("findAllCircleRole")
+	@ResponseBody
+	public ResultObject findAllEntity(CircleRole entity, HttpServletRequest request) {
+		try {
+			List<CircleRole> circleRoles = circleRoleService.findAll();
+			resultObject.setMsg("成功");
+			resultObject.setResult(circleRoles);
+			resultObject.setSuccess(true);
+			return resultObject;
+		} catch (ServiceException e) {
+			e.printStackTrace();
 			resultObject.setSuccess(false);
 			return resultObject;
 		}

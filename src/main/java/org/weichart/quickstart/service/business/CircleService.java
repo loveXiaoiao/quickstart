@@ -80,6 +80,10 @@ public class CircleService {
 		return circles;
 	}
 	
+	public List<Circle> findAllEntity(){
+		return (List<Circle>)circleDao.findAll();
+	}
+	
 	public Circle findCircleByName(String name) {
 		return circleDao.findByname(name);
 	}
@@ -125,6 +129,12 @@ public class CircleService {
 		}
 		accounts.remove(account);
 		circle.setAttentionAccounts(accounts);
+		circleDao.save(circle);
+	}
+	
+	public void updateAttentions(Circle entity) throws ServiceException{
+		Circle circle = circleDao.findOne(entity.getId());
+		circle.setAttentionAccounts(entity.getAttentionAccounts());
 		circleDao.save(circle);
 	}
 	

@@ -32,7 +32,7 @@
 					<!-- 按钮 -->
 					<p>
 						<button id="sample_editable_1_new" class="btn green"
-							onclick="addTK()">
+							onclick="addTK();">
 							增加 <i class="icon-plus"></i>
 						</button>
 						<button id="sample_editable_1_del" class="btn red"

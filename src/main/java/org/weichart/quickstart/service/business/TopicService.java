@@ -91,6 +91,10 @@ public class TopicService {
 		}else{//修改
 			//TODO
 			Topic topic = topicDao.findOne(entity.getId());
+			CircleRole circleRole = circleRoleDao.findOne(entity.getCircleRole().getId());
+			entity.setCircleRole(circleRole);
+			entity.setAccount(circleRole.getAccount());
+			entity.setCircle(circleRole.getCircle());
 			topic.setContent(entity.getContent());
 			topic.setImages(entity.getImages());
 			topicDao.save(topic);

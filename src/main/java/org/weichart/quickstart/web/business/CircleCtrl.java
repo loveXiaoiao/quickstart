@@ -1,14 +1,20 @@
 package org.weichart.quickstart.web.business;
 
+import java.util.Arrays;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springside.modules.web.Servlets;
+import org.weichart.quickstart.entity.Account;
 import org.weichart.quickstart.entity.Circle;
 import org.weichart.quickstart.service.ServiceException;
 import org.weichart.quickstart.service.business.AccountService;
@@ -30,7 +36,7 @@ public class CircleCtrl {
 	private CircleService circleService;
 	@Autowired
 	private AccountService accountService;
-
+	
 	private ResultObject resultObject = new ResultObject(true, "OK!");
 
 	@RequestMapping("listCircle")
@@ -100,17 +106,31 @@ public class CircleCtrl {
 	
 	@RequestMapping("updateAttentions")
 	@ResponseBody
-	public ResultObject  updateAttentions(Long ids[], HttpServletRequest request){
+	public ResultObject updateAttentions(Circle entity, Long[] ids, HttpServletRequest request){
 		try{
-			System.out.println("is ids");
+			List<Account> attentions = accountService.findByids(Arrays.asList(ids));
+			entity.setAttentionAccounts(attentions);
+			circleService.updateAttentions(entity);
 			return resultObject;
 		}catch(ServiceException e){
 			e.printStackTrace();
+			resultObject.setSuccess(false);
 			return resultObject;
 		}
 	}
 	
-	
-	
+	@RequestMapping("findAllCircle")
+	@ResponseBody
+	public ResultObject findAll(HttpServletRequest request){
+		try{
+			List<Circle> circles = circleService.findAllEntity();
+			resultObject.setResult(circles);
+			return resultObject;
+		}catch(ServiceException e){
+			e.printStackTrace();
+			resultObject.setSuccess(false);
+			return resultObject;
+		}
+	}
 
 }
