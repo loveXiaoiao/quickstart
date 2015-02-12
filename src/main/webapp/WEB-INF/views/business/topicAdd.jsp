@@ -24,7 +24,7 @@
 
 						<div class="controls">
 
-							<select class="" data-placeholder="" id="belongCircle">
+							<select class="" data-placeholder="" id="belongCircle" onchange=addCircleRoleOption(this.value)>
 
 								<option value="">选择圈子</option>
 
@@ -38,7 +38,7 @@
 
 						<div class="controls">
 
-							<select class="" data-placeholder="" id="createRole">
+							<select class="" data-placeholder="选择角色" id="createRole">
 
 								<option value="">选择角色</option>
 

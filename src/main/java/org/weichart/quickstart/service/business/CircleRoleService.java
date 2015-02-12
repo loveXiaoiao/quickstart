@@ -17,6 +17,7 @@ import org.springside.modules.utils.Clock;
 import org.weichart.quickstart.entity.Account;
 import org.weichart.quickstart.entity.Circle;
 import org.weichart.quickstart.entity.CircleRole;
+import org.weichart.quickstart.repository.AccountDao;
 import org.weichart.quickstart.repository.CircleDao;
 import org.weichart.quickstart.repository.CircleRoleDao;
 import org.weichart.quickstart.service.ServiceException;
@@ -35,8 +36,13 @@ public class CircleRoleService {
 	
 	private CircleRoleDao circleRoleDao;
 	private CircleDao circleDao;
+	private AccountDao accountDao;
 	private Clock clock = Clock.DEFAULT;
-	
+	@Autowired
+	public void setAccountDao(AccountDao accountDao) {
+		this.accountDao = accountDao;
+	}
+
 	@Autowired
 	public void setCircleRoleDao(CircleRoleDao circleRoleDao) {
 		this.circleRoleDao = circleRoleDao;
@@ -90,17 +96,23 @@ public class CircleRoleService {
 	
 	public void saveEntity(CircleRole entity) throws ServiceException{
 		Circle circle = circleDao.findOne(entity.getCircle().getId());
+		Account account = new Account();
+		if(entity.getAccount().getId() != null){
+			account = accountDao.findOne(entity.getAccount().getId());
+		}
 		if(entity.getId() == null){//新增
 			if(findByRoleName(entity.getRoleName()) != null){
 				throw new ServiceException("该角色已存在!");
 			}
 			entity.setCircle(circle);
+			entity.setAccount(account);
 			entity.setStatus(1);//未关联
 			entity.setActiveDegree(1);
 			entity.setCreateTime(clock.getCurrentDate());
 			circleRoleDao.save(entity);
 		}else{//修改
 			CircleRole circleRole = circleRoleDao.findOne(entity.getId());
+			circleRole.setAccount(account);
 			circleRole.setAvatar(entity.getAvatar());
 			circleRole.setRoleName(entity.getRoleName());
 			circleRole.setCircle(circle);
@@ -117,8 +129,9 @@ public class CircleRoleService {
 		return circleRoleDao.findOne(id);
 	}
 	
-	public List<CircleRole> findAll(){
-		return (List<CircleRole>)circleRoleDao.findAll();
+	public List<CircleRole> findAll(Map<String, Object> searchParams){
+		Specification<CircleRole> spec = buildSpecification(searchParams);
+		return circleRoleDao.findAll(spec);
 	}
 	
 	public void addRelation(CircleRole circleRole, Account account){

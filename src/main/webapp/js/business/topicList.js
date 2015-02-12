@@ -71,7 +71,6 @@ var Topic = function () {
     return {
         init: function () {
         	inittable();
-        	addCircleRoleOption();
         	addCircleOption();
         }
     };
@@ -105,12 +104,17 @@ function addCircleOption(){
 			}
 		}
 	});
+	$("#createRole").attr({disabled:true});
 }
 
-function addCircleRoleOption(){
+
+function addCircleRoleOption(data){
+	$("#createRole").empty();
+	$("#createRole").attr({disabled:false});
 	$.ajax({
 		type: "GET",
 		url: "circleRole/findAllCircleRole",
+		data: {'search_EQ_circle.id':data},
 		datatype:"json",
 		success: function(data){
 			if(data.success){

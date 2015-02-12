@@ -106,8 +106,9 @@ public class CircleRoleCtrl {
 	@RequestMapping("findAllCircleRole")
 	@ResponseBody
 	public ResultObject findAllEntity(CircleRole entity, HttpServletRequest request) {
+		Map<String, Object> searchParams = Servlets.getParametersStartingWith(request, "search_");
 		try {
-			List<CircleRole> circleRoles = circleRoleService.findAll();
+			List<CircleRole> circleRoles = circleRoleService.findAll(searchParams);
 			resultObject.setMsg("成功");
 			resultObject.setResult(circleRoles);
 			resultObject.setSuccess(true);

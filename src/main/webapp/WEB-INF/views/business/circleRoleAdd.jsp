@@ -47,6 +47,20 @@
 					
 					<div class="control-group">
 
+						<label class="control-label">绑定账户</label>
+
+						<div class="controls">
+
+							<select class="" data-placeholder="" id="bindingAccount">
+
+								<option value="">选择账户</option>
+
+							</select>
+						</div>
+					</div>
+					
+					<div class="control-group">
+
 						<label class="control-label">备注</label>
 
 						<div class="controls">

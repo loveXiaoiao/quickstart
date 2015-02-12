@@ -78,6 +78,7 @@ var CircleRole = function () {
     return {
         init: function () {
         	inittable();
+        	addCircleOption();
         	addAccountOption();
         }
     };
@@ -97,7 +98,7 @@ function reset(){
 	reloadTable();
 }
 
-function addAccountOption(){
+function addCircleOption(){
 	$.ajax({
 		type: "GET",
 		url: "circle/findAllCircle",
@@ -113,8 +114,24 @@ function addAccountOption(){
 	});
 }
 
+function addAccountOption(){
+	$.ajax({
+		type: "GET",
+		url: "account/findAllAccount",
+		datatype:"json",
+		success: function(data){
+			if(data.success){
+				for(var i=0;i<data.result.length;i++){
+					//给select添加option
+					$("#bindingAccount").append("<option value='"+data.result[i].id+"'>"+data.result[i].accountName+"</option>"); 
+				}
+			}
+		}
+	});
+}
+
 function addTK(){
-	$("#topicAddEditModal").modal('show');//展示
+	$("#circleRoleAddEditModal").modal('show');//展示
 }
 
 
@@ -133,7 +150,8 @@ function editTK(id){
     			$('#roleName').val(data.result.roleName);
     			$('#avatar').val(data.result.avatar);
     			$('#remark').val(data.result.remark);
-    			$('#belongCircle').val(data.result.circle.id);
+    			$('#belongCircle').val(data.result.circle.id);//所在圈子
+    			$('#bindingAccount').val(data.result.account.id);//使用人
     		}
     	});
 	}
@@ -145,6 +163,7 @@ function saveCircleRole(){
 	params["roleName"] = $('#roleName').val();
 	params["avatar"] = $('#avatar').val();
 	params["circle.id"] = $('#belongCircle').val();
+	params["account.id"] = $('#bindingAccount').val();
 	params["remark"] = $('#remark').val();
 	$.ajax({
 		  type: "POST",
